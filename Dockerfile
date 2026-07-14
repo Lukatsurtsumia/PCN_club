@@ -1,5 +1,6 @@
-# PCN — Pugilist Club Niçois — production image (Laravel 12, nginx + php-fpm)
-# Same reliable pattern as the BoxerOS deploy. No database needed (file-based storage).
+# PCN — Pugilist Club Niçois — production image (Laravel 13, nginx + php-fpm)
+# Laravel 13 / Symfony 8 require PHP >= 8.4, so we use the 8.4 runtime.
+# No database needed (file-based storage).
 
 # ---- Stage 1: compile front-end assets (Vite + Tailwind) ----
 FROM node:22-alpine AS assets
@@ -8,7 +9,7 @@ COPY . .
 RUN npm install && npm run build
 
 # ---- Stage 2: application runtime (nginx + php-fpm, serves /app/public on :80) ----
-FROM webdevops/php-nginx:8.3-alpine
+FROM webdevops/php-nginx:8.4-alpine
 
 ENV WEB_DOCUMENT_ROOT=/app/public \
     COMPOSER_ALLOW_SUPERUSER=1

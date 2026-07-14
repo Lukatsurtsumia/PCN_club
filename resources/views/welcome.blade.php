@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="description" content="Pugilist Club Niçois — club de boxe anglaise à Nice depuis 1969. Boxe jeunesse, fitness, compétition et coaching privé.">
+        <meta name="description" content="Pugilist Club Niçois - club de boxe anglaise à Nice depuis 1969. Boxe jeunesse, fitness, compétition et coaching privé.">
 
         <title>Pugilist Club Niçois | Boxe Anglaise à Nice</title>
 
@@ -92,12 +92,12 @@
             @mouseleave="play()"
             class="relative h-screen min-h-[680px] w-full overflow-hidden bg-navy-950"
         >
-            {{-- background layer — slide 1 --}}
+            {{-- background layer - slide 1 --}}
             <div x-show="active === 0" x-transition:enter="transition ease-out duration-[1200ms]" x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100" x-transition:leave="transition ease-in duration-500" x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0" class="absolute inset-0">
                 <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_theme(colors.navy.700),_theme(colors.navy.950)_65%)]"></div>
             </div>
 
-            {{-- background layer — slide 2 --}}
+            {{-- background layer - slide 2 --}}
             <div x-show="active === 1" x-transition:enter="transition ease-out duration-[1200ms]" x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100" x-transition:leave="transition ease-in duration-500" x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0" class="absolute inset-0">
                 <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_left,_theme(colors.navy.700),_theme(colors.navy.950)_65%)]"></div>
                 <div class="absolute inset-x-0 top-1/3 flex flex-col gap-6 opacity-40">
@@ -108,7 +108,7 @@
                 <div class="absolute -left-16 bottom-0 h-[30rem] w-[30rem] rounded-full bg-blue-600/20 blur-3xl animate-ring-pulse"></div>
             </div>
 
-            {{-- background layer — slide 3 --}}
+            {{-- background layer - slide 3 --}}
             <div x-show="active === 2" x-transition:enter="transition ease-out duration-[1200ms]" x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100" x-transition:leave="transition ease-in duration-500" x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0" class="absolute inset-0">
                 <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_theme(colors.navy.700),_theme(colors.navy.950)_65%)]"></div>
             </div>
@@ -146,7 +146,7 @@
                         const key = new THREE.DirectionalLight(0xffffff, 2.4); key.position.set(120, 240, 180); scene.add(key);
                         const rim = new THREE.DirectionalLight(0x6aa8ff, 1.4); rim.position.set(-160, 120, -140); scene.add(rim);
 
-                        // (re)frame the whole figure for the container's current size — called on load and on any resize
+                        // (re)frame the whole figure for the container's current size - called on load and on any resize
                         function frame() {
                             if (!boxSize || !renderer) return;
                             const cw = Math.max(mount.clientWidth, 1), ch = Math.max(mount.clientHeight, 1);
@@ -250,7 +250,7 @@
                     <div class="animate-hero-in max-w-xl">
                         <span class="mb-5 inline-block rounded-full border border-blue-400/40 bg-blue-500/10 px-4 py-1.5 text-xs font-bold tracking-[0.3em] text-blue-300 backdrop-blur-sm">{{ __('EVERY ROUND COUNTS') }}</span>
                         <h1 class="font-display text-5xl leading-[0.95] tracking-wide text-white [text-shadow:0_4px_28px_rgba(0,0,0,0.65)] sm:text-6xl lg:text-7xl">{{ __('DISCIPLINE.') }} <span class="text-blue-500 [text-shadow:0_0_24px_rgba(59,130,246,0.7)]">{{ __('POWER.') }}</span> {{ __('PRECISION.') }}</h1>
-                        <p class="mt-6 max-w-lg text-lg text-white/70">{{ __('From your first jab to your first fight night, our coaches build technique that lasts — not just a good workout.') }}</p>
+                        <p class="mt-6 max-w-lg text-lg text-white/70">{{ __('From your first jab to your first fight night, our coaches build technique that lasts - not just a good workout.') }}</p>
                         <div class="mt-9 flex flex-wrap gap-4">
                             <a href="#join" class="rounded-full bg-blue-600 px-8 py-3.5 text-sm font-bold tracking-wide text-white shadow-glow transition hover:bg-blue-500 hover:-translate-y-0.5">{{ __('Join The Club') }}</a>
                             <a href="#about" class="rounded-full border border-white/30 px-8 py-3.5 text-sm font-bold tracking-wide text-white transition hover:border-white hover:bg-white/10">{{ __('Our Story') }}</a>
@@ -262,7 +262,7 @@
                     <div class="animate-hero-in max-w-xl">
                         <span class="mb-5 inline-block rounded-full border border-blue-400/40 bg-blue-500/10 px-4 py-1.5 text-xs font-bold tracking-[0.3em] text-blue-300 backdrop-blur-sm">{{ __('ONE TEAM. ONE CORNER.') }}</span>
                         <h1 class="font-display text-5xl leading-[0.95] tracking-wide text-white [text-shadow:0_4px_28px_rgba(0,0,0,0.65)] sm:text-6xl lg:text-7xl">{{ __('JOIN THE') }} <span class="text-blue-500 [text-shadow:0_0_24px_rgba(59,130,246,0.7)]">{{ __('PCN') }}</span> {{ __('FAMILY') }}</h1>
-                        <p class="mt-6 max-w-lg text-lg text-white/70">{{ __('A gym built on respect, sweat, and community. All levels welcome — no experience needed to start.') }}</p>
+                        <p class="mt-6 max-w-lg text-lg text-white/70">{{ __('A gym built on respect, sweat, and community. All levels welcome - no experience needed to start.') }}</p>
                         <div class="mt-9 flex flex-wrap gap-4">
                             <a href="#join" class="rounded-full bg-blue-600 px-8 py-3.5 text-sm font-bold tracking-wide text-white shadow-glow transition hover:bg-blue-500 hover:-translate-y-0.5">{{ __('Join The Club') }}</a>
                             <a href="#location" class="rounded-full border border-white/30 px-8 py-3.5 text-sm font-bold tracking-wide text-white transition hover:border-white hover:bg-white/10">{{ __('Find The Gym') }}</a>
@@ -372,10 +372,10 @@
 
                 <div class="mt-16 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
                     @foreach ([
-                        ['img' => '/images/prog-youth.jpg', 'title' => 'Youth Boxing', 'desc' => 'Ages 8-16 build footwork, discipline and confidence with age-matched coaching.', 'tag' => 'Ages 8–16'],
+                        ['img' => '/images/prog-youth.jpg', 'title' => 'Youth Boxing', 'desc' => 'Ages 8-16 build footwork, discipline and confidence with age-matched coaching.', 'tag' => 'Ages 8-16'],
                         ['img' => '/images/prog-fitness.jpg', 'title' => 'Fitness Boxing', 'desc' => 'High-energy pad and bag rounds that torch calories and sharpen technique.', 'tag' => 'All Levels'],
                         ['img' => '/images/prog-team.jpg', 'title' => 'Competitive Team', 'desc' => 'Sparring, conditioning and fight-camp prep for our amateur roster.', 'tag' => 'By Trial'],
-                        ['img' => '/images/prog-coaching.jpg', 'title' => '1-on-1 Coaching', 'desc' => 'Private sessions dialed into your goals — form, power, or fight prep.', 'tag' => 'Private'],
+                        ['img' => '/images/prog-coaching.jpg', 'title' => '1-on-1 Coaching', 'desc' => 'Private sessions dialed into your goals - form, power, or fight prep.', 'tag' => 'Private'],
                     ] as $i => $card)
                         <div data-reveal="up" data-reveal-delay="{{ $i + 1 }}" class="group overflow-hidden rounded-3xl bg-navy-900 shadow-xl transition-all duration-500 hover:-translate-y-2 hover:shadow-glow">
                             <div class="relative h-56 overflow-hidden">
@@ -404,7 +404,7 @@
                 <h2 data-reveal="up" data-reveal-delay="1" class="mt-4 font-display text-4xl tracking-wide text-navy-950 sm:text-5xl">{{ __('REAL PEOPLE. REAL RESULTS.') }}</h2>
             </div>
 
-            {{-- Live Google reviews via Elfsight — pulls the club's reviews from Google and auto-updates --}}
+            {{-- Live Google reviews via Elfsight - pulls the club's reviews from Google and auto-updates --}}
             <div data-reveal="up" data-reveal-delay="2" class="mx-auto mt-12 max-w-7xl px-6 lg:px-10">
                 <script src="https://elfsightcdn.com/platform.js" async></script>
                 <div class="elfsight-app-0e0cdec6-2556-432d-a0b1-e2a0934c43a3" data-elfsight-app-lazy></div>
@@ -429,7 +429,7 @@
                         @foreach ([
                             ['icon' => 'pin', 'label' => 'Address', 'value' => '16 rue Fornéro Méneï, 06300 Nice'],
                             ['icon' => 'phone', 'label' => 'Phone', 'value' => '04 93 89 05 09'],
-                            ['icon' => 'clock', 'label' => 'Hours', 'value' => 'Mon–Fri · 5pm–8pm'],
+                            ['icon' => 'clock', 'label' => 'Hours', 'value' => 'Mon-Fri · 5pm-8pm'],
                         ] as $item)
                             <div class="flex items-start gap-4">
                                 <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-blue-600/15 text-blue-400">
@@ -484,7 +484,7 @@
                 <div data-reveal="left">
                     <span class="text-sm font-bold tracking-[0.3em] text-blue-400">{{ __('COURSES & PRICING') }}</span>
                     <h2 class="mt-4 font-display text-4xl tracking-wide text-white sm:text-5xl">{{ __('JOIN THE CLUB') }}</h2>
-                    <p class="mt-5 max-w-md text-lg text-white/60">{{ __('Pick your discipline. Annual membership, coached by our team — license & insurance included.') }}</p>
+                    <p class="mt-5 max-w-md text-lg text-white/60">{{ __('Pick your discipline. Annual membership, coached by our team - license & insurance included.') }}</p>
 
                     <div class="mt-8 space-y-4">
                         @foreach ([
@@ -504,7 +504,7 @@
                             </div>
                         @endforeach
                     </div>
-                    <p class="mt-5 text-xs text-white/40">* {{ __('Indicative pricing — contact us for full details and required certificates.') }}</p>
+                    <p class="mt-5 text-xs text-white/40">* {{ __('Indicative pricing - contact us for full details and required certificates.') }}</p>
                 </div>
 
                 {{-- Contact form --}}
@@ -512,7 +512,7 @@
                     @if (session('contact_sent'))
                         <div class="mb-6 flex items-center gap-3 rounded-2xl bg-green-50 p-4 text-sm font-semibold text-green-700 ring-1 ring-green-200">
                             <svg class="h-5 w-5 shrink-0" viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                            {{ __("Thanks! Your message has been sent — we'll get back to you soon.") }}
+                            {{ __("Thanks! Your message has been sent - we'll get back to you soon.") }}
                         </div>
                     @endif
 
@@ -540,7 +540,7 @@
                         <div>
                             <label class="mb-1.5 block text-xs font-bold uppercase tracking-wide text-navy-500">{{ __('Course of interest') }}</label>
                             <select name="course" class="w-full rounded-xl border border-navy-200 bg-navy-50/40 px-4 py-3 text-sm text-navy-900 outline-none transition focus:border-blue-500 focus:bg-white focus:ring-2 focus:ring-blue-500/20">
-                                <option value="">— {{ __('Choose') }} —</option>
+                                <option value="">- {{ __('Choose') }} -</option>
                                 <option>{{ __('Boxing · Adults') }}</option>
                                 <option>{{ __('Youth School (8-16)') }}</option>
                                 <option>{{ __('Fit Boxing') }}</option>
@@ -569,7 +569,7 @@
             <div class="mx-auto grid max-w-7xl grid-cols-1 gap-12 px-6 lg:grid-cols-4 lg:px-10">
                 <div>
                     <x-logo />
-                    <p class="mt-5 max-w-xs text-sm text-white/50">{{ __('A boxing club built on discipline, respect and real coaching — from your first jab to your first fight.') }}</p>
+                    <p class="mt-5 max-w-xs text-sm text-white/50">{{ __('A boxing club built on discipline, respect and real coaching - from your first jab to your first fight.') }}</p>
                     <div class="mt-6 flex gap-3">
                         @foreach (['instagram', 'facebook', 'youtube'] as $social)
                             <a href="#" class="flex h-9 w-9 items-center justify-center rounded-full border border-white/15 text-white/60 transition hover:border-blue-400 hover:text-blue-400">

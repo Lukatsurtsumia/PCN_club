@@ -35,7 +35,7 @@
 <body>
     <div class="wrap">
         <header>
-            <h1>🥊 PCN — Tableau de bord</h1>
+            <h1>🥊 PCN - Tableau de bord</h1>
             <span class="count">{{ count($rows) }} demandes</span>
         </header>
 

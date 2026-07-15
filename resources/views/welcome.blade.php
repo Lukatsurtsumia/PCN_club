@@ -90,15 +90,17 @@
             x-data="heroSlider(3, 6000)"
             @mouseenter="stop()"
             @mouseleave="play()"
+            @touchstart.passive="touchStart($event)"
+            @touchend.passive="touchEnd($event)"
             class="relative h-screen min-h-[680px] w-full overflow-hidden bg-navy-950"
         >
             {{-- background layer - slide 1 --}}
-            <div x-show="active === 0" x-transition:enter="transition ease-out duration-[1200ms]" x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100" x-transition:leave="transition ease-in duration-500" x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0" class="absolute inset-0">
+            <div x-show="active === 0" x-transition:enter="transition ease-out duration-[400ms]" x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100" x-transition:leave="transition ease-in duration-[400ms]" x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0" class="absolute inset-0">
                 <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_theme(colors.navy.700),_theme(colors.navy.950)_65%)]"></div>
             </div>
 
             {{-- background layer - slide 2 --}}
-            <div x-show="active === 1" x-transition:enter="transition ease-out duration-[1200ms]" x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100" x-transition:leave="transition ease-in duration-500" x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0" class="absolute inset-0">
+            <div x-show="active === 1" x-transition:enter="transition ease-out duration-[400ms]" x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100" x-transition:leave="transition ease-in duration-[400ms]" x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0" class="absolute inset-0">
                 <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_left,_theme(colors.navy.700),_theme(colors.navy.950)_65%)]"></div>
                 <div class="absolute inset-x-0 top-1/3 flex flex-col gap-6 opacity-40">
                     <span class="h-1 w-full bg-blue-500"></span>
@@ -109,7 +111,7 @@
             </div>
 
             {{-- background layer - slide 3 --}}
-            <div x-show="active === 2" x-transition:enter="transition ease-out duration-[1200ms]" x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100" x-transition:leave="transition ease-in duration-500" x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0" class="absolute inset-0">
+            <div x-show="active === 2" x-transition:enter="transition ease-out duration-[400ms]" x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100" x-transition:leave="transition ease-in duration-[400ms]" x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0" class="absolute inset-0">
                 <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_theme(colors.navy.700),_theme(colors.navy.950)_65%)]"></div>
             </div>
 

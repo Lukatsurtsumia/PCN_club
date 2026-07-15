@@ -6,6 +6,8 @@ Alpine.data('heroSlider', (slideCount = 3, intervalMs = 6000) => ({
     active: 0,
     total: slideCount,
     timer: null,
+    touchX: null,
+    touchY: null,
 
     init() {
         this.play();
@@ -31,6 +33,27 @@ Alpine.data('heroSlider', (slideCount = 3, intervalMs = 6000) => ({
     goTo(index) {
         this.active = index;
         this.play();
+    },
+
+    // --- mobile swipe: left = next slide, right = previous ---
+    touchStart(e) {
+        const t = e.changedTouches[0];
+        this.touchX = t.clientX;
+        this.touchY = t.clientY;
+    },
+
+    touchEnd(e) {
+        if (this.touchX === null) return;
+        const t = e.changedTouches[0];
+        const dx = t.clientX - this.touchX;
+        const dy = t.clientY - this.touchY;
+        this.touchX = this.touchY = null;
+        // only a mostly-horizontal drag counts as a swipe, so vertical page
+        // scrolling still works untouched
+        if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy)) {
+            dx < 0 ? this.next() : this.prev();
+            this.play(); // restart the auto-advance timer after a manual swipe
+        }
     },
 }));
 

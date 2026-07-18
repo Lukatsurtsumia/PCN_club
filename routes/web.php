@@ -49,7 +49,7 @@ Route::post('/contact', function (Request $request) {
 })->name('contact');
 
 // Private inbox — password protected (HTTP Basic auth using ENQ_USER / ENQ_PASS from .env)
-Route::get('/enquiries', function (Request $request) {
+Route::get('/profile', function (Request $request) {
     $user = env('ENQ_USER', 'admin');
     $pass = env('ENQ_PASS');
     if (! $pass || $request->getUser() !== $user || ! hash_equals($pass, (string) $request->getPassword())) {
@@ -78,10 +78,11 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
+// (unused Laravel auth account page — moved off /profile so the private inbox can use it)
 Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::get('/account', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/account', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/account', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
 // Language switch (FR default / EN)

@@ -75,6 +75,48 @@ Alpine.data('navMenu', () => ({
     },
 }));
 
+/* ------------------------------------------------------------------ */
+/* Cookie consent (GDPR): gates Google Maps + Elfsight reviews.         */
+/* Nothing third-party loads until the visitor clicks Accept.           */
+/* ------------------------------------------------------------------ */
+Alpine.store('consent', {
+    value: null, // 'accepted' | 'refused' | null (undecided)
+    _loaded: false,
+    KEY: 'pcn_cookie_consent',
+    MAX_AGE: 180 * 24 * 60 * 60 * 1000, // re-ask after ~6 months
+
+    init() {
+        try {
+            const raw = JSON.parse(localStorage.getItem(this.KEY) || 'null');
+            if (raw && raw.at && Date.now() - raw.at < this.MAX_AGE) {
+                this.value = raw.v;
+            }
+        } catch (e) { /* ignore */ }
+        if (this.value === 'accepted') this.loadThirdParty();
+    },
+
+    decided() { return this.value !== null; },
+    accepted() { return this.value === 'accepted'; },
+
+    set(v) {
+        this.value = v;
+        try { localStorage.setItem(this.KEY, JSON.stringify({ v, at: Date.now() })); } catch (e) { /* ignore */ }
+        if (v === 'accepted') this.loadThirdParty();
+    },
+
+    reopen() { this.value = null; }, // "Cookie settings" — show the banner again
+
+    // load the Elfsight reviews script only once the visitor has accepted
+    loadThirdParty() {
+        if (this._loaded) return;
+        this._loaded = true;
+        const s = document.createElement('script');
+        s.src = 'https://elfsightcdn.com/platform.js';
+        s.async = true;
+        document.body.appendChild(s);
+    },
+});
+
 Alpine.start();
 
 /* ------------------------------------------------------------------ */

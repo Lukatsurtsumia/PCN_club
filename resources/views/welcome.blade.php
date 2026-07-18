@@ -406,10 +406,20 @@
                 <h2 data-reveal="up" data-reveal-delay="1" class="mt-4 font-display text-4xl tracking-wide text-navy-950 sm:text-5xl">{{ __('REAL PEOPLE. REAL RESULTS.') }}</h2>
             </div>
 
-            {{-- Live Google reviews via Elfsight - pulls the club's reviews from Google and auto-updates --}}
-            <div data-reveal="up" data-reveal-delay="2" class="mx-auto mt-12 max-w-7xl px-6 lg:px-10">
-                <script src="https://elfsightcdn.com/platform.js" async></script>
-                <div class="elfsight-app-0e0cdec6-2556-432d-a0b1-e2a0934c43a3" data-elfsight-app-lazy></div>
+            {{-- Live Google reviews via Elfsight - loads only after cookie consent --}}
+            <div data-reveal="up" data-reveal-delay="2" x-data class="mx-auto mt-12 max-w-7xl px-6 lg:px-10">
+                <template x-if="$store.consent.accepted()">
+                    <div x-init="$store.consent.loadThirdParty()">
+                        <div class="elfsight-app-0e0cdec6-2556-432d-a0b1-e2a0934c43a3" data-elfsight-app-lazy></div>
+                    </div>
+                </template>
+                <template x-if="! $store.consent.accepted()">
+                    <div class="flex flex-col items-center justify-center gap-4 rounded-3xl border border-navy-200 bg-navy-50/60 p-12 text-center">
+                        <span class="text-3xl">&#11088;</span>
+                        <p class="max-w-sm text-sm text-navy-500">{{ __('Accept cookies to display our Google reviews.') }}</p>
+                        <button @click="$store.consent.set('accepted')" class="rounded-full bg-blue-600 px-5 py-2.5 text-sm font-bold text-white transition hover:bg-blue-500">{{ __('Accept') }}</button>
+                    </div>
+                </template>
             </div>
         </section>
 
@@ -462,15 +472,24 @@
                         </a>
                     </div>
 
-                    <div data-reveal="right" class="col-span-3 min-h-[380px] bg-navy-800">
-                        <iframe
-                            title="PCN Boxing Club location map"
-                            src="https://maps.google.com/maps?q=Pugilist%20Club%20Nicois%2C%2016%20rue%20Forn%C3%A9ro%20M%C3%A9ne%C3%AF%2C%2006300%20Nice&t=&z=15&output=embed"
-                            class="h-full min-h-[380px] w-full grayscale-[0.3] contrast-[1.1]"
-                            style="border:0"
-                            loading="lazy"
-                            referrerpolicy="no-referrer-when-downgrade"
-                        ></iframe>
+                    <div data-reveal="right" x-data class="col-span-3 min-h-[380px] bg-navy-800">
+                        <template x-if="$store.consent.accepted()">
+                            <iframe
+                                title="PCN Boxing Club location map"
+                                src="https://maps.google.com/maps?q=Pugilist%20Club%20Nicois%2C%2016%20rue%20Forn%C3%A9ro%20M%C3%A9ne%C3%AF%2C%2006300%20Nice&t=&z=15&output=embed"
+                                class="h-full min-h-[380px] w-full grayscale-[0.3] contrast-[1.1]"
+                                style="border:0"
+                                loading="lazy"
+                                referrerpolicy="no-referrer-when-downgrade"
+                            ></iframe>
+                        </template>
+                        <template x-if="! $store.consent.accepted()">
+                            <div class="flex h-full min-h-[380px] flex-col items-center justify-center gap-4 p-8 text-center">
+                                <span class="text-3xl">&#128506;</span>
+                                <p class="max-w-xs text-sm text-white/60">{{ __('Accept cookies to display the interactive map.') }}</p>
+                                <button @click="$store.consent.set('accepted')" class="rounded-full bg-blue-600 px-5 py-2.5 text-sm font-bold text-white transition hover:bg-blue-500">{{ __('Accept') }}</button>
+                            </div>
+                        </template>
                     </div>
                 </div>
             </div>
@@ -617,21 +636,19 @@
                 </div>
             </div>
 
-            <div class="mx-auto mt-14 max-w-7xl border-t border-white/10 px-6 pt-6 text-center text-xs text-white/40 lg:px-10">
+            <div x-data class="mx-auto mt-14 max-w-7xl border-t border-white/10 px-6 pt-6 text-center text-xs text-white/40 lg:px-10">
                 &copy; {{ date('Y') }} Pugilist Club Niçois. {{ __('All rights reserved.') }}
                 <span class="mx-2 text-white/20">&middot;</span>
                 Conçu &amp; développé par Luka Tsurtsumia
+                <span class="mx-2 text-white/20">&middot;</span>
+                <button @click="$store.consent.reopen()" class="underline underline-offset-2 transition hover:text-white/70">🍪 {{ __('Cookie settings') }}</button>
             </div>
         </footer>
 
         {{-- ============================= COOKIE BANNER ============================= --}}
         <div
-            x-data="{
-                show: false,
-                init() { this.show = ! localStorage.getItem('pcn_cookie_consent'); },
-                choose(v) { localStorage.setItem('pcn_cookie_consent', v); this.show = false; }
-            }"
-            x-show="show"
+            x-data
+            x-show="! $store.consent.decided()"
             x-cloak
             x-transition:enter="transition ease-out duration-500"
             x-transition:enter-start="opacity-0 translate-y-6"
@@ -643,8 +660,8 @@
                     <span class="mr-1.5">🍪</span>{{ __('We use cookies to improve your experience and to display the map and reviews. You can accept or refuse.') }}
                 </p>
                 <div class="flex shrink-0 gap-3">
-                    <button @click="choose('refused')" class="rounded-full border border-white/25 px-5 py-2.5 text-sm font-bold text-white transition hover:bg-white/10">{{ __('Refuse') }}</button>
-                    <button @click="choose('accepted')" class="rounded-full bg-blue-600 px-6 py-2.5 text-sm font-bold text-white shadow-glow transition hover:bg-blue-500 hover:-translate-y-0.5">{{ __('Accept') }}</button>
+                    <button @click="$store.consent.set('refused')" class="rounded-full border border-white/25 px-5 py-2.5 text-sm font-bold text-white transition hover:bg-white/10">{{ __('Refuse') }}</button>
+                    <button @click="$store.consent.set('accepted')" class="rounded-full bg-blue-600 px-6 py-2.5 text-sm font-bold text-white shadow-glow transition hover:bg-blue-500 hover:-translate-y-0.5">{{ __('Accept') }}</button>
                 </div>
             </div>
         </div>

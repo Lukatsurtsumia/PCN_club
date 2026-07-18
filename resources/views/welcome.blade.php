@@ -619,6 +619,8 @@
 
             <div class="mx-auto mt-14 max-w-7xl border-t border-white/10 px-6 pt-6 text-center text-xs text-white/40 lg:px-10">
                 &copy; {{ date('Y') }} Pugilist Club Niçois. {{ __('All rights reserved.') }}
+                <span class="mx-2 text-white/20">&middot;</span>
+                Conçu &amp; développé par Luka Tsurtsumia
             </div>
         </footer>
     </body>

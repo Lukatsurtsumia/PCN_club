@@ -430,7 +430,7 @@
 
                         @foreach ([
                             ['icon' => 'pin', 'label' => 'Address', 'value' => '16 rue Fornéro Méneï, 06300 Nice'],
-                            ['icon' => 'phone', 'label' => 'Phone', 'value' => '04 93 89 05 09'],
+                            ['icon' => 'phone', 'label' => 'Phone', 'value' => '00 00 00 00'],
                             ['icon' => 'clock', 'label' => 'Hours', 'value' => 'Mon-Fri · 5pm-8pm'],
                         ] as $item)
                             <div class="flex items-start gap-4">
@@ -623,5 +623,30 @@
                 Conçu &amp; développé par Luka Tsurtsumia
             </div>
         </footer>
+
+        {{-- ============================= COOKIE BANNER ============================= --}}
+        <div
+            x-data="{
+                show: false,
+                init() { this.show = ! localStorage.getItem('pcn_cookie_consent'); },
+                choose(v) { localStorage.setItem('pcn_cookie_consent', v); this.show = false; }
+            }"
+            x-show="show"
+            x-cloak
+            x-transition:enter="transition ease-out duration-500"
+            x-transition:enter-start="opacity-0 translate-y-6"
+            x-transition:enter-end="opacity-100 translate-y-0"
+            class="fixed inset-x-0 bottom-0 z-[60] p-4 sm:p-6"
+        >
+            <div class="mx-auto flex max-w-4xl flex-col gap-4 rounded-2xl border border-white/10 bg-navy-900/95 p-5 shadow-2xl shadow-black/40 backdrop-blur-md sm:flex-row sm:items-center sm:gap-6 sm:p-6">
+                <p class="flex-1 text-sm leading-relaxed text-white/70">
+                    <span class="mr-1.5">🍪</span>{{ __('We use cookies to improve your experience and to display the map and reviews. You can accept or refuse.') }}
+                </p>
+                <div class="flex shrink-0 gap-3">
+                    <button @click="choose('refused')" class="rounded-full border border-white/25 px-5 py-2.5 text-sm font-bold text-white transition hover:bg-white/10">{{ __('Refuse') }}</button>
+                    <button @click="choose('accepted')" class="rounded-full bg-blue-600 px-6 py-2.5 text-sm font-bold text-white shadow-glow transition hover:bg-blue-500 hover:-translate-y-0.5">{{ __('Accept') }}</button>
+                </div>
+            </div>
+        </div>
     </body>
 </html>

@@ -2,7 +2,7 @@
 
 Official website for the **Pugilist Club Niçois**, a boxing club in Nice, France (established 1969).
 
-**Live:** https://pcn.boxeros.app
+**Live:** https://pcnboxe.com
 
 Designed, built, and owned by **Luka Tsurtsumia**.
 

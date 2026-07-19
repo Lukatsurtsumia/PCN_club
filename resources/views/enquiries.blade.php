@@ -81,7 +81,7 @@
             <div class="empty">Aucune demande pour le moment. Les messages envoyés depuis le formulaire de contact du site apparaîtront ici.</div>
         @endforelse
 
-        <p class="hint">Page privée · rechargez pour actualiser. Modifiez l'accès dans <code>.env</code> (ENQ_USER / ENQ_PASS).</p>
+        <p class="hint">Page privée · rechargez pour actualiser. Modifiez l'accès dans les variables <code>Coolify</code> (ENQ_USER / ENQ_PASS).</p>
     </div>
 </body>
 </html>

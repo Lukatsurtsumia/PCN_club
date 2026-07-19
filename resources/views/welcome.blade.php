@@ -540,52 +540,21 @@
 
                 {{-- Contact form --}}
                 <div data-reveal="right" class="rounded-3xl bg-white p-8 shadow-2xl sm:p-10">
-                    @if (session('contact_sent'))
-                        <div class="mb-6 flex items-center gap-3 rounded-2xl bg-green-50 p-4 text-sm font-semibold text-green-700 ring-1 ring-green-200">
-                            <svg class="h-5 w-5 shrink-0" viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                            {{ __("Thanks! Your message has been sent - we'll get back to you soon.") }}
-                        </div>
-                    @endif
-
                     <h3 class="font-display text-2xl tracking-wide text-navy-950">{{ __('SEND US A MESSAGE') }}</h3>
                     <p class="mt-2 text-sm text-navy-600">{{ __('A question or want to sign up? Drop us a line.') }}</p>
 
-                    <form data-mailto-form data-mailto-to="lukatsurtsumia0@gmail.com" class="mt-6 space-y-4">
-                        <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
-                            <div>
-                                <label class="mb-1.5 block text-xs font-bold uppercase tracking-wide text-navy-500">{{ __('Name') }}</label>
-                                <input type="text" name="name" value="{{ old('name') }}" required placeholder="{{ __('Your name') }}" class="w-full rounded-xl border border-navy-200 bg-navy-50/40 px-4 py-3 text-sm text-navy-900 outline-none transition placeholder:text-navy-400 focus:border-blue-500 focus:bg-white focus:ring-2 focus:ring-blue-500/20" />
-                                @error('name') <p class="mt-1 text-xs font-medium text-red-600">{{ $message }}</p> @enderror
-                            </div>
-                            <div>
-                                <label class="mb-1.5 block text-xs font-bold uppercase tracking-wide text-navy-500">{{ __('Phone') }}</label>
-                                <input type="tel" name="phone" value="{{ old('phone') }}" placeholder="06 12 34 56 78" class="w-full rounded-xl border border-navy-200 bg-navy-50/40 px-4 py-3 text-sm text-navy-900 outline-none transition placeholder:text-navy-400 focus:border-blue-500 focus:bg-white focus:ring-2 focus:ring-blue-500/20" />
-                            </div>
-                        </div>
-                        <div>
-                            <label class="mb-1.5 block text-xs font-bold uppercase tracking-wide text-navy-500">{{ __('Email') }}</label>
-                            <input type="email" name="email" value="{{ old('email') }}" required placeholder="you@email.com" class="w-full rounded-xl border border-navy-200 bg-navy-50/40 px-4 py-3 text-sm text-navy-900 outline-none transition placeholder:text-navy-400 focus:border-blue-500 focus:bg-white focus:ring-2 focus:ring-blue-500/20" />
-                            @error('email') <p class="mt-1 text-xs font-medium text-red-600">{{ $message }}</p> @enderror
-                        </div>
-                        <div>
-                            <label class="mb-1.5 block text-xs font-bold uppercase tracking-wide text-navy-500">{{ __('Course of interest') }}</label>
-                            <select name="course" class="w-full rounded-xl border border-navy-200 bg-navy-50/40 px-4 py-3 text-sm text-navy-900 outline-none transition focus:border-blue-500 focus:bg-white focus:ring-2 focus:ring-blue-500/20">
-                                <option value="">- {{ __('Choose') }} -</option>
-                                <option>{{ __('Boxing · Adults') }}</option>
-                                <option>{{ __('Youth School (8-16)') }}</option>
-                                <option>{{ __('Fit Boxing') }}</option>
-                                <option>{{ __('Other') }}</option>
-                            </select>
-                        </div>
-                        <div>
-                            <label class="mb-1.5 block text-xs font-bold uppercase tracking-wide text-navy-500">{{ __('Message') }}</label>
-                            <textarea name="message" rows="4" required placeholder="{{ __("Tell us what you're looking for…") }}" class="w-full rounded-xl border border-navy-200 bg-navy-50/40 px-4 py-3 text-sm text-navy-900 outline-none transition placeholder:text-navy-400 focus:border-blue-500 focus:bg-white focus:ring-2 focus:ring-blue-500/20">{{ old('message') }}</textarea>
-                            @error('message') <p class="mt-1 text-xs font-medium text-red-600">{{ $message }}</p> @enderror
-                        </div>
-                        <button type="submit" class="w-full rounded-full bg-blue-600 px-8 py-4 text-sm font-bold tracking-wide text-white shadow-glow transition hover:-translate-y-0.5 hover:bg-blue-500">
-                            {{ __('Send Message') }}
-                        </button>
-                    </form>
+                    <div class="mt-8 flex flex-col items-center gap-6 rounded-2xl border border-navy-100 bg-navy-50/50 p-8 text-center sm:p-10">
+                        <span class="flex h-16 w-16 items-center justify-center rounded-2xl bg-blue-600/10 text-blue-600">
+                            <svg class="h-8 w-8" viewBox="0 0 24 24" fill="none"><rect x="3" y="5" width="18" height="14" rx="2.5" stroke="currentColor" stroke-width="1.8"/><path d="M4 7l8 6 8-6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        </span>
+                        <p class="max-w-sm text-sm text-navy-600">{{ __('Write to us directly by email and we will reply quickly.') }}</p>
+                        <a href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;to=lukatsurtsumia0@gmail.com&amp;su=Inscription" target="_blank" rel="noopener"
+                           class="inline-flex items-center gap-2.5 rounded-full bg-blue-600 px-9 py-4 text-sm font-bold tracking-wide text-white shadow-glow transition hover:-translate-y-0.5 hover:bg-blue-500">
+                            <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none"><rect x="3" y="5" width="18" height="14" rx="2" stroke="currentColor" stroke-width="2"/><path d="M4 7l8 6 8-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                            {{ __('Email us') }}
+                        </a>
+                        <span class="select-all text-sm font-semibold text-navy-500">lukatsurtsumia0@gmail.com</span>
+                    </div>
                 </div>
             </div>
         </section>

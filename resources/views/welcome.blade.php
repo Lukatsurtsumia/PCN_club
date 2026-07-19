@@ -550,8 +550,7 @@
                     <h3 class="font-display text-2xl tracking-wide text-navy-950">{{ __('SEND US A MESSAGE') }}</h3>
                     <p class="mt-2 text-sm text-navy-600">{{ __('A question or want to sign up? Drop us a line.') }}</p>
 
-                    <form method="POST" action="{{ route('contact') }}" class="mt-6 space-y-4">
-                        @csrf
+                    <form data-mailto-form data-mailto-to="lukatsurtsumia0@gmail.com" class="mt-6 space-y-4">
                         <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
                             <div>
                                 <label class="mb-1.5 block text-xs font-bold uppercase tracking-wide text-navy-500">{{ __('Name') }}</label>

@@ -3,6 +3,8 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        {{-- stop browsers auto-translating the site (it garbles the FR nav); use the built-in FR/EN switch instead --}}
+        <meta name="google" content="notranslate">
         <meta name="description" content="Pugilist Club Niçois - club de boxe anglaise à Nice depuis 1969. Boxe jeunesse, fitness, compétition et coaching privé.">
 
         <title>Pugilist Club Niçois | Boxe Anglaise à Nice</title>

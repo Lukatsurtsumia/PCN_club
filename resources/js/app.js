@@ -194,8 +194,11 @@ document.querySelectorAll('[data-mailto-form]').forEach((form) => {
             'Message :',
             val('message'),
         ].join('\n');
-        window.location.href = 'mailto:' + to
-            + '?subject=' + encodeURIComponent(subject)
+        // open Gmail's compose window directly, pre-filled (customer then clicks Send)
+        const gmail = 'https://mail.google.com/mail/?view=cm&fs=1'
+            + '&to=' + encodeURIComponent(to)
+            + '&su=' + encodeURIComponent(subject)
             + '&body=' + encodeURIComponent(body);
+        window.open(gmail, '_blank');
     });
 });

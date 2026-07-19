@@ -174,31 +174,3 @@ const counterObserver = new IntersectionObserver(
 );
 
 document.querySelectorAll('[data-counter]').forEach((el) => counterObserver.observe(el));
-
-/* ------------------------------------------------------------------ */
-/* Contact form -> opens the visitor's email pre-filled (mailto).       */
-/* Recipient + subject "Inscription" are set; customer just hits Send.  */
-/* ------------------------------------------------------------------ */
-document.querySelectorAll('[data-mailto-form]').forEach((form) => {
-    form.addEventListener('submit', (e) => {
-        e.preventDefault();
-        const to = form.dataset.mailtoTo;
-        const val = (n) => (form.querySelector(`[name="${n}"]`)?.value || '').trim();
-        const subject = 'Inscription' + (val('name') ? ' - ' + val('name') : '');
-        const body = [
-            'Nom : ' + val('name'),
-            'Téléphone : ' + val('phone'),
-            'Email : ' + val('email'),
-            'Cours souhaité : ' + val('course'),
-            '',
-            'Message :',
-            val('message'),
-        ].join('\n');
-        // open Gmail's compose window directly, pre-filled (customer then clicks Send)
-        const gmail = 'https://mail.google.com/mail/?view=cm&fs=1'
-            + '&to=' + encodeURIComponent(to)
-            + '&su=' + encodeURIComponent(subject)
-            + '&body=' + encodeURIComponent(body);
-        window.open(gmail, '_blank');
-    });
-});

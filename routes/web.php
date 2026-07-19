@@ -26,28 +26,6 @@ Route::get('/', function (Request $request) {
     return $response;
 });
 
-// Contact / membership enquiry form (Join section) — saves each enquiry to a file
-Route::post('/contact', function (Request $request) {
-    app()->setLocale('fr');
-    $data = $request->validate([
-        'name'    => ['required', 'string', 'max:100'],
-        'email'   => ['required', 'email', 'max:150'],
-        'phone'   => ['nullable', 'string', 'max:40'],
-        'course'  => ['nullable', 'string', 'max:80'],
-        'message' => ['required', 'string', 'max:2000'],
-    ], [
-        'required' => 'Ce champ est obligatoire.',
-        'email'    => 'Veuillez saisir une adresse email valide.',
-        'max'      => 'Ce champ est trop long.',
-    ]);
-
-    $data['at'] = now()->toDateTimeString();
-    $line = json_encode($data, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) . "\n";
-    file_put_contents(storage_path('app/enquiries.jsonl'), $line, FILE_APPEND | LOCK_EX);
-
-    return back()->with('contact_sent', true)->withFragment('join');
-})->name('contact');
-
 // Private inbox — styled session login (form at /profile, no more browser popup)
 Route::get('/profile', function (Request $request) {
     if (! $request->session()->get('pcn_admin')) {
@@ -74,8 +52,8 @@ Route::get('/profile', function (Request $request) {
 
 // Handle the login form
 Route::post('/profile/login', function (Request $request) {
-    $user = env('ENQ_USER', 'admin');
-    $pass = env('ENQ_PASS');
+    $user = config('pcn.admin_user');
+    $pass = config('pcn.admin_pass');
     if ($pass && $request->input('username') === $user && hash_equals($pass, (string) $request->input('password'))) {
         $request->session()->regenerate();
         $request->session()->put('pcn_admin', true);

@@ -247,7 +247,7 @@
                         <p class="mt-6 max-w-lg text-lg text-white/70">{{ __('Elite coaching, real ring craft, and a corner that pushes you every single round. This is where fighters are made.') }}</p>
                         <div class="mt-9 flex flex-wrap gap-4">
                             <a href="#join" class="rounded-full bg-blue-600 px-8 py-3.5 text-sm font-bold tracking-wide text-white shadow-glow transition hover:bg-blue-500 hover:-translate-y-0.5">{{ __('Join The Club') }}</a>
-                            <a href="#programs" class="rounded-full border border-white/30 px-8 py-3.5 text-sm font-bold tracking-wide text-white transition hover:border-white hover:bg-white/10">{{ __('View Programs') }}</a>
+                            <a href="#explore" class="rounded-full border border-white/30 px-8 py-3.5 text-sm font-bold tracking-wide text-white transition hover:border-white hover:bg-white/10">{{ __('View Programs') }}</a>
                         </div>
                     </div>
                 </template>
@@ -590,7 +590,8 @@
                     <h4 class="text-sm font-bold uppercase tracking-wide text-white">{{ __('Quick Links') }}</h4>
                     <ul class="mt-5 space-y-3 text-sm text-white/50">
                         <li><a href="#about" class="transition hover:text-blue-400">{{ __('About') }}</a></li>
-                        <li><a href="#programs" class="transition hover:text-blue-400">{{ __('Programs') }}</a></li>
+                        <li><a href="/horaires" class="transition hover:text-blue-400">{{ __('Schedule') }}</a></li>
+                        <li><a href="/galerie" class="transition hover:text-blue-400">{{ __('Gallery') }}</a></li>
                         <li><a href="#testimonials" class="transition hover:text-blue-400">{{ __('Fighters Say') }}</a></li>
                         <li><a href="#location" class="transition hover:text-blue-400">{{ __('Location') }}</a></li>
                     </ul>

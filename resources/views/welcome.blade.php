@@ -43,11 +43,11 @@
                 </a>
 
                 <nav class="hidden items-center gap-6 lg:flex">
-                    <a href="#about" class="relative text-sm font-semibold tracking-wide text-white/80 transition hover:text-white after:absolute after:-bottom-1.5 after:left-0 after:h-0.5 after:w-0 after:rounded-full after:bg-blue-500 after:transition-all after:duration-300 hover:after:w-full">{{ __('About') }}</a>
-                    <a href="/horaires" class="relative text-sm font-semibold tracking-wide text-white/80 transition hover:text-white after:absolute after:-bottom-1.5 after:left-0 after:h-0.5 after:w-0 after:rounded-full after:bg-blue-500 after:transition-all after:duration-300 hover:after:w-full">{{ __('Schedule') }}</a>
-                    <a href="/galerie" class="relative text-sm font-semibold tracking-wide text-white/80 transition hover:text-white after:absolute after:-bottom-1.5 after:left-0 after:h-0.5 after:w-0 after:rounded-full after:bg-blue-500 after:transition-all after:duration-300 hover:after:w-full">{{ __('Gallery') }}</a>
-                    <a href="#testimonials" class="relative text-sm font-semibold tracking-wide text-white/80 transition hover:text-white after:absolute after:-bottom-1.5 after:left-0 after:h-0.5 after:w-0 after:rounded-full after:bg-blue-500 after:transition-all after:duration-300 hover:after:w-full">{{ __('Fighters Say') }}</a>
-                    <a href="#location" class="relative text-sm font-semibold tracking-wide text-white/80 transition hover:text-white after:absolute after:-bottom-1.5 after:left-0 after:h-0.5 after:w-0 after:rounded-full after:bg-blue-500 after:transition-all after:duration-300 hover:after:w-full">{{ __('Location') }}</a>
+                    <a href="#about" class="nav-underline text-sm font-semibold tracking-wide text-white/80 transition hover:text-white">{{ __('About') }}</a>
+                    <a href="/horaires" class="nav-underline text-sm font-semibold tracking-wide text-white/80 transition hover:text-white">{{ __('Schedule') }}</a>
+                    <a href="/galerie" class="nav-underline text-sm font-semibold tracking-wide text-white/80 transition hover:text-white">{{ __('Gallery') }}</a>
+                    <a href="#testimonials" class="nav-underline text-sm font-semibold tracking-wide text-white/80 transition hover:text-white">{{ __('Fighters Say') }}</a>
+                    <a href="#location" class="nav-underline text-sm font-semibold tracking-wide text-white/80 transition hover:text-white">{{ __('Location') }}</a>
                     <a href="#join" class="rounded-full bg-blue-600 px-6 py-2.5 text-sm font-bold tracking-wide text-white shadow-glow transition hover:bg-blue-500 hover:-translate-y-0.5">
                         {{ __('Join The Fight') }}
                     </a>

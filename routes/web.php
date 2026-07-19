@@ -85,6 +85,17 @@ Route::middleware('auth')->group(function () {
     Route::delete('/account', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+// Standalone pages linked from the homepage cards
+Route::get('/horaires', function () {
+    app()->setLocale(session('locale', 'fr'));
+    return view('schedule');
+})->name('schedule');
+
+Route::get('/galerie', function () {
+    app()->setLocale(session('locale', 'fr'));
+    return view('gallery');
+})->name('gallery');
+
 // Language switch (FR default / EN)
 Route::get('/lang/{locale}', function (string $locale) {
     if (in_array($locale, ['fr', 'en'], true)) {

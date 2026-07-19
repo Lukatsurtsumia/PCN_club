@@ -40,9 +40,10 @@
                     <x-logo />
                 </a>
 
-                <nav class="hidden items-center gap-9 lg:flex">
+                <nav class="hidden items-center gap-6 lg:flex">
                     <a href="#about" class="text-sm font-semibold tracking-wide text-white/80 transition hover:text-white">{{ __('About') }}</a>
-                    <a href="#programs" class="text-sm font-semibold tracking-wide text-white/80 transition hover:text-white">{{ __('Programs') }}</a>
+                    <a href="/horaires" class="text-sm font-semibold tracking-wide text-white/80 transition hover:text-white">{{ __('Schedule') }}</a>
+                    <a href="/galerie" class="text-sm font-semibold tracking-wide text-white/80 transition hover:text-white">{{ __('Gallery') }}</a>
                     <a href="#testimonials" class="text-sm font-semibold tracking-wide text-white/80 transition hover:text-white">{{ __('Fighters Say') }}</a>
                     <a href="#location" class="text-sm font-semibold tracking-wide text-white/80 transition hover:text-white">{{ __('Location') }}</a>
                     <a href="#join" class="rounded-full bg-blue-600 px-6 py-2.5 text-sm font-bold tracking-wide text-white shadow-glow transition hover:bg-blue-500 hover:-translate-y-0.5">
@@ -66,7 +67,8 @@
             <div x-show="open" x-transition x-cloak @click.outside="close()" class="mx-4 mt-4 rounded-2xl bg-navy-900 p-6 shadow-xl lg:hidden">
                 <nav class="flex flex-col gap-5">
                     <a @click="close()" href="#about" class="text-base font-semibold text-white/90">{{ __('About') }}</a>
-                    <a @click="close()" href="#programs" class="text-base font-semibold text-white/90">{{ __('Programs') }}</a>
+                    <a @click="close()" href="/horaires" class="text-base font-semibold text-white/90">{{ __('Schedule') }}</a>
+                    <a @click="close()" href="/galerie" class="text-base font-semibold text-white/90">{{ __('Gallery') }}</a>
                     <a @click="close()" href="#testimonials" class="text-base font-semibold text-white/90">{{ __('Fighters Say') }}</a>
                     <a @click="close()" href="#location" class="text-base font-semibold text-white/90">{{ __('Location') }}</a>
                     <a @click="close()" href="#join" class="rounded-full bg-blue-600 px-6 py-3 text-center text-base font-bold text-white">{{ __('Join The Fight') }}</a>
@@ -363,38 +365,42 @@
             </div>
         </section>
 
-        {{-- ============================= PROGRAMS (animated boxer cards) ============================= --}}
-        <section id="programs" class="scroll-mt-24 bg-navy-950 py-24 sm:py-32">
+        {{-- ============================= EXPLORE (schedule + gallery cards) ============================= --}}
+        <section id="explore" class="scroll-mt-24 bg-navy-950 py-24 sm:py-32">
             <div class="mx-auto max-w-7xl px-6 lg:px-10">
                 <div class="mx-auto max-w-2xl text-center">
-                    <span data-reveal="up" class="text-sm font-bold tracking-[0.3em] text-blue-400">{{ __('TRAINING PROGRAMS') }}</span>
-                    <h2 data-reveal="up" data-reveal-delay="1" class="mt-4 font-display text-4xl tracking-wide text-white sm:text-5xl">{{ __('FIND YOUR ROUND') }}</h2>
-                    <p data-reveal="up" data-reveal-delay="2" class="mt-5 text-lg text-white/60">{{ __('Four paths. One gym. Every session is coached, structured, and built around real boxing fundamentals.') }}</p>
+                    <span data-reveal="up" class="text-sm font-bold tracking-[0.3em] text-blue-400">{{ __('DISCOVER') }}</span>
+                    <h2 data-reveal="up" data-reveal-delay="1" class="mt-4 font-display text-4xl tracking-wide text-white sm:text-5xl">{{ __('EXPLORE THE CLUB') }}</h2>
                 </div>
 
-                <div class="mt-16 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
-                    @foreach ([
-                        ['img' => '/images/prog-youth.jpg', 'title' => 'Youth Boxing', 'desc' => 'Ages 8-16 build footwork, discipline and confidence with age-matched coaching.', 'tag' => 'Ages 8-16'],
-                        ['img' => '/images/prog-fitness.jpg', 'title' => 'Fitness Boxing', 'desc' => 'High-energy pad and bag rounds that torch calories and sharpen technique.', 'tag' => 'All Levels'],
-                        ['img' => '/images/prog-team.jpg', 'title' => 'Competitive Team', 'desc' => 'Sparring, conditioning and fight-camp prep for our amateur roster.', 'tag' => 'By Trial'],
-                        ['img' => '/images/prog-coaching.jpg', 'title' => '1-on-1 Coaching', 'desc' => 'Private sessions dialed into your goals - form, power, or fight prep.', 'tag' => 'Private'],
-                    ] as $i => $card)
-                        <div data-reveal="up" data-reveal-delay="{{ $i + 1 }}" class="group overflow-hidden rounded-3xl bg-navy-900 shadow-xl transition-all duration-500 hover:-translate-y-2 hover:shadow-glow">
-                            <div class="relative h-56 overflow-hidden">
-                                <img src="{{ $card['img'] }}?v=4" alt="{{ __($card['title']) }}" loading="lazy" class="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110" />
-                                <div class="absolute inset-0 bg-gradient-to-t from-navy-900 via-navy-900/25 to-transparent"></div>
-                                <span class="absolute right-4 top-4 rounded-full border border-white/20 bg-navy-950/60 px-3 py-1 text-[10px] font-bold tracking-wider text-white backdrop-blur-sm">{{ __($card['tag']) }}</span>
-                            </div>
-                            <div class="p-6">
-                                <h3 class="font-display text-xl tracking-wide text-white">{{ mb_strtoupper(__($card['title']), 'UTF-8') }}</h3>
-                                <p class="mt-3 text-sm text-white/60">{{ __($card['desc']) }}</p>
-                                <a href="#join" class="mt-5 inline-flex items-center gap-2 text-sm font-bold text-blue-400 transition group-hover:gap-3">
-                                    {{ __('Learn more') }}
-                                    <svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                                </a>
-                            </div>
+                <div class="mt-16 grid grid-cols-1 gap-8 md:grid-cols-2">
+                    {{-- Schedule card --}}
+                    <a href="/horaires" data-reveal="left" class="group relative flex h-80 items-end overflow-hidden rounded-3xl shadow-xl ring-1 ring-white/10 transition duration-500 hover:-translate-y-2 hover:shadow-glow">
+                        <img src="/images/gallery-3.jpg" alt="{{ __('Schedule') }}" loading="lazy" class="absolute inset-0 h-full w-full object-cover transition duration-700 group-hover:scale-110" />
+                        <div class="absolute inset-0 bg-gradient-to-t from-navy-950 via-navy-950/55 to-navy-950/10"></div>
+                        <div class="relative z-10 p-8">
+                            <span class="text-xs font-bold tracking-[0.3em] text-blue-400">{{ __('WEEKLY SCHEDULE') }}</span>
+                            <h3 class="mt-2 font-display text-3xl tracking-wide text-white sm:text-4xl">{{ __('Schedule') }}</h3>
+                            <span class="mt-4 inline-flex items-center gap-2 text-sm font-bold text-white transition group-hover:gap-3">
+                                {{ __('View the schedule') }}
+                                <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                            </span>
                         </div>
-                    @endforeach
+                    </a>
+
+                    {{-- Gallery card --}}
+                    <a href="/galerie" data-reveal="right" class="group relative flex h-80 items-end overflow-hidden rounded-3xl shadow-xl ring-1 ring-white/10 transition duration-500 hover:-translate-y-2 hover:shadow-glow">
+                        <img src="/images/prog-team.jpg" alt="{{ __('Gallery') }}" loading="lazy" class="absolute inset-0 h-full w-full object-cover transition duration-700 group-hover:scale-110" />
+                        <div class="absolute inset-0 bg-gradient-to-t from-navy-950 via-navy-950/55 to-navy-950/10"></div>
+                        <div class="relative z-10 p-8">
+                            <span class="text-xs font-bold tracking-[0.3em] text-blue-400">{{ __('GALLERY') }}</span>
+                            <h3 class="mt-2 font-display text-3xl tracking-wide text-white sm:text-4xl">{{ __('Gallery') }}</h3>
+                            <span class="mt-4 inline-flex items-center gap-2 text-sm font-bold text-white transition group-hover:gap-3">
+                                {{ __('View the gallery') }}
+                                <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                            </span>
+                        </div>
+                    </a>
                 </div>
             </div>
         </section>
@@ -409,8 +415,12 @@
             {{-- Live Google reviews via Elfsight - loads only after cookie consent --}}
             <div data-reveal="up" data-reveal-delay="2" x-data class="mx-auto mt-12 max-w-7xl px-6 lg:px-10">
                 <template x-if="$store.consent.accepted()">
-                    <div x-init="$store.consent.loadThirdParty()">
-                        <div class="elfsight-app-0e0cdec6-2556-432d-a0b1-e2a0934c43a3" data-elfsight-app-lazy></div>
+                    <div x-data="{ loading: true }" x-init="$store.consent.loadThirdParty(); setTimeout(() => loading = false, 6000)">
+                        <div x-show="loading" class="flex flex-col items-center justify-center gap-3 py-16 text-navy-400">
+                            <span class="h-9 w-9 animate-spin rounded-full border-2 border-navy-200 border-t-blue-500"></span>
+                            <span class="text-sm">{{ __('Loading Google reviews…') }}</span>
+                        </div>
+                        <div class="elfsight-app-0e0cdec6-2556-432d-a0b1-e2a0934c43a3"></div>
                     </div>
                 </template>
                 <template x-if="! $store.consent.accepted()">

@@ -36,7 +36,13 @@
     <div class="wrap">
         <header>
             <h1>🥊 PCN - Tableau de bord</h1>
-            <span class="count">{{ count($rows) }} demandes</span>
+            <div style="display:flex; align-items:center; gap:14px;">
+                <span class="count">{{ count($rows) }} demandes</span>
+                <form method="POST" action="{{ route('profile.logout') }}" style="margin:0;">
+                    @csrf
+                    <button type="submit" style="background:#17233c; border:1px solid #253a5c; color:#b9c6de; border-radius:999px; padding:6px 14px; font-size:12px; font-weight:600; cursor:pointer;">Déconnexion</button>
+                </form>
+            </div>
         </header>
 
         <div class="stats">

@@ -48,12 +48,10 @@ Route::post('/contact', function (Request $request) {
     return back()->with('contact_sent', true)->withFragment('join');
 })->name('contact');
 
-// Private inbox — password protected (HTTP Basic auth using ENQ_USER / ENQ_PASS from .env)
+// Private inbox — styled session login (form at /profile, no more browser popup)
 Route::get('/profile', function (Request $request) {
-    $user = env('ENQ_USER', 'admin');
-    $pass = env('ENQ_PASS');
-    if (! $pass || $request->getUser() !== $user || ! hash_equals($pass, (string) $request->getPassword())) {
-        return response('Authentification requise.', 401, ['WWW-Authenticate' => 'Basic realm="PCN"']);
+    if (! $request->session()->get('pcn_admin')) {
+        return view('login');
     }
 
     $path = storage_path('app/enquiries.jsonl');
@@ -73,6 +71,24 @@ Route::get('/profile', function (Request $request) {
 
     return view('enquiries', ['rows' => $rows, 'visits' => $visits, 'todayVisits' => $todayVisits]);
 })->name('enquiries');
+
+// Handle the login form
+Route::post('/profile/login', function (Request $request) {
+    $user = env('ENQ_USER', 'admin');
+    $pass = env('ENQ_PASS');
+    if ($pass && $request->input('username') === $user && hash_equals($pass, (string) $request->input('password'))) {
+        $request->session()->regenerate();
+        $request->session()->put('pcn_admin', true);
+        return redirect('/profile');
+    }
+    return back()->withErrors(['auth' => 'Identifiants incorrects.'])->withInput();
+})->name('profile.login');
+
+// Log out
+Route::post('/profile/logout', function (Request $request) {
+    $request->session()->forget('pcn_admin');
+    return redirect('/profile');
+})->name('profile.logout');
 
 Route::get('/dashboard', function () {
     return view('dashboard');

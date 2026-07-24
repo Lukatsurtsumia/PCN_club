@@ -9,7 +9,7 @@
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
         @vite(['resources/css/app.css', 'resources/js/app.js'])
-   <link rel="icon" href="{{ asset('favicon.ico') }}">
+   <link rel="icon" href="/favicon.ico" sizes="any">
     </head>
     <body class="font-body bg-navy-950 text-white antialiased">
         <header class="sticky top-0 z-50 border-b border-white/10 bg-navy-950/90 backdrop-blur-md">

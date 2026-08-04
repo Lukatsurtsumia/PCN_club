@@ -23,17 +23,27 @@ return [
     |--------------------------------------------------------------------------
     |
     | The homepage contact form POSTs a JSON payload
-    | { name, email, phone, course, message } to this URL. It points at the
-    | PCN Cloudflare Worker (workers/contact-worker) which relays the message
-    | by email via Resend. Override with PCN_CONTACT_ENDPOINT (Coolify variable
-    | in production) to switch to the custom domain route once it's live, e.g.
-    | https://pugilistclubnicois.fr/api/contact
+    | { name, email, phone, course, message } to this URL. It hits the PCN
+    | Cloudflare Worker (workers/contact-worker) which relays the message by
+    | email via Resend.
+    |
+    | Default = the branded pcnboxe.com route. For this to work the worker must
+    | be attached to that path in Cloudflare (once only):
+    |   Workers & Pages -> pcnboxe-contact-worker -> Settings -> Domains & Routes
+    |   -> Add Route:  pcnboxe.com/api/contact*   (zone: pcnboxe.com)
+    |
+    | Until that route exists, pcnboxe.com/api/contact returns 405 (the static
+    | site rejects POST). Fallback that works with zero Cloudflare setup:
+    |   PCN_CONTACT_ENDPOINT=https://pcnboxe-contact-worker.pcnboxe06.workers.dev
+    |
+    | Override anytime via the PCN_CONTACT_ENDPOINT env var (Coolify variable in
+    | production) without touching code.
     |
     */
 
     'contact_endpoint' => env(
         'PCN_CONTACT_ENDPOINT',
-        'https://pcnboxe-contact-worker.pcnboxe06.workers.dev'
+        'https://pcnboxe.com/api/contact'
     ),
 
 ];

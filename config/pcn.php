@@ -27,14 +27,15 @@ return [
     | Cloudflare Worker (workers/contact-worker) which relays the message by
     | email via Resend.
     |
-    | Default = the branded pcnboxe.com route. For this to work the worker must
-    | be attached to that path in Cloudflare (once only):
+    | Default = the deployed workers.dev URL. This works out of the box with
+    | ZERO Cloudflare setup (the worker is already live, CORS is open), so it's
+    | the simplest option for whoever deploys the fork.
+    |
+    | To later use a branded URL on pcnboxe.com, attach the worker to a route in
+    | Cloudflare (once only):
     |   Workers & Pages -> pcnboxe-contact-worker -> Settings -> Domains & Routes
     |   -> Add Route:  pcnboxe.com/api/contact*   (zone: pcnboxe.com)
-    |
-    | Until that route exists, pcnboxe.com/api/contact returns 405 (the static
-    | site rejects POST). Fallback that works with zero Cloudflare setup:
-    |   PCN_CONTACT_ENDPOINT=https://pcnboxe-contact-worker.pcnboxe06.workers.dev
+    | then set  PCN_CONTACT_ENDPOINT=https://pcnboxe.com/api/contact
     |
     | Override anytime via the PCN_CONTACT_ENDPOINT env var (Coolify variable in
     | production) without touching code.
@@ -43,7 +44,7 @@ return [
 
     'contact_endpoint' => env(
         'PCN_CONTACT_ENDPOINT',
-        'https://pcnboxe.com/api/contact'
+        'https://pcnboxe-contact-worker.pcnboxe06.workers.dev'
     ),
 
 ];

@@ -76,6 +76,54 @@ Alpine.data('navMenu', () => ({
 }));
 
 /* ------------------------------------------------------------------ */
+/* Contact form: POSTs { name, email, phone, course, message } as JSON */
+/* to the PCN Cloudflare Worker (config/pcn.php → contact_endpoint),    */
+/* which relays it by email via Resend. Payload keys must match the    */
+/* worker's expected fields exactly.                                   */
+/* ------------------------------------------------------------------ */
+Alpine.data('contactForm', (endpoint, errorText = '') => ({
+    endpoint,
+    errorText,
+    sending: false,
+    sent: false,
+    error: '',
+    form: { name: '', email: '', phone: '', course: '', message: '' },
+
+    async submit() {
+        if (this.sending) return;
+        this.error = '';
+        this.sending = true;
+
+        try {
+            const res = await fetch(this.endpoint, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    name: this.form.name,
+                    email: this.form.email,
+                    phone: this.form.phone,
+                    course: this.form.course,
+                    message: this.form.message,
+                }),
+            });
+
+            const data = await res.json().catch(() => ({}));
+
+            if (res.ok && data.success) {
+                this.sent = true;
+                this.form = { name: '', email: '', phone: '', course: '', message: '' };
+            } else {
+                this.error = data.error || this.errorText;
+            }
+        } catch (e) {
+            this.error = this.errorText;
+        } finally {
+            this.sending = false;
+        }
+    },
+}));
+
+/* ------------------------------------------------------------------ */
 /* Cookie consent (GDPR): gates Google Maps + Elfsight reviews.         */
 /* Nothing third-party loads until the visitor clicks Accept.           */
 /* ------------------------------------------------------------------ */

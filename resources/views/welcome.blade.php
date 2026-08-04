@@ -540,23 +540,70 @@
                     <p class="mt-5 text-xs text-white/40">* {{ __('Indicative pricing - contact us for full details and required certificates.') }}</p>
                 </div>
 
-                {{-- Contact form --}}
-                <div data-reveal="right" class="rounded-3xl bg-white p-8 shadow-2xl sm:p-10">
+                {{-- Contact form → POSTs JSON { name, email, phone, course, message } to the
+                     PCN Cloudflare Worker (config/pcn.php → contact_endpoint) which emails it via Resend --}}
+                <div data-reveal="right" class="rounded-3xl bg-white p-8 shadow-2xl sm:p-10"
+                     x-data="contactForm(@js(config('pcn.contact_endpoint')), @js(__('Something went wrong. Please try again or email us directly.')))">
                     <h3 class="font-display text-2xl tracking-wide text-navy-950">{{ __('SEND US A MESSAGE') }}</h3>
                     <p class="mt-2 text-sm text-navy-600">{{ __('A question or want to sign up? Drop us a line.') }}</p>
 
-                    <div class="mt-8 flex flex-col items-center gap-6 rounded-2xl border border-navy-100 bg-navy-50/50 p-8 text-center sm:p-10">
-                        <span class="flex h-16 w-16 items-center justify-center rounded-2xl bg-blue-600/10 text-blue-600">
-                            <svg class="h-8 w-8" viewBox="0 0 24 24" fill="none"><rect x="3" y="5" width="18" height="14" rx="2.5" stroke="currentColor" stroke-width="1.8"/><path d="M4 7l8 6 8-6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    {{-- Success state --}}
+                    <div x-show="sent" x-cloak class="mt-8 flex flex-col items-center gap-4 rounded-2xl border border-blue-100 bg-blue-50/60 p-8 text-center sm:p-10">
+                        <span class="flex h-14 w-14 items-center justify-center rounded-2xl bg-blue-600/10 text-blue-600">
+                            <svg class="h-7 w-7" viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
                         </span>
-                        <p class="max-w-sm text-sm text-navy-600">{{ __('Write to us directly by email and we will reply quickly.') }}</p>
-                        <a href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;to=lukatsurtsumia0@gmail.com&amp;su=Inscription" target="_blank" rel="noopener"
-                           class="inline-flex items-center gap-2.5 rounded-full bg-blue-600 px-9 py-4 text-sm font-bold tracking-wide text-white shadow-glow transition hover:-translate-y-0.5 hover:bg-blue-500">
-                            <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none"><rect x="3" y="5" width="18" height="14" rx="2" stroke="currentColor" stroke-width="2"/><path d="M4 7l8 6 8-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                            {{ __('Email us') }}
-                        </a>
-                        <span class="select-all text-sm font-semibold text-navy-500">lukatsurtsumia0@gmail.com</span>
+                        <p class="max-w-sm text-sm font-medium text-navy-700">{{ __("Thanks! Your message has been sent - we'll get back to you soon.") }}</p>
                     </div>
+
+                    {{-- Form --}}
+                    <form x-show="! sent" @submit.prevent="submit" class="mt-8 space-y-5">
+                        <div class="grid grid-cols-1 gap-5 sm:grid-cols-2">
+                            <label class="block">
+                                <span class="mb-1.5 block text-xs font-bold uppercase tracking-wide text-slate-500">{{ __('Name') }} *</span>
+                                <input x-model="form.name" type="text" required autocomplete="name" placeholder="{{ __('Your name') }}"
+                                       class="w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-900 placeholder-slate-400 transition focus:border-blue-500 focus:bg-white focus:outline-none focus:ring-2 focus:ring-blue-500/20" />
+                            </label>
+                            <label class="block">
+                                <span class="mb-1.5 block text-xs font-bold uppercase tracking-wide text-slate-500">{{ __('Email') }} *</span>
+                                <input x-model="form.email" type="email" required autocomplete="email" placeholder="{{ __('Your email') }}"
+                                       class="w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-900 placeholder-slate-400 transition focus:border-blue-500 focus:bg-white focus:outline-none focus:ring-2 focus:ring-blue-500/20" />
+                            </label>
+                        </div>
+
+                        <div class="grid grid-cols-1 gap-5 sm:grid-cols-2">
+                            <label class="block">
+                                <span class="mb-1.5 block text-xs font-bold uppercase tracking-wide text-slate-500">{{ __('Phone (optional)') }}</span>
+                                <input x-model="form.phone" type="tel" autocomplete="tel" placeholder="06 12 34 56 78"
+                                       class="w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-900 placeholder-slate-400 transition focus:border-blue-500 focus:bg-white focus:outline-none focus:ring-2 focus:ring-blue-500/20" />
+                            </label>
+                            <label class="block">
+                                <span class="mb-1.5 block text-xs font-bold uppercase tracking-wide text-slate-500">{{ __('Course of interest') }}</span>
+                                <select x-model="form.course"
+                                        class="w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-900 transition focus:border-blue-500 focus:bg-white focus:outline-none focus:ring-2 focus:ring-blue-500/20">
+                                    <option value="">{{ __('Choose') }}…</option>
+                                    <option value="{{ __('Boxing · Adults') }}">{{ __('Boxing · Adults') }}</option>
+                                    <option value="{{ __('Youth School (8-16)') }}">{{ __('Youth School (8-16)') }}</option>
+                                    <option value="{{ __('Fit Boxing') }}">{{ __('Fit Boxing') }}</option>
+                                    <option value="{{ __('Other') }}">{{ __('Other') }}</option>
+                                </select>
+                            </label>
+                        </div>
+
+                        <label class="block">
+                            <span class="mb-1.5 block text-xs font-bold uppercase tracking-wide text-slate-500">{{ __('Message') }} *</span>
+                            <textarea x-model="form.message" required rows="4" placeholder="{{ __("Tell us what you're looking for…") }}"
+                                      class="w-full resize-y rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-900 placeholder-slate-400 transition focus:border-blue-500 focus:bg-white focus:outline-none focus:ring-2 focus:ring-blue-500/20"></textarea>
+                        </label>
+
+                        {{-- Error message --}}
+                        <p x-show="error" x-cloak x-text="error" class="text-sm font-medium text-red-600"></p>
+
+                        <button type="submit" :disabled="sending"
+                                class="inline-flex w-full items-center justify-center gap-2.5 rounded-full bg-blue-600 px-9 py-4 text-sm font-bold tracking-wide text-white shadow-glow transition hover:-translate-y-0.5 hover:bg-blue-500 disabled:cursor-not-allowed disabled:opacity-60 disabled:hover:translate-y-0">
+                            <svg x-show="! sending" class="h-4 w-4" viewBox="0 0 24 24" fill="none"><path d="M4 12l16-8-6 16-3-6-7-2z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                            <span x-text="sending ? @js(__('Sending…')) : @js(__('Send Message'))"></span>
+                        </button>
+                    </form>
                 </div>
             </div>
         </section>

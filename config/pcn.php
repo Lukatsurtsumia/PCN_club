@@ -17,4 +17,34 @@ return [
 
     'admin_pass' => env('ENQ_PASS'),
 
+    /*
+    |--------------------------------------------------------------------------
+    | Contact form endpoint
+    |--------------------------------------------------------------------------
+    |
+    | The homepage contact form POSTs a JSON payload
+    | { name, email, phone, course, message } to this URL. It hits the PCN
+    | Cloudflare Worker (workers/contact-worker) which relays the message by
+    | email via Resend.
+    |
+    | Default = the deployed workers.dev URL. This works out of the box with
+    | ZERO Cloudflare setup (the worker is already live, CORS is open), so it's
+    | the simplest option for whoever deploys the fork.
+    |
+    | To later use a branded URL on pcnboxe.com, attach the worker to a route in
+    | Cloudflare (once only):
+    |   Workers & Pages -> pcnboxe-contact-worker -> Settings -> Domains & Routes
+    |   -> Add Route:  pcnboxe.com/api/contact*   (zone: pcnboxe.com)
+    | then set  PCN_CONTACT_ENDPOINT=https://pcnboxe.com/api/contact
+    |
+    | Override anytime via the PCN_CONTACT_ENDPOINT env var (Coolify variable in
+    | production) without touching code.
+    |
+    */
+
+    'contact_endpoint' => env(
+        'PCN_CONTACT_ENDPOINT',
+        'https://pcnboxe-contact-worker.pcnboxe06.workers.dev'
+    ),
+
 ];

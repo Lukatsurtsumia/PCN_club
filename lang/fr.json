@@ -79,9 +79,13 @@
     "Your name": "Votre nom",
     "Course of interest": "Cours souhaité",
     "Choose": "Choisir",
+    "Phone (optional)": "Téléphone (facultatif)",
+    "Fit Boxing": "Boxe Fitness",
     "Message": "Message",
     "Tell us what you're looking for…": "Dites-nous ce que vous recherchez…",
     "Send Message": "Envoyer le message",
+    "Sending…": "Envoi…",
+    "Something went wrong. Please try again or email us directly.": "Une erreur est survenue. Réessayez ou écrivez-nous directement par email.",
     "Thanks! Your message has been sent - we'll get back to you soon.": "Merci ! Votre message a bien été envoyé - nous vous recontactons très vite.",
 
     "FIGHTERS SAY": "TÉMOIGNAGES",

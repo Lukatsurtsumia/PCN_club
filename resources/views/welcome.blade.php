@@ -28,6 +28,11 @@
         </script>
 
         @vite(['resources/css/app.css', 'resources/js/app.js'])
+
+        {{-- Cloudflare Turnstile (spam protection) — only loaded when a Site Key is configured --}}
+        @if (config('pcn.turnstile_site_key'))
+            <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+        @endif
     </head>
     <body class="font-body bg-white text-navy-950 antialiased">
 
@@ -543,7 +548,7 @@
                 {{-- Contact form → POSTs JSON { name, email, phone, course, message } to the
                      PCN Cloudflare Worker (config/pcn.php → contact_endpoint) which emails it via Resend --}}
                 <div data-reveal="right" class="rounded-3xl bg-white p-8 shadow-2xl sm:p-10"
-                     x-data="contactForm(@js(config('pcn.contact_endpoint')), @js(__('Something went wrong. Please try again or email us directly.')))">
+                     x-data="contactForm(@js(config('pcn.contact_endpoint')), @js(__('Something went wrong. Please try again or email us directly.')), @js(__('Please complete the security check.')), @js((bool) config('pcn.turnstile_site_key')))">
                     <h3 class="font-display text-2xl tracking-wide text-navy-950">{{ __('SEND US A MESSAGE') }}</h3>
                     <p class="mt-2 text-sm text-navy-600">{{ __('A question or want to sign up? Drop us a line.') }}</p>
 
@@ -594,6 +599,11 @@
                             <textarea x-model="form.message" required rows="4" placeholder="{{ __("Tell us what you're looking for…") }}"
                                       class="w-full resize-y rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-900 placeholder-slate-400 transition focus:border-blue-500 focus:bg-white focus:outline-none focus:ring-2 focus:ring-blue-500/20"></textarea>
                         </label>
+
+                        {{-- Cloudflare Turnstile widget (renders only when a Site Key is configured) --}}
+                        @if (config('pcn.turnstile_site_key'))
+                            <div class="cf-turnstile" data-sitekey="{{ config('pcn.turnstile_site_key') }}" data-callback="onTurnstileCallback"></div>
+                        @endif
 
                         {{-- Error message --}}
                         <p x-show="error" x-cloak x-text="error" class="text-sm font-medium text-red-600"></p>

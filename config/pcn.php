@@ -63,6 +63,10 @@ return [
     |
     */
 
+    // Turnstile stays OFF until the key is confirmed to allow the live domain.
+    // To enable: set PCN_TURNSTILE_SITE_KEY=0x4AAAAAAEGUaJ2zYPn1GeQU (or put it
+    // as the default below) once the key's registered domains include the site's
+    // real host (e.g. pcn.boxeros.app) + localhost for testing.
     'turnstile_site_key' => env('PCN_TURNSTILE_SITE_KEY'),
 
 ];

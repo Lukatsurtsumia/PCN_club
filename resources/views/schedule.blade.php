@@ -22,7 +22,7 @@
         </div>
 
         <!-- Coming Soon Card -->
-        <div class="mt-16 flex justify-center">
+        <div class="mt-10 flex justify-center">
             <div class="w-full max-w-3xl rounded-3xl border border-blue-100 bg-gradient-to-br from-blue-50 via-white to-blue-100 px-8 py-12 text-center shadow-xl">
 
                 <div class="mx-auto flex h-20 w-20 items-center justify-center rounded-full bg-blue-600 text-white shadow-lg">

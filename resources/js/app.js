@@ -81,30 +81,52 @@ Alpine.data('navMenu', () => ({
 /* which relays it by email via Resend. Payload keys must match the    */
 /* worker's expected fields exactly.                                   */
 /* ------------------------------------------------------------------ */
-Alpine.data('contactForm', (endpoint, errorText = '') => ({
+Alpine.data('contactForm', (endpoint, errorText = '', turnstileError = '', turnstileEnabled = false) => ({
     endpoint,
     errorText,
+    turnstileError,
+    turnstileEnabled,
     sending: false,
     sent: false,
     error: '',
+    turnstileToken: '',
     form: { name: '', email: '', phone: '', course: '', message: '' },
+
+    init() {
+        // Cloudflare Turnstile calls this global once the visitor passes the check
+        window.onTurnstileCallback = (token) => { this.turnstileToken = token; };
+    },
 
     async submit() {
         if (this.sending) return;
+
+        // Only require a Turnstile token when the widget is actually enabled
+        if (this.turnstileEnabled) {
+            const field = document.querySelector('[name="cf-turnstile-response"]');
+            this.turnstileToken = this.turnstileToken || (field ? field.value : '');
+            if (! this.turnstileToken) {
+                this.error = this.turnstileError;
+                return;
+            }
+        }
+
         this.error = '';
         this.sending = true;
 
         try {
+            const payload = {
+                name: this.form.name,
+                email: this.form.email,
+                phone: this.form.phone,
+                course: this.form.course,
+                message: this.form.message,
+            };
+            if (this.turnstileEnabled) payload.turnstileToken = this.turnstileToken;
+
             const res = await fetch(this.endpoint, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    name: this.form.name,
-                    email: this.form.email,
-                    phone: this.form.phone,
-                    course: this.form.course,
-                    message: this.form.message,
-                }),
+                body: JSON.stringify(payload),
             });
 
             const data = await res.json().catch(() => ({}));
@@ -114,12 +136,20 @@ Alpine.data('contactForm', (endpoint, errorText = '') => ({
                 this.form = { name: '', email: '', phone: '', course: '', message: '' };
             } else {
                 this.error = data.error || this.errorText;
+                this.resetTurnstile();
             }
         } catch (e) {
             this.error = this.errorText;
+            this.resetTurnstile();
         } finally {
             this.sending = false;
         }
+    },
+
+    // Turnstile tokens are single-use — clear + re-render the widget after a failed send
+    resetTurnstile() {
+        this.turnstileToken = '';
+        if (this.turnstileEnabled && window.turnstile) window.turnstile.reset();
     },
 }));
 

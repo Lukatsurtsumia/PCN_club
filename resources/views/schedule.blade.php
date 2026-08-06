@@ -53,43 +53,7 @@
                     {{ __('The complete timetable will include training days, class times, age groups, and coach assignments. We want to ensure every athlete has the best possible training experience before publishing the final schedule.') }}
                 </p>
 
-                <div class="mt-10 rounded-2xl border border-blue-200 bg-white/80 p-6">
-                    <h3 class="text-lg font-semibold text-navy-950">
-                        {{ __('What to expect') }}
-                    </h3>
-
-                    <div class="mt-6 grid gap-5 text-left sm:grid-cols-2">
-
-                        <div class="flex items-start gap-3">
-                            <div class="mt-1 h-2.5 w-2.5 rounded-full bg-blue-600"></div>
-                            <p class="text-gray-600">
-                                {{ __('Training sessions for all skill levels.') }}
-                            </p>
-                        </div>
-
-                        <div class="flex items-start gap-3">
-                            <div class="mt-1 h-2.5 w-2.5 rounded-full bg-blue-600"></div>
-                            <p class="text-gray-600">
-                                {{ __('Separate classes for children, teens, and adults.') }}
-                            </p>
-                        </div>
-
-                        <div class="flex items-start gap-3">
-                            <div class="mt-1 h-2.5 w-2.5 rounded-full bg-blue-600"></div>
-                            <p class="text-gray-600">
-                                {{ __('Professional coaching and structured training plans.') }}
-                            </p>
-                        </div>
-
-                        <div class="flex items-start gap-3">
-                            <div class="mt-1 h-2.5 w-2.5 rounded-full bg-blue-600"></div>
-                            <p class="text-gray-600">
-                                {{ __('Updated weekly timetable available soon.') }}
-                            </p>
-                        </div>
-
-                    </div>
-                </div>
+                 
 
                 <p class="mt-8 text-base font-medium text-blue-700">
                     {{ __('Stay tuned — the full schedule will be announced very soon!') }}

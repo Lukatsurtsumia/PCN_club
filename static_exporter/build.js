@@ -8,7 +8,18 @@ const ROOT_DIR = path.resolve(__dirname, '..');
 const DIST_DIR = path.resolve(__dirname, 'dist');
 
 // French translations (default app locale is FR)
+const langFrPath = path.resolve(ROOT_DIR, 'lang/fr.json');
+let dictFRFromFile = {};
+try {
+  if (fs.existsSync(langFrPath)) {
+    dictFRFromFile = fs.readJsonSync(langFrPath);
+  }
+} catch (e) {
+  console.warn('Could not read lang/fr.json:', e);
+}
+
 const dictFR = {
+  ...dictFRFromFile,
   'About': 'À propos',
   'Programs': 'Programmes',
   'Fighters Say': 'Avis',
@@ -54,7 +65,7 @@ const dictFR = {
   'High-energy pad and bag rounds that torch calories and sharpen technique.': 'Séances toniques aux sacs et aux paos pour brûler des calories et se défouler.',
   'Competitive Team': 'Section Compétition',
   'By Trial': 'Sur sélection',
-  'Sparring, conditioning and fight-camp prep for our amateur roster.': 'Mises en gants, préparation physique et suivi personnalisé pour la compétition.',
+  'Sparring, conditioning and fight-camp prep for our amateur roster.': 'Sparring, préparation physique et suivi personnalisé pour la compétition.',
   '1-on-1 Coaching': 'Coaching Privé',
   'Private': 'Sur mesure',
   'Private sessions dialed into your goals - form, power, or fight prep.': 'Séances individuelles adaptées à vos objectifs personnels.',
@@ -98,7 +109,32 @@ const dictFR = {
   'Competitive Team': 'Section Compétition',
   '1-on-1 Coaching': 'Coaching Privé',
   "Thanks! Your message has been sent - we'll get back to you soon.": "Merci ! Votre message a été envoyé - nous vous répondrons rapidement.",
+  'Something went wrong. Please try again or email us directly.': 'Une erreur est survenue. Veuillez réessayer ou nous contacter directement.',
+  'Sending…': 'Envoi…',
+  'Schedule': 'Horaires',
+  'Gallery': 'Galerie',
+  'WEEKLY SCHEDULE': 'PLANNING DE LA SEMAINE',
+  'FIND YOUR SLOT': 'TROUVEZ VOTRE CRÉNEAU',
+  'All sessions are coached. Times may vary during holidays - contact us to confirm.': 'Toutes les séances sont encadrées. Les horaires peuvent varier pendant les vacances - contactez-nous pour confirmer.',
+  'Monday': 'Lundi',
+  'Tuesday': 'Mardi',
+  'Wednesday': 'Mercredi',
+  'Thursday': 'Jeudi',
+  'Friday': 'Vendredi',
+  'Saturday': 'Samedi',
+  'Sparring': 'Sparring',
+  'Open Sparring': 'Sparring Libre',
+  'GALLERY': 'GALERIE',
+  'INSIDE THE GYM': 'DANS LA SALLE',
+  'Real training, real fighters, real community.': 'Un vrai entraînement, de vrais combattants, une vraie communauté.',
+  'Home': 'Accueil',
 };
+
+const contactEndpoint = process.env.PCN_CONTACT_ENDPOINT || 'https://pcnboxe-contact-worker.pcnboxe06.workers.dev';
+
+function toJsString(str) {
+  return "'" + String(str).replace(/\\/g, '\\\\').replace(/'/g, "\\'") + "'";
+}
 
 function getLogoHtml(basePath) {
   return `<div class="inline-flex items-center gap-3">
@@ -110,8 +146,34 @@ function getLogoHtml(basePath) {
 </div>`;
 }
 
-function renderBlade(bladeContent, locale = 'fr', basePath = '.', cssFileName = 'css.css', jsFileName = 'js.js') {
+function renderBlade(bladeContent, locale = 'fr', basePath = '.', cssFileName = 'css.css', jsFileName = 'js.js', pageType = 'home') {
   let html = bladeContent;
+
+  // Handle views extending layouts.page
+  if (html.includes("@extends('layouts.page')")) {
+    const pageLayoutPath = path.resolve(ROOT_DIR, 'resources/views/layouts/page.blade.php');
+    let layoutContent = fs.readFileSync(pageLayoutPath, 'utf8');
+
+    // Extract title
+    let titleKey = '';
+    if (html.includes("'Schedule'") || html.includes('"Schedule"')) {
+      titleKey = 'Schedule';
+    } else if (html.includes("'Gallery'") || html.includes('"Gallery"')) {
+      titleKey = 'Gallery';
+    }
+    const pageTitle = locale === 'fr' ? (dictFR[titleKey] || titleKey) : titleKey;
+
+    // Extract content section
+    let sectionContent = '';
+    const contentMatch = html.match(/@section\(['"]content['"]\)([\s\S]*?)@endsection/);
+    if (contentMatch) {
+      sectionContent = contentMatch[1];
+    }
+
+    layoutContent = layoutContent.replace(/@yield\(['"]title['"]\)/g, pageTitle);
+    layoutContent = layoutContent.replace(/@yield\(['"]content['"]\)/g, sectionContent);
+    html = layoutContent;
+  }
 
   // 0. Strip Blade server-side comments {{-- ... --}}
   html = html.replace(/\{\{\-\-[\s\S]*?\-\-\}\}/g, '');
@@ -131,24 +193,162 @@ function renderBlade(bladeContent, locale = 'fr', basePath = '.', cssFileName = 
   // Replace root asset paths with relative basePath
   html = html.replace(/data-model="\/models\/hero-boxer\.fbx"/g, `data-model="${basePath}/models/hero-boxer.fbx"`);
   html = html.replace(/src="\/images\//g, `src="${basePath}/images/`);
+  html = html.replace(/href="\/favicon\.ico"/g, `href="${basePath}/favicon.ico"`);
 
   // 3. Replace locale function
   html = html.replace(/\{\{\s*str_replace\('_',\s*'-',\s*app\(\)->getLocale\(\)\)\s*\}\}/g, locale);
 
-  // 4. Handle language links
+  // 4. Handle navigation links & language links
+  let frLangHref = '#';
+  let enLangHref = '#';
+  if (pageType === 'home') {
+    frLangHref = locale === 'fr' ? '#' : '../';
+    enLangHref = locale === 'fr' ? './en/' : '#';
+  } else if (pageType === 'horaires') {
+    frLangHref = locale === 'fr' ? '#' : '../../horaires/';
+    enLangHref = locale === 'fr' ? '../en/horaires/' : '#';
+  } else if (pageType === 'galerie') {
+    frLangHref = locale === 'fr' ? '#' : '../../galerie/';
+    enLangHref = locale === 'fr' ? '../en/galerie/' : '#';
+  }
+
+  html = html.replace(/href="\/lang\/fr"/g, `href="${frLangHref}"`);
+  html = html.replace(/href="\/lang\/en"/g, `href="${enLangHref}"`);
+
   if (locale === 'fr') {
-    html = html.replace(/href="\/lang\/fr"/g, 'href="#"');
-    html = html.replace(/href="\/lang\/en"/g, 'href="./en/"');
     html = html.replace(/class="\{\{\s*app\(\)->getLocale\(\)\s*===\s*'fr'\s*\?\s*'text-blue-400'\s*:\s*'text-white\/50(?:\s+hover:text-white)?'\s*\}\}"/g, 'class="text-blue-400"');
     html = html.replace(/class="\{\{\s*app\(\)->getLocale\(\)\s*===\s*'en'\s*\?\s*'text-blue-400'\s*:\s*'text-white\/50(?:\s+hover:text-white)?'\s*\}\}"/g, 'class="text-white/50 hover:text-white"');
   } else {
-    html = html.replace(/href="\/lang\/fr"/g, 'href="../"');
-    html = html.replace(/href="\/lang\/en"/g, 'href="#"');
     html = html.replace(/class="\{\{\s*app\(\)->getLocale\(\)\s*===\s*'fr'\s*\?\s*'text-blue-400'\s*:\s*'text-white\/50(?:\s+hover:text-white)?'\s*\}\}"/g, 'class="text-white/50 hover:text-white"');
     html = html.replace(/class="\{\{\s*app\(\)->getLocale\(\)\s*===\s*'en'\s*\?\s*'text-blue-400'\s*:\s*'text-white\/50(?:\s+hover:text-white)?'\s*\}\}"/g, 'class="text-blue-400"');
   }
 
+  // Home links (<a href="/">)
+  if (pageType === 'home') {
+    html = html.replace(/href="\/"/g, 'href="#"');
+  } else {
+    html = html.replace(/href="\/"/g, 'href="../"');
+  }
+
+  // Subpage links (/horaires and /galerie)
+  if (pageType === 'home') {
+    html = html.replace(/href="\/horaires"/g, 'href="./horaires/"');
+    html = html.replace(/href="\/galerie"/g, 'href="./galerie/"');
+  } else if (pageType === 'horaires') {
+    html = html.replace(/href="\/horaires"/g, 'href="#"');
+    html = html.replace(/href="\/galerie"/g, 'href="../galerie/"');
+  } else if (pageType === 'galerie') {
+    html = html.replace(/href="\/horaires"/g, 'href="../horaires/"');
+    html = html.replace(/href="\/galerie"/g, 'href="#"');
+  }
+
+  // Join link (/ #join)
+  if (pageType === 'home') {
+    html = html.replace(/href="\/#join"/g, 'href="#join"');
+  } else {
+    html = html.replace(/href="\/#join"/g, 'href="../#join"');
+  }
+
   // 5. Unroll @foreach loops
+  // Gallery loop
+  const galleryLoopRegex = /@foreach\s*\(\$gallery\s+as\s+\$g\)([\s\S]*?)@endforeach/;
+  if (galleryLoopRegex.test(html)) {
+    const galleryItems = [
+      { img: 'prog-team.jpg', span: 'sm:col-span-2 sm:row-span-2' },
+      { img: 'gallery-2.jpg', span: '' },
+      { img: 'gallery-3.jpg', span: '' },
+      { img: 'prog-fitness.jpg', span: '' },
+      { img: 'gallery-1.jpg', span: 'sm:row-span-2' },
+      { img: 'gallery-4.jpg', span: '' },
+      { img: 'prog-youth.jpg', span: '' },
+      { img: 'gallery-6.jpg', span: '' },
+      { img: 'prog-coaching.jpg', span: '' },
+      { img: 'gallery-5.jpg', span: '' },
+    ];
+    html = html.replace(/@php[\s\S]*?\$gallery\s*=[\s\S]*?@endphp/g, '');
+    html = html.replace(galleryLoopRegex, (match, body) => {
+      return galleryItems.map((g) => {
+        let node = body;
+        node = node.replace(/\{\{\s*\$g\['span'\]\s*\}\}/g, g.span);
+        node = node.replace(/\{\{\s*\$g\['img'\]\s*\}\}/g, g.img);
+        return node;
+      }).join('');
+    });
+  }
+
+  // Schedule classColor legend loop
+  const classColorLoopRegex = /@foreach\s*\(\$classColor\s+as\s+\$cls\s+=>\s+\$c\)([\s\S]*?)@endforeach/;
+  if (classColorLoopRegex.test(html)) {
+    const classColor = {
+      'Youth Boxing': { dot: 'bg-blue-500', bar: 'border-blue-500' },
+      'Fitness Boxing': { dot: 'bg-sky-400', bar: 'border-sky-400' },
+      'Competitive Team': { dot: 'bg-rose-500', bar: 'border-rose-500' },
+      '1-on-1 Coaching': { dot: 'bg-violet-500', bar: 'border-violet-500' },
+      'Sparring': { dot: 'bg-amber-500', bar: 'border-amber-500' },
+      'Open Sparring': { dot: 'bg-amber-500', bar: 'border-amber-500' },
+    };
+    html = html.replace(classColorLoopRegex, (match, body) => {
+      return Object.entries(classColor)
+        .filter(([cls]) => cls !== 'Open Sparring')
+        .map(([cls, c]) => {
+          let node = body.replace(/@continue\([^)]+\)/g, '');
+          node = node.replace(/\{\{\s*\$c\['dot'\]\s*\}\}/g, c.dot);
+          const translatedCls = locale === 'fr' ? (dictFR[cls] || cls) : cls;
+          node = node.replace(/\{\{\s*__\(\$cls\)\s*\}\}/g, translatedCls);
+          return node;
+        }).join('');
+    });
+  }
+
+  // Schedule week loop
+  if (html.includes('@foreach ($week as $day => $slots)')) {
+    const classColor = {
+      'Youth Boxing': { dot: 'bg-blue-500', bar: 'border-blue-500' },
+      'Fitness Boxing': { dot: 'bg-sky-400', bar: 'border-sky-400' },
+      'Competitive Team': { dot: 'bg-rose-500', bar: 'border-rose-500' },
+      '1-on-1 Coaching': { dot: 'bg-violet-500', bar: 'border-violet-500' },
+      'Sparring': { dot: 'bg-amber-500', bar: 'border-amber-500' },
+      'Open Sparring': { dot: 'bg-amber-500', bar: 'border-amber-500' },
+    };
+
+    const week = {
+      'Monday': [['17h00', 'Youth Boxing'], ['18h30', 'Fitness Boxing'], ['20h00', 'Competitive Team']],
+      'Tuesday': [['18h00', 'Fitness Boxing'], ['19h30', '1-on-1 Coaching']],
+      'Wednesday': [['14h00', 'Youth Boxing'], ['18h30', 'Fitness Boxing'], ['20h00', 'Sparring']],
+      'Thursday': [['18h00', 'Fitness Boxing'], ['19h30', 'Competitive Team']],
+      'Friday': [['17h00', 'Youth Boxing'], ['18h30', 'Fitness Boxing'], ['20h00', '1-on-1 Coaching']],
+      'Saturday': [['10h00', 'Fitness Boxing'], ['11h30', 'Open Sparring']],
+    };
+
+    html = html.replace(/@php[\s\S]*?\$week\s*=[\s\S]*?@endphp/g, '');
+
+    const renderedDays = Object.entries(week).map(([day, slots]) => {
+      const translatedDay = locale === 'fr' ? (dictFR[day] || day) : day;
+      const dayHeader = translatedDay.toUpperCase();
+
+      const slotsHtml = slots.map((slot) => {
+        const time = slot[0];
+        const cls = slot[1];
+        const bar = classColor[cls] ? classColor[cls].bar : '';
+        const translatedCls = locale === 'fr' ? (dictFR[cls] || cls) : cls;
+        return `<li class="rounded-lg border-l-4 ${bar} bg-navy-50/70 py-2.5 pl-3 pr-2 transition hover:bg-navy-100/70">
+            <span class="block text-[15px] font-bold leading-tight text-navy-900">${time}</span>
+            <span class="mt-0.5 block text-xs font-medium text-navy-500">${translatedCls}</span>
+        </li>`;
+      }).join('\n');
+
+      return `<div class="overflow-hidden rounded-2xl border border-navy-100 bg-white shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-xl">
+          <h3 class="bg-navy-950 py-3.5 text-center font-display text-base tracking-[0.15em] text-white">${dayHeader}</h3>
+          <ul class="flex flex-col gap-2.5 p-4">
+              ${slotsHtml}
+          </ul>
+      </div>`;
+    }).join('\n');
+
+    const weekContainerRegex = /@foreach\s*\(\$week\s+as\s+\$day\s+=>\s+\$slots\)[\s\S]*?@endforeach\s*<\/ul>\s*<\/div>\s*@endforeach/;
+    html = html.replace(weekContainerRegex, renderedDays);
+  }
+
   // Loop for items under ABOUT
   const aboutLoopRegex = /@foreach\s*\(\[\s*'Certified professional coaches',\s*'Beginner to competitive levels',\s*'Fully equipped modern ring',\s*'Structured fight-team pathway',\s*\]\s*as\s*\$i\s*=>\s*\$item\)([\s\S]*?)@endforeach/;
   html = html.replace(aboutLoopRegex, (match, body) => {
@@ -255,7 +455,21 @@ function renderBlade(bladeContent, locale = 'fr', basePath = '.', cssFileName = 
     }).join('');
   });
 
-  // 6. Clean up remaining Blade directives
+  // 6. Clean up remaining Blade directives & @js directives
+  html = html.replace(/@js\(\s*config\(['"]pcn\.contact_endpoint['"]\)\s*\)/g, toJsString(contactEndpoint));
+  html = html.replace(/@js\(\s*__\((['"])([\s\S]*?)\1\)\s*\)/g, (match, q, key) => {
+    const text = locale === 'fr' ? (dictFR[key] || key) : key;
+    return toJsString(text);
+  });
+  html = html.replace(/@js\((['"])([\s\S]*?)\1\)/g, (match, q, str) => {
+    return toJsString(str);
+  });
+
+  html = html.replace(
+    /<form x-show="!\s*sent" @submit\.prevent="submit"/g,
+    '<form x-show="! sent" @submit.prevent="submit" action="#" onsubmit="return false;"'
+  );
+
   html = html.replace(/@csrf/g, '');
   html = html.replace(/\{\{\s*date\('Y'\)\s*\}\}/g, new Date().getFullYear().toString());
   html = html.replace(/action="\{\{\s*route\('contact'\)\s*\}\}"/g, 'action="#" id="contact-form"');
@@ -291,19 +505,34 @@ async function run() {
   await fs.remove(DIST_DIR);
   await fs.ensureDir(DIST_DIR);
 
-  // 1. Read Blade source template
+  // 1. Read Blade source templates
   const welcomeBladePath = path.resolve(ROOT_DIR, 'resources/views/welcome.blade.php');
-  const bladeSource = await fs.readFile(welcomeBladePath, 'utf8');
+  const scheduleBladePath = path.resolve(ROOT_DIR, 'resources/views/schedule.blade.php');
+  const galleryBladePath = path.resolve(ROOT_DIR, 'resources/views/gallery.blade.php');
+
+  const welcomeBladeSource = await fs.readFile(welcomeBladePath, 'utf8');
+  const scheduleBladeSource = await fs.readFile(scheduleBladePath, 'utf8');
+  const galleryBladeSource = await fs.readFile(galleryBladePath, 'utf8');
 
   // 2. Render initial static HTML templates to dist/ so Tailwind content-scanner picks up all classes
-  console.log('🇫🇷 Generating French static HTML template...');
-  const htmlFRTemplate = renderBlade(bladeSource, 'fr', '.', 'css.css', 'js.js');
-  await fs.writeFile(path.join(DIST_DIR, 'index.html'), htmlFRTemplate, 'utf8');
+  console.log('🇫🇷 Generating French static HTML templates...');
+  await fs.writeFile(path.join(DIST_DIR, 'index.html'), renderBlade(welcomeBladeSource, 'fr', '.', 'css.css', 'js.js', 'home'), 'utf8');
 
-  console.log('🇬🇧 Generating English static HTML template...');
+  await fs.ensureDir(path.join(DIST_DIR, 'horaires'));
+  await fs.writeFile(path.join(DIST_DIR, 'horaires', 'index.html'), renderBlade(scheduleBladeSource, 'fr', '..', 'css.css', 'js.js', 'horaires'), 'utf8');
+
+  await fs.ensureDir(path.join(DIST_DIR, 'galerie'));
+  await fs.writeFile(path.join(DIST_DIR, 'galerie', 'index.html'), renderBlade(galleryBladeSource, 'fr', '..', 'css.css', 'js.js', 'galerie'), 'utf8');
+
+  console.log('🇬🇧 Generating English static HTML templates...');
   await fs.ensureDir(path.join(DIST_DIR, 'en'));
-  const htmlENTemplate = renderBlade(bladeSource, 'en', '..', 'css.css', 'js.js');
-  await fs.writeFile(path.join(DIST_DIR, 'en', 'index.html'), htmlENTemplate, 'utf8');
+  await fs.writeFile(path.join(DIST_DIR, 'en', 'index.html'), renderBlade(welcomeBladeSource, 'en', '..', 'css.css', 'js.js', 'home'), 'utf8');
+
+  await fs.ensureDir(path.join(DIST_DIR, 'en', 'horaires'));
+  await fs.writeFile(path.join(DIST_DIR, 'en', 'horaires', 'index.html'), renderBlade(scheduleBladeSource, 'en', '../..', 'css.css', 'js.js', 'horaires'), 'utf8');
+
+  await fs.ensureDir(path.join(DIST_DIR, 'en', 'galerie'));
+  await fs.writeFile(path.join(DIST_DIR, 'en', 'galerie', 'index.html'), renderBlade(galleryBladeSource, 'en', '../..', 'css.css', 'js.js', 'galerie'), 'utf8');
 
   // 3. Copy public assets
   const publicDir = path.resolve(ROOT_DIR, 'public');
@@ -326,13 +555,58 @@ async function run() {
   const cssFile = assetFiles.find((f) => f.endsWith('.css'));
   const jsFile = assetFiles.find((f) => f.endsWith('.js'));
 
-  // 5. Replace final hashed asset paths in dist/index.html & dist/en/index.html
+  // 5. Replace final hashed asset paths in output HTML files
   console.log('🔗 Injecting asset paths...');
-  const finalHtmlFR = renderBlade(bladeSource, 'fr', '.', cssFile, jsFile);
-  await fs.writeFile(path.join(DIST_DIR, 'index.html'), finalHtmlFR, 'utf8');
 
-  const finalHtmlEN = renderBlade(bladeSource, 'en', '..', cssFile, jsFile);
-  await fs.writeFile(path.join(DIST_DIR, 'en', 'index.html'), finalHtmlEN, 'utf8');
+  // FR Home
+  await fs.writeFile(path.join(DIST_DIR, 'index.html'), renderBlade(welcomeBladeSource, 'fr', '.', cssFile, jsFile, 'home'), 'utf8');
+
+  // FR Horaires
+  const finalHorairesFR = renderBlade(scheduleBladeSource, 'fr', '..', cssFile, jsFile, 'horaires');
+  await fs.ensureDir(path.join(DIST_DIR, 'horaires'));
+  await fs.writeFile(path.join(DIST_DIR, 'horaires', 'index.html'), finalHorairesFR, 'utf8');
+  await fs.writeFile(path.join(DIST_DIR, 'horaires.html'), finalHorairesFR, 'utf8');
+  await fs.ensureDir(path.join(DIST_DIR, 'schedule'));
+  await fs.writeFile(path.join(DIST_DIR, 'schedule', 'index.html'), finalHorairesFR, 'utf8');
+  await fs.writeFile(path.join(DIST_DIR, 'schedule.html'), finalHorairesFR, 'utf8');
+
+  // FR Galerie
+  const finalGalerieFR = renderBlade(galleryBladeSource, 'fr', '..', cssFile, jsFile, 'galerie');
+  await fs.ensureDir(path.join(DIST_DIR, 'galerie'));
+  await fs.writeFile(path.join(DIST_DIR, 'galerie', 'index.html'), finalGalerieFR, 'utf8');
+  await fs.writeFile(path.join(DIST_DIR, 'galerie.html'), finalGalerieFR, 'utf8');
+  await fs.ensureDir(path.join(DIST_DIR, 'gallery'));
+  await fs.writeFile(path.join(DIST_DIR, 'gallery', 'index.html'), finalGalerieFR, 'utf8');
+  await fs.writeFile(path.join(DIST_DIR, 'gallery.html'), finalGalerieFR, 'utf8');
+
+  // EN Home
+  await fs.writeFile(path.join(DIST_DIR, 'en', 'index.html'), renderBlade(welcomeBladeSource, 'en', '..', cssFile, jsFile, 'home'), 'utf8');
+
+  // EN Horaires
+  const finalHorairesEN = renderBlade(scheduleBladeSource, 'en', '../..', cssFile, jsFile, 'horaires');
+  await fs.ensureDir(path.join(DIST_DIR, 'en', 'horaires'));
+  await fs.writeFile(path.join(DIST_DIR, 'en', 'horaires', 'index.html'), finalHorairesEN, 'utf8');
+  await fs.writeFile(path.join(DIST_DIR, 'en', 'horaires.html'), finalHorairesEN, 'utf8');
+  await fs.ensureDir(path.join(DIST_DIR, 'en', 'schedule'));
+  await fs.writeFile(path.join(DIST_DIR, 'en', 'schedule', 'index.html'), finalHorairesEN, 'utf8');
+  await fs.writeFile(path.join(DIST_DIR, 'en', 'schedule.html'), finalHorairesEN, 'utf8');
+
+  // EN Galerie
+  const finalGalerieEN = renderBlade(galleryBladeSource, 'en', '../..', cssFile, jsFile, 'galerie');
+  await fs.ensureDir(path.join(DIST_DIR, 'en', 'galerie'));
+  await fs.writeFile(path.join(DIST_DIR, 'en', 'galerie', 'index.html'), finalGalerieEN, 'utf8');
+  await fs.writeFile(path.join(DIST_DIR, 'en', 'galerie.html'), finalGalerieEN, 'utf8');
+  await fs.ensureDir(path.join(DIST_DIR, 'en', 'gallery'));
+  await fs.writeFile(path.join(DIST_DIR, 'en', 'gallery', 'index.html'), finalGalerieEN, 'utf8');
+  await fs.writeFile(path.join(DIST_DIR, 'en', 'gallery.html'), finalGalerieEN, 'utf8');
+
+  // 6. Write Cloudflare Pages _redirects file
+  const redirectsContent = `/gallery /galerie 301
+/schedule /horaires 301
+/en/gallery /en/galerie 301
+/en/schedule /en/horaires 301
+`;
+  await fs.writeFile(path.join(DIST_DIR, '_redirects'), redirectsContent, 'utf8');
 
   console.log('✅ Static build complete! Output directory: static_exporter/dist');
 }

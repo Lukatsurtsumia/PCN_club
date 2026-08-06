@@ -128,9 +128,11 @@ const dictFR = {
   'INSIDE THE GYM': 'DANS LA SALLE',
   'Real training, real fighters, real community.': 'Un vrai entraînement, de vrais combattants, une vraie communauté.',
   'Home': 'Accueil',
+  'Please complete the security check.': 'Veuillez valider le test de sécurité.',
 };
 
 const contactEndpoint = process.env.PCN_CONTACT_ENDPOINT || 'https://pcnboxe-contact-worker.pcnboxe06.workers.dev';
+const turnstileSiteKey = process.env.PCN_TURNSTILE_SITE_KEY || '';
 
 function toJsString(str) {
   return "'" + String(str).replace(/\\/g, '\\\\').replace(/'/g, "\\'") + "'";
@@ -456,6 +458,15 @@ function renderBlade(bladeContent, locale = 'fr', basePath = '.', cssFileName = 
   });
 
   // 6. Clean up remaining Blade directives & @js directives
+  if (turnstileSiteKey) {
+    html = html.replace(/@if\s*\(\s*config\(['"]pcn\.turnstile_site_key['"]\)\s*\)([\s\S]*?)@endif/g, (match, body) => {
+      return body.replace(/\{\{\s*config\(['"]pcn\.turnstile_site_key['"]\)\s*\}\}/g, turnstileSiteKey);
+    });
+  } else {
+    html = html.replace(/@if\s*\(\s*config\(['"]pcn\.turnstile_site_key['"]\)\s*\)[\s\S]*?@endif/g, '');
+  }
+
+  html = html.replace(/@js\(\s*\(bool\)\s*config\(['"]pcn\.turnstile_site_key['"]\)\s*\)/g, turnstileSiteKey ? 'true' : 'false');
   html = html.replace(/@js\(\s*config\(['"]pcn\.contact_endpoint['"]\)\s*\)/g, toJsString(contactEndpoint));
   html = html.replace(/@js\(\s*__\((['"])([\s\S]*?)\1\)\s*\)/g, (match, q, key) => {
     const text = locale === 'fr' ? (dictFR[key] || key) : key;

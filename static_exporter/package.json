@@ -6,7 +6,7 @@
   "scripts": {
     "build": "node build.js",
     "preview": "vite preview",
-    "deploy": "npm run build && npx wrangler pages deploy dist --project-name=pcn-club-static"
+    "deploy": "npm run build && npx wrangler pages deploy dist --project-name=pcn-club-static --branch=main"
   },
   "dependencies": {},
   "devDependencies": {

@@ -247,9 +247,9 @@
             <div class="relative z-10 mx-auto flex h-full max-w-7xl items-center px-6 lg:px-10">
                 <template x-if="active === 0">
                     <div class="animate-hero-in max-w-xl">
-                        <span class="mb-5 inline-block rounded-full border border-blue-400/40 bg-blue-500/10 px-4 py-1.5 text-xs font-bold tracking-[0.3em] text-blue-300 backdrop-blur-sm">{{ __('PCN BOXING CLUB') }}</span>
-                        <h1 class="font-display text-5xl leading-[0.95] tracking-wide text-white [text-shadow:0_4px_28px_rgba(0,0,0,0.65)] sm:text-6xl lg:text-7xl">{{ __('TRAIN LIKE A') }} <span class="text-blue-500 [text-shadow:0_0_24px_rgba(59,130,246,0.7)]">{{ __('CHAMPION') }}</span></h1>
-                        <p class="mt-6 max-w-lg text-lg text-white/70">{{ __('Elite coaching, real ring craft, and a corner that pushes you every single round. This is where fighters are made.') }}</p>
+                        <span class="mb-5 inline-block rounded-full border border-blue-400/40 bg-blue-500/10 px-4 py-1.5 text-xs font-bold tracking-[0.3em] text-blue-300 backdrop-blur-sm">{{ __('ENGLISH BOXING CLUB IN NICE SINCE 1969') }}</span>
+                        <h1 class="font-display text-5xl leading-[0.95] tracking-wide text-white [text-shadow:0_4px_28px_rgba(0,0,0,0.65)] sm:text-6xl lg:text-7xl">{{ __('ENGLISH BOXING CLUB') }} <span class="text-blue-500 [text-shadow:0_0_24px_rgba(59,130,246,0.7)]">{{ __('IN NICE') }}</span></h1>
+                        <p class="mt-6 max-w-lg text-lg text-white/70">{{ __('Since 1969, Pugilist Club Niçois has offered English boxing classes in Nice for children, teens, and adults, from recreational to competitive levels.') }}</p>
                         <div class="mt-9 flex flex-wrap gap-4">
                             <a href="#join" class="rounded-full bg-blue-600 px-8 py-3.5 text-sm font-bold tracking-wide text-white shadow-glow transition hover:bg-blue-500 hover:-translate-y-0.5">{{ __('Join The Club') }}</a>
                             <a href="#explore" class="rounded-full border border-white/30 px-8 py-3.5 text-sm font-bold tracking-wide text-white transition hover:border-white hover:bg-white/10">{{ __('View Programs') }}</a>
@@ -261,7 +261,7 @@
                     <div class="animate-hero-in max-w-xl">
                         <span class="mb-5 inline-block rounded-full border border-blue-400/40 bg-blue-500/10 px-4 py-1.5 text-xs font-bold tracking-[0.3em] text-blue-300 backdrop-blur-sm">{{ __('EVERY ROUND COUNTS') }}</span>
                         <h1 class="font-display text-5xl leading-[0.95] tracking-wide text-white [text-shadow:0_4px_28px_rgba(0,0,0,0.65)] sm:text-6xl lg:text-7xl">{{ __('DISCIPLINE.') }} <span class="text-blue-500 [text-shadow:0_0_24px_rgba(59,130,246,0.7)]">{{ __('POWER.') }}</span> {{ __('PRECISION.') }}</h1>
-                        <p class="mt-6 max-w-lg text-lg text-white/70">{{ __('From your first jab to your first fight night, our coaches build technique that lasts - not just a good workout.') }}</p>
+                        <p class="mt-6 max-w-lg text-lg text-white/70">{{ __('Pugilist Club Niçois is the historic English boxing club in Nice. Our coaches guide beginners, recreational boxers, and competitors in a gym fully dedicated to boxing.') }}</p>
                         <div class="mt-9 flex flex-wrap gap-4">
                             <a href="#join" class="rounded-full bg-blue-600 px-8 py-3.5 text-sm font-bold tracking-wide text-white shadow-glow transition hover:bg-blue-500 hover:-translate-y-0.5">{{ __('Join The Club') }}</a>
                             <a href="#about" class="rounded-full border border-white/30 px-8 py-3.5 text-sm font-bold tracking-wide text-white transition hover:border-white hover:bg-white/10">{{ __('Our Story') }}</a>
@@ -271,10 +271,19 @@
 
                 <template x-if="active === 2">
                     <div class="animate-hero-in max-w-xl">
-                        <span class="mb-5 inline-block rounded-full border border-blue-400/40 bg-blue-500/10 px-4 py-1.5 text-xs font-bold tracking-[0.3em] text-blue-300 backdrop-blur-sm">{{ __('ONE TEAM. ONE CORNER.') }}</span>
-                        <h1 class="font-display text-5xl leading-[0.95] tracking-wide text-white [text-shadow:0_4px_28px_rgba(0,0,0,0.65)] sm:text-6xl lg:text-7xl">{{ __('JOIN THE') }} <span class="text-blue-500 [text-shadow:0_0_24px_rgba(59,130,246,0.7)]">{{ __('PCN') }}</span> {{ __('FAMILY') }}</h1>
-                        <p class="mt-6 max-w-lg text-lg text-white/70">{{ __('A gym built on respect, sweat, and community. All levels welcome - no experience needed to start.') }}</p>
-                        <div class="mt-9 flex flex-wrap gap-4">
+                        <span class="mb-5 inline-block rounded-full border border-blue-400/40 bg-blue-500/10 px-4 py-1.5 text-xs font-bold tracking-[0.3em] text-blue-300 backdrop-blur-sm">{{ __('WHY PCN') }}</span>
+                        <h1 class="font-display text-4xl leading-[0.95] tracking-wide text-white [text-shadow:0_4px_28px_rgba(0,0,0,0.65)] sm:text-5xl lg:text-6xl">{{ __('WHY CHOOSE') }} <span class="text-blue-500 [text-shadow:0_0_24px_rgba(59,130,246,0.7)]">{{ __('PUGILIST CLUB NIÇOIS?') }}</span></h1>
+                        <ul class="mt-6 grid grid-cols-1 gap-2.5 sm:grid-cols-2 text-base text-white/80">
+                            <li class="flex items-center gap-2 font-medium"><span class="text-blue-400 font-bold">✓</span> {{ __('Historic club founded in 1969') }}</li>
+                            <li class="flex items-center gap-2 font-medium"><span class="text-blue-400 font-bold">✓</span> {{ __('Affiliated with the French Boxing Federation') }}</li>
+                            <li class="flex items-center gap-2 font-medium"><span class="text-blue-400 font-bold">✓</span> {{ __('Kids classes from age 6') }}</li>
+                            <li class="flex items-center gap-2 font-medium"><span class="text-blue-400 font-bold">✓</span> {{ __('Recreational boxing') }}</li>
+                            <li class="flex items-center gap-2 font-medium"><span class="text-blue-400 font-bold">✓</span> {{ __('Competitive boxing') }}</li>
+                            <li class="flex items-center gap-2 font-medium"><span class="text-blue-400 font-bold">✓</span> {{ __('Physical conditioning') }}</li>
+                            <li class="flex items-center gap-2 font-medium"><span class="text-blue-400 font-bold">✓</span> {{ __('Salle Serge Leyrit in Nice') }}</li>
+                            <li class="flex items-center gap-2 font-medium"><span class="text-blue-400 font-bold">✓</span> {{ __('Lady boxing') }}</li>
+                        </ul>
+                        <div class="mt-8 flex flex-wrap gap-4">
                             <a href="#join" class="rounded-full bg-blue-600 px-8 py-3.5 text-sm font-bold tracking-wide text-white shadow-glow transition hover:bg-blue-500 hover:-translate-y-0.5">{{ __('Join The Club') }}</a>
                             <a href="#location" class="rounded-full border border-white/30 px-8 py-3.5 text-sm font-bold tracking-wide text-white transition hover:border-white hover:bg-white/10">{{ __('Find The Gym') }}</a>
                         </div>
@@ -333,10 +342,12 @@
 
                 <div>
                     <span data-reveal="up" class="text-sm font-bold tracking-[0.3em] text-blue-600">{{ __('ABOUT THE CLUB') }}</span>
-                    <h2 data-reveal="up" data-reveal-delay="1" class="mt-4 font-display text-4xl leading-tight tracking-wide text-navy-950 sm:text-5xl">{{ __('MORE THAN A GYM.') }} <br class="hidden sm:block" />{{ __("IT'S A CORNER FOR LIFE.") }}</h2>
-                    <p data-reveal="up" data-reveal-delay="2" class="mt-6 max-w-xl text-lg text-navy-700/80">
-                        {{ __("PCN Boxing Club was founded on one idea: real technique, honest coaching, and a community that has your back between rounds. Whether you're stepping into a gym for the first time or chasing a title, our coaches meet you where you are and push you past it.") }}
-                    </p>
+                    <h2 data-reveal="up" data-reveal-delay="1" class="mt-4 font-display text-4xl leading-tight tracking-wide text-navy-950 sm:text-5xl">{{ __('MORE THAN A BOXING CLUB,') }} <br class="hidden sm:block" />{{ __('A FAMILY.') }}</h2>
+                    <div data-reveal="up" data-reveal-delay="2" class="mt-6 max-w-xl space-y-4 text-base sm:text-lg leading-relaxed text-navy-700/80">
+                        <p>{{ __("Founded in 1969, Pugilist Club Niçois is the oldest English boxing club in Nice. A historical cornerstone of boxing in Nice, the club has passed on the values of respect, discipline, pushing one's limits, and passion for over 50 years.") }}</p>
+                        <p>{{ __('Today, the club is experiencing a fresh momentum driven by a new Board of Directors, committed to preserving its heritage while developing new projects to pass on the passion for boxing to future generations.') }}</p>
+                        <p class="font-semibold text-navy-950">{{ __('Join Pugilist Club Niçois, the historic English boxing club in Nice, and discover a facility where experience, high standards, well-being, and passion are handed down from generation to generation.') }}</p>
+                    </div>
 
                     <ul class="mt-8 grid max-w-xl grid-cols-1 gap-3 sm:grid-cols-2">
                         @foreach ([

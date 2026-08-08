@@ -312,12 +312,26 @@
             {{-- Live Google reviews via Elfsight - loads only after cookie consent --}}
             <div data-reveal="up" data-reveal-delay="2" x-data class="mx-auto mt-12 max-w-7xl px-6 lg:px-10">
                 <template x-if="$store.consent.accepted()">
-                    <div x-data="{ loading: true }" x-init="$store.consent.loadThirdParty(); setTimeout(() => loading = false, 6000)">
-                        <div x-show="loading" class="flex flex-col items-center justify-center gap-3 py-16 text-navy-400">
+                    <div x-data="reviewsWidget()">
+                        {{-- loading spinner --}}
+                        <div x-show="state === 'loading'" class="flex flex-col items-center justify-center gap-3 py-16 text-navy-400">
                             <span class="h-9 w-9 animate-spin rounded-full border-2 border-navy-200 border-t-blue-500"></span>
                             <span class="text-sm">{{ __('Loading Google reviews…') }}</span>
                         </div>
-                        <div class="elfsight-app-0e0cdec6-2556-432d-a0b1-e2a0934c43a3"></div>
+                        {{-- live Google reviews (Elfsight) — kept in the DOM so it can populate; hidden only if it stays empty (monthly view cap) --}}
+                        <div x-show="state !== 'fallback'" class="elfsight-app-0e0cdec6-2556-432d-a0b1-e2a0934c43a3"></div>
+                        {{-- graceful 5-star fallback shown when the reviews widget is capped/unavailable --}}
+                        <div x-show="state === 'fallback'" x-cloak class="mx-auto flex max-w-xl flex-col items-center gap-4 rounded-3xl border border-navy-100 bg-gradient-to-b from-navy-50/70 to-white p-10 text-center shadow-sm sm:p-12">
+                            <div class="flex items-center gap-1.5 text-3xl text-amber-400" aria-hidden="true">
+                                <span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span>
+                            </div>
+                            <div class="font-display text-5xl tracking-wide text-navy-950">{{ __('5.0') }}</div>
+                            <p class="max-w-md text-navy-600">{{ __('Our members rate us 5 stars on Google.') }}</p>
+                            <a href="https://www.google.com/maps/search/?api=1&amp;query=Pugilist+Club+Ni%C3%A7ois+Nice" target="_blank" rel="noopener"
+                               class="inline-flex items-center gap-2 rounded-full bg-blue-600 px-6 py-3 text-sm font-bold text-white transition hover:-translate-y-0.5 hover:bg-blue-500">
+                                {{ __('Read our Google reviews') }}
+                            </a>
+                        </div>
                     </div>
                 </template>
                 <template x-if="! $store.consent.accepted()">

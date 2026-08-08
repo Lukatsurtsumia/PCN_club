@@ -3,7 +3,7 @@
 {{-- Click-to-flip discipline card: photo on the front, description ($slot) on the back --}}
 <div x-data="{ f: false }" @click="f = !f" @keydown.enter="f = !f" @keydown.space.prevent="f = !f"
      :class="f && 'is-flipped'" role="button" tabindex="0"
-     class="flip-card h-[28rem] cursor-pointer rounded-3xl focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 focus-visible:ring-offset-2 focus-visible:ring-offset-navy-950">
+     class="flip-card h-[32rem] lg:h-[28rem] cursor-pointer rounded-3xl focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 focus-visible:ring-offset-2 focus-visible:ring-offset-navy-950">
     <div class="flip-card-inner">
         {{-- front: photo + title --}}
         <div class="flip-face overflow-hidden rounded-3xl shadow-xl ring-1 ring-white/10">

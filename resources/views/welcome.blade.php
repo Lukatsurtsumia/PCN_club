@@ -247,9 +247,9 @@
             <div class="relative z-10 mx-auto flex h-full max-w-7xl items-center px-6 lg:px-10">
                 <template x-if="active === 0">
                     <div class="animate-hero-in max-w-xl">
-                        <span class="mb-5 inline-block rounded-full border border-blue-400/40 bg-blue-500/10 px-4 py-1.5 text-xs font-bold tracking-[0.3em] text-blue-300 backdrop-blur-sm">{{ __('PCN BOXING CLUB') }}</span>
-                        <h1 class="font-display text-5xl leading-[0.95] tracking-wide text-white [text-shadow:0_4px_28px_rgba(0,0,0,0.65)] sm:text-6xl lg:text-7xl">{{ __('TRAIN LIKE A') }} <span class="text-blue-500 [text-shadow:0_0_24px_rgba(59,130,246,0.7)]">{{ __('CHAMPION') }}</span></h1>
-                        <p class="mt-6 max-w-lg text-lg text-white/70">{{ __('Elite coaching, real ring craft, and a corner that pushes you every single round. This is where fighters are made.') }}</p>
+                        <span class="mb-5 inline-block rounded-full border border-blue-400/40 bg-blue-500/10 px-4 py-1.5 text-xs font-bold tracking-[0.3em] text-blue-300 backdrop-blur-sm">{{ __('ENGLISH BOXING CLUB IN NICE SINCE 1969') }}</span>
+                        <h1 class="font-display text-5xl leading-[0.95] tracking-wide text-white [text-shadow:0_4px_28px_rgba(0,0,0,0.65)] sm:text-6xl lg:text-7xl">{{ __('ENGLISH BOXING CLUB') }} <span class="text-blue-500 [text-shadow:0_0_24px_rgba(59,130,246,0.7)]">{{ __('IN NICE') }}</span></h1>
+                        <p class="mt-6 max-w-lg text-lg text-white/70">{{ __('Since 1969, Pugilist Club Niçois has offered English boxing classes in Nice for children, teens, and adults, from recreational to competitive levels.') }}</p>
                         <div class="mt-9 flex flex-wrap gap-4">
                             <a href="#join" class="rounded-full bg-blue-600 px-8 py-3.5 text-sm font-bold tracking-wide text-white shadow-glow transition hover:bg-blue-500 hover:-translate-y-0.5">{{ __('Join The Club') }}</a>
                             <a href="#explore" class="rounded-full border border-white/30 px-8 py-3.5 text-sm font-bold tracking-wide text-white transition hover:border-white hover:bg-white/10">{{ __('View Programs') }}</a>
@@ -333,7 +333,7 @@
 
                 <div>
                     <span data-reveal="up" class="text-sm font-bold tracking-[0.3em] text-blue-600">{{ __('ABOUT THE CLUB') }}</span>
-                    <h2 data-reveal="up" data-reveal-delay="1" class="mt-4 font-display text-4xl leading-tight tracking-wide text-navy-950 sm:text-5xl">{{ __('MORE THAN A GYM.') }} <br class="hidden sm:block" />{{ __("IT'S A CORNER FOR LIFE.") }}</h2>
+                    <h2 data-reveal="up" data-reveal-delay="1" class="mt-4 font-display text-4xl leading-tight tracking-wide text-navy-950 sm:text-5xl">{{ __('MORE THAN A BOXING CLUB,') }} <br class="hidden sm:block" />{{ __('A FAMILY.') }}</h2>
                     <p data-reveal="up" data-reveal-delay="2" class="mt-6 max-w-xl text-lg text-navy-700/80">
                         {{ __("PCN Boxing Club was founded on one idea: real technique, honest coaching, and a community that has your back between rounds. Whether you're stepping into a gym for the first time or chasing a title, our coaches meet you where you are and push you past it.") }}
                     </p>

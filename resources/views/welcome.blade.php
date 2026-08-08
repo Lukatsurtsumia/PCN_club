@@ -212,7 +212,7 @@
                             <svg class="h-6 w-6 fill-current" viewBox="0 0 24 24"><path d="M12 2l2.9 6.3 6.8.7-5.1 4.6 1.4 6.7L12 17.8 6 20.9l1.4-6.7-5.1-4.6 6.8-.7z"/></svg>
                         </span>
                         <span class="leading-none">
-                            <span class="block text-[10px] font-bold uppercase tracking-[0.3em] text-navy-500">Depuis</span>
+                            <span class="block text-[10px] font-bold uppercase tracking-[0.3em] text-slate-500">Depuis</span>
                             <span class="mt-1.5 block font-display text-3xl tracking-wide text-blue-600">1969</span>
                         </span>
                     </div>
@@ -244,7 +244,7 @@
                         @endforeach
                     </ul>
 
-                    <div class="mt-12 grid max-w-md grid-cols-2 gap-6 border-t border-navy-100 pt-8">
+                    <div class="mt-12 grid max-w-md grid-cols-2 gap-6 border-t border-slate-200 pt-8">
                         @foreach ([
                             ['target' => 55, 'suffix' => '+', 'label' => 'Years'],
                             ['target' => 3000, 'suffix' => '+', 'label' => 'Members Trained'],
@@ -253,7 +253,7 @@
                                 <div class="font-display text-3xl text-navy-950 sm:text-4xl">
                                     <span data-counter="{{ $stat['target'] }}" data-counter-suffix="{{ $stat['suffix'] }}">0{{ $stat['suffix'] }}</span>
                                 </div>
-                                <div class="mt-1 text-xs font-semibold uppercase tracking-wide text-navy-500">{{ __($stat['label']) }}</div>
+                                <div class="mt-1 text-xs font-semibold uppercase tracking-wide text-slate-500">{{ __($stat['label']) }}</div>
                             </div>
                         @endforeach
                     </div>
@@ -271,13 +271,86 @@
                 </div>
 
                 <div class="mt-16 grid grid-cols-1 gap-8 md:grid-cols-2">
-                    <x-discipline-card img="gallery-6" :title="__('Recreational Boxing')">{{ __("Recreational boxing is open to anyone who wants to practice boxing without the obligation to compete. Sessions combine technique, cardio, physical conditioning, coordination, and partner work. Sparring may also be offered when appropriate for the skill level and desired by the participant. It's a complete activity to get active, progress, improve your fitness, and promote well-being in a friendly and respectful atmosphere.") }}</x-discipline-card>
+                <div class="mt-16 grid grid-cols-1 gap-8 md:grid-cols-2">
+                    {{-- RECREATIONAL BOXING --}}
+                    <div x-data="{ f: false }" @click="f = !f" @keydown.enter="f = !f" @keydown.space.prevent="f = !f" :class="f && 'is-flipped'" role="button" tabindex="0" class="flip-card h-[32rem] lg:h-[28rem] cursor-pointer rounded-3xl focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 focus-visible:ring-offset-2 focus-visible:ring-offset-navy-950">
+                        <div class="flip-card-inner">
+                            <div class="flip-face overflow-hidden rounded-3xl shadow-xl ring-1 ring-white/10">
+                                <img src="/images/gallery-6.jpg" alt="{{ __('Recreational Boxing') }}" loading="lazy" class="absolute inset-0 h-full w-full object-cover" />
+                                <div class="absolute inset-0 bg-gradient-to-t from-navy-950 via-navy-950/45 to-navy-950/5"></div>
+                                <div class="absolute inset-0 flex flex-col justify-end p-7">
+                                    <h3 class="font-display text-3xl uppercase tracking-wide text-white sm:text-4xl">{{ __('Recreational Boxing') }}</h3>
+                                    <span class="mt-3 inline-flex items-center gap-2 text-sm font-bold text-blue-300">{{ __('Click to discover') }} <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none"><path d="M4 12a8 8 0 108-8" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/><path d="M12 4l-3 3m3-3l3 3" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+                                </div>
+                            </div>
+                            <div class="flip-face flip-face-back flex flex-col overflow-hidden rounded-3xl bg-navy-900 p-7 shadow-xl ring-1 ring-white/10 sm:p-8">
+                                <h3 class="font-display text-2xl tracking-wide text-white">{{ __('Recreational Boxing') }}</h3>
+                                <span class="mt-3 h-[3px] w-11 rounded-full bg-blue-500"></span>
+                                <p class="mt-4 flex-1 overflow-y-auto pr-1 text-sm leading-relaxed text-white/70">{{ __("Recreational boxing is open to anyone who wants to practice boxing without the obligation to compete. Sessions combine technique, cardio, physical conditioning, coordination, and partner work. Sparring may also be offered when appropriate for the skill level and desired by the participant. It's a complete activity to get active, progress, improve your fitness, and promote well-being in a friendly and respectful atmosphere.") }}</p>
+                                <span class="mt-4 inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wide text-blue-400">{{ __('Click to flip back') }}</span>
+                            </div>
+                        </div>
+                    </div>
 
-                    <x-discipline-card img="lady-boxing" :title="__('Lady Boxing')">{{ __("Lady Boxing is a form of boxing specifically designed for women of all skill levels. Sessions combine technique, cardio, strength training, physical conditioning, and partner work to help women release energy, improve their fitness, and build confidence. Sparring may also be offered when appropriate for the participant's level and desired by them, always within a structured, safe, and supportive environment.") }}</x-discipline-card>
+                    {{-- LADY BOXING --}}
+                    <div x-data="{ f: false }" @click="f = !f" @keydown.enter="f = !f" @keydown.space.prevent="f = !f" :class="f && 'is-flipped'" role="button" tabindex="0" class="flip-card h-[32rem] lg:h-[28rem] cursor-pointer rounded-3xl focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 focus-visible:ring-offset-2 focus-visible:ring-offset-navy-950">
+                        <div class="flip-card-inner">
+                            <div class="flip-face overflow-hidden rounded-3xl shadow-xl ring-1 ring-white/10">
+                                <img src="/images/lady-boxing.jpg" alt="{{ __('Lady Boxing') }}" loading="lazy" class="absolute inset-0 h-full w-full object-cover" />
+                                <div class="absolute inset-0 bg-gradient-to-t from-navy-950 via-navy-950/45 to-navy-950/5"></div>
+                                <div class="absolute inset-0 flex flex-col justify-end p-7">
+                                    <h3 class="font-display text-3xl uppercase tracking-wide text-white sm:text-4xl">{{ __('Lady Boxing') }}</h3>
+                                    <span class="mt-3 inline-flex items-center gap-2 text-sm font-bold text-blue-300">{{ __('Click to discover') }} <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none"><path d="M4 12a8 8 0 108-8" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/><path d="M12 4l-3 3m3-3l3 3" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+                                </div>
+                            </div>
+                            <div class="flip-face flip-face-back flex flex-col overflow-hidden rounded-3xl bg-navy-900 p-7 shadow-xl ring-1 ring-white/10 sm:p-8">
+                                <h3 class="font-display text-2xl tracking-wide text-white">{{ __('Lady Boxing') }}</h3>
+                                <span class="mt-3 h-[3px] w-11 rounded-full bg-blue-500"></span>
+                                <p class="mt-4 flex-1 overflow-y-auto pr-1 text-sm leading-relaxed text-white/70">{{ __("Lady Boxing is a form of boxing specifically designed for women of all skill levels. Sessions combine technique, cardio, strength training, physical conditioning, and partner work to help women release energy, improve their fitness, and build confidence. Sparring may also be offered when appropriate for the participant's level and desired by them, always within a structured, safe, and supportive environment.") }}</p>
+                                <span class="mt-4 inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wide text-blue-400">{{ __('Click to flip back') }}</span>
+                            </div>
+                        </div>
+                    </div>
 
-                    <x-discipline-card img="educative.jpeg" :title="__('Educational Boxing')">{{ __("Aimed at children and young people, educational boxing allows them to discover English boxing while developing coordination, motor skills, self-control, and respect for others. The training includes partner exercises and educational sparring adapted to age and skill level, with controlled touches, without the emphasis on power or causing pain. Each session takes place in a safe, respectful, and educational environment, where the goal is to learn to box while controlling one's movements and emotions.") }}</x-discipline-card>
+                    {{-- EDUCATIONAL BOXING --}}
+                    <div x-data="{ f: false }" @click="f = !f" @keydown.enter="f = !f" @keydown.space.prevent="f = !f" :class="f && 'is-flipped'" role="button" tabindex="0" class="flip-card h-[32rem] lg:h-[28rem] cursor-pointer rounded-3xl focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 focus-visible:ring-offset-2 focus-visible:ring-offset-navy-950">
+                        <div class="flip-card-inner">
+                            <div class="flip-face overflow-hidden rounded-3xl shadow-xl ring-1 ring-white/10">
+                                <img src="/images/educative.jpeg" alt="{{ __('Educational Boxing') }}" loading="lazy" class="absolute inset-0 h-full w-full object-cover" />
+                                <div class="absolute inset-0 bg-gradient-to-t from-navy-950 via-navy-950/45 to-navy-950/5"></div>
+                                <div class="absolute inset-0 flex flex-col justify-end p-7">
+                                    <h3 class="font-display text-3xl uppercase tracking-wide text-white sm:text-4xl">{{ __('Educational Boxing') }}</h3>
+                                    <span class="mt-3 inline-flex items-center gap-2 text-sm font-bold text-blue-300">{{ __('Click to discover') }} <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none"><path d="M4 12a8 8 0 108-8" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/><path d="M12 4l-3 3m3-3l3 3" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+                                </div>
+                            </div>
+                            <div class="flip-face flip-face-back flex flex-col overflow-hidden rounded-3xl bg-navy-900 p-7 shadow-xl ring-1 ring-white/10 sm:p-8">
+                                <h3 class="font-display text-2xl tracking-wide text-white">{{ __('Educational Boxing') }}</h3>
+                                <span class="mt-3 h-[3px] w-11 rounded-full bg-blue-500"></span>
+                                <p class="mt-4 flex-1 overflow-y-auto pr-1 text-sm leading-relaxed text-white/70">{{ __("Aimed at children and young people, educational boxing allows them to discover English boxing while developing coordination, motor skills, self-control, and respect for others. The training includes partner exercises and educational sparring adapted to age and skill level, with controlled touches, without the emphasis on power or causing pain. Each session takes place in a safe, respectful, and educational environment, where the goal is to learn to box while controlling one's movements and emotions.") }}</p>
+                                <span class="mt-4 inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wide text-blue-400">{{ __('Click to flip back') }}</span>
+                            </div>
+                        </div>
+                    </div>
 
-                    <x-discipline-card img="gallery-2" :title="__('Competitors')">{{ __("The competitive section is for boxers who want to fully commit to competition. Training is demanding and combines technical and tactical work, physical preparation, conditioning, and mental development. Boxers participate in national competitions and receive support tailored to their level, goals, and progress. This type of training requires commitment, consistency, discipline, and a drive to push oneself to the limit.") }}</x-discipline-card>
+                    {{-- COMPETITORS --}}
+                    <div x-data="{ f: false }" @click="f = !f" @keydown.enter="f = !f" @keydown.space.prevent="f = !f" :class="f && 'is-flipped'" role="button" tabindex="0" class="flip-card h-[32rem] lg:h-[28rem] cursor-pointer rounded-3xl focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 focus-visible:ring-offset-2 focus-visible:ring-offset-navy-950">
+                        <div class="flip-card-inner">
+                            <div class="flip-face overflow-hidden rounded-3xl shadow-xl ring-1 ring-white/10">
+                                <img src="/images/gallery-2.jpg" alt="{{ __('Competitors') }}" loading="lazy" class="absolute inset-0 h-full w-full object-cover" />
+                                <div class="absolute inset-0 bg-gradient-to-t from-navy-950 via-navy-950/45 to-navy-950/5"></div>
+                                <div class="absolute inset-0 flex flex-col justify-end p-7">
+                                    <h3 class="font-display text-3xl uppercase tracking-wide text-white sm:text-4xl">{{ __('Competitors') }}</h3>
+                                    <span class="mt-3 inline-flex items-center gap-2 text-sm font-bold text-blue-300">{{ __('Click to discover') }} <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none"><path d="M4 12a8 8 0 108-8" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/><path d="M12 4l-3 3m3-3l3 3" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+                                </div>
+                            </div>
+                            <div class="flip-face flip-face-back flex flex-col overflow-hidden rounded-3xl bg-navy-900 p-7 shadow-xl ring-1 ring-white/10 sm:p-8">
+                                <h3 class="font-display text-2xl tracking-wide text-white">{{ __('Competitors') }}</h3>
+                                <span class="mt-3 h-[3px] w-11 rounded-full bg-blue-500"></span>
+                                <p class="mt-4 flex-1 overflow-y-auto pr-1 text-sm leading-relaxed text-white/70">{{ __("The competitive section is for boxers who want to fully commit to competition. Training is demanding and combines technical and tactical work, physical preparation, conditioning, and mental development. Boxers participate in national competitions and receive support tailored to their level, goals, and progress. This type of training requires commitment, consistency, discipline, and a drive to push oneself to the limit.") }}</p>
+                                <span class="mt-4 inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wide text-blue-400">{{ __('Click to flip back') }}</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -334,14 +407,14 @@
                 <template x-if="$store.consent.accepted()">
                     <div x-data="reviewsWidget()">
                         {{-- loading spinner --}}
-                        <div x-show="state === 'loading'" class="flex flex-col items-center justify-center gap-3 py-16 text-navy-400">
-                            <span class="h-9 w-9 animate-spin rounded-full border-2 border-navy-200 border-t-blue-500"></span>
+                        <div x-show="state === 'loading'" class="flex flex-col items-center justify-center gap-3 py-16 text-slate-400">
+                            <span class="h-9 w-9 animate-spin rounded-full border-2 border-slate-200 border-t-blue-500"></span>
                             <span class="text-sm">{{ __('Loading Google reviews…') }}</span>
                         </div>
                         {{-- live Google reviews (Elfsight) — kept in the DOM so it can populate; hidden only if it stays empty (monthly view cap) --}}
                         <div x-show="state !== 'fallback'" class="elfsight-app-0e0cdec6-2556-432d-a0b1-e2a0934c43a3"></div>
                         {{-- graceful 5-star fallback shown when the reviews widget is capped/unavailable --}}
-                        <div x-show="state === 'fallback'" x-cloak class="mx-auto flex max-w-xl flex-col items-center gap-4 rounded-3xl border border-navy-100 bg-gradient-to-b from-navy-50/70 to-white p-10 text-center shadow-sm sm:p-12">
+                        <div x-show="state === 'fallback'" x-cloak class="mx-auto flex max-w-xl flex-col items-center gap-4 rounded-3xl border border-slate-200 bg-gradient-to-b from-slate-50/70 to-white p-10 text-center shadow-sm sm:p-12">
                             <div class="flex items-center gap-1.5 text-3xl text-amber-400" aria-hidden="true">
                                 <span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span>
                             </div>
@@ -355,9 +428,9 @@
                     </div>
                 </template>
                 <template x-if="! $store.consent.accepted()">
-                    <div class="flex flex-col items-center justify-center gap-4 rounded-3xl border border-navy-200 bg-navy-50/60 p-12 text-center">
+                    <div class="flex flex-col items-center justify-center gap-4 rounded-3xl border border-slate-200 bg-slate-50/60 p-12 text-center">
                         <span class="text-3xl">&#11088;</span>
-                        <p class="max-w-sm text-sm text-navy-500">{{ __('Accept cookies to display our Google reviews.') }}</p>
+                        <p class="max-w-sm text-sm text-slate-500">{{ __('Accept cookies to display our Google reviews.') }}</p>
                         <button @click="$store.consent.set('accepted')" class="rounded-full bg-blue-600 px-5 py-2.5 text-sm font-bold text-white transition hover:bg-blue-500">{{ __('Accept') }}</button>
                     </div>
                 </template>

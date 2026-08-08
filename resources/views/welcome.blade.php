@@ -526,19 +526,68 @@
 
                     <div class="mt-8 space-y-4">
                         @foreach ([
-                            ['name' => 'Boxing · Adults', 'desc' => 'All levels · technique &amp; sparring', 'price' => '250'],
-                            ['name' => 'Youth School (8-16)', 'desc' => 'Dedicated junior coaching', 'price' => '200'],
-                            ['name' => 'Fit Boxing', 'desc' => 'Cardio · conditioning · pads', 'price' => '220'],
+                            [
+                                'name' => 'Educative Boxing',
+                                'subtitle' => 'Born 2013 – 2019',
+                                'price' => '200',
+                                'features' => [
+                                    '2 training sessions / week',
+                                    'FFB license & federal insurance included',
+                                ],
+                            ],
+                            [
+                                'name' => 'Cadets / Juniors',
+                                'subtitle' => 'Born 2009 – 2012',
+                                'price' => '220',
+                                'features' => [
+                                    '2 training sessions / week',
+                                    'FFB license & federal insurance included',
+                                ],
+                            ],
+                            [
+                                'name' => 'Seniors',
+                                'subtitle' => 'Born 2008 & before',
+                                'price' => '290',
+                                'features' => [
+                                    '2 Recreational slots / week',
+                                    'Heavy bags & strength training 2x / week',
+                                    'Access to Lady Boxing slot',
+                                    'Optional sparring sessions',
+                                    'FFB license & federal insurance included',
+                                ],
+                            ],
+                            [
+                                'name' => 'Competitor',
+                                'subtitle' => 'By selection of PCN President',
+                                'price' => '200',
+                                'features' => [
+                                    'Access to all training sessions',
+                                    'Physical & technical competition prep',
+                                    'Dedicated coaching & follow-up',
+                                    'Contact us for an interview',
+                                    'FFB license & federal insurance included',
+                                ],
+                            ],
                         ] as $course)
-                            <div class="flex items-center justify-between gap-4 rounded-2xl border border-white/10 bg-white/[0.04] p-5 transition hover:border-blue-400/40 hover:bg-white/[0.06]">
-                                <div>
-                                    <h3 class="font-display text-lg tracking-wide text-white">{{ mb_strtoupper(__($course['name']), 'UTF-8') }}</h3>
-                                    <p class="mt-1 text-sm text-white/50">{!! __($course['desc']) !!}</p>
+                            <div class="rounded-2xl border border-white/10 bg-white/[0.04] p-5 transition hover:border-blue-400/40 hover:bg-white/[0.06]">
+                                <div class="flex items-start justify-between gap-4">
+                                    <div>
+                                        <span class="inline-block rounded-full bg-blue-500/10 px-3 py-0.5 text-xs font-semibold text-blue-300 border border-blue-400/20 mb-1.5">{{ __($course['subtitle']) }}</span>
+                                        <h3 class="font-display text-xl tracking-wide text-white">{{ mb_strtoupper(__($course['name']), 'UTF-8') }}</h3>
+                                    </div>
+                                    <div class="shrink-0 text-right">
+                                        <span class="font-display text-3xl text-blue-400">{{ $course['price'] }}€</span>
+                                        <span class="block text-[11px] font-semibold uppercase tracking-wide text-white/40">/ {{ __('year') }}</span>
+                                    </div>
                                 </div>
-                                <div class="shrink-0 text-right">
-                                    <span class="font-display text-3xl text-blue-400">{{ $course['price'] }}€</span>
-                                    <span class="block text-[11px] font-semibold uppercase tracking-wide text-white/40">/ {{ __('year') }}</span>
-                                </div>
+                                <ul class="mt-3.5 space-y-1.5 border-t border-white/10 pt-3 text-xs text-white/70">
+                                    @foreach ($course['features'] as $feat)
+                                        <li class="flex items-center gap-2">
+                                            <span class="text-blue-400 font-bold text-sm">✓</span>
+                                            <span>{{ __($feat) }}</span>
+                                        </li>
+                                    @endforeach
+                                </ul>
                             </div>
                         @endforeach
                     </div>
@@ -586,9 +635,10 @@
                                 <select x-model="form.course"
                                         class="w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-900 transition focus:border-blue-500 focus:bg-white focus:outline-none focus:ring-2 focus:ring-blue-500/20">
                                     <option value="">{{ __('Choose') }}…</option>
-                                    <option value="{{ __('Boxing · Adults') }}">{{ __('Boxing · Adults') }}</option>
-                                    <option value="{{ __('Youth School (8-16)') }}">{{ __('Youth School (8-16)') }}</option>
-                                    <option value="{{ __('Fit Boxing') }}">{{ __('Fit Boxing') }}</option>
+                                    <option value="{{ __('Educative Boxing (2013-2019)') }}">{{ __('Educative Boxing (2013-2019)') }}</option>
+                                    <option value="{{ __('Cadets / Juniors (2009-2012)') }}">{{ __('Cadets / Juniors (2009-2012)') }}</option>
+                                    <option value="{{ __('Seniors (2008 & before)') }}">{{ __('Seniors (2008 & before)') }}</option>
+                                    <option value="{{ __('Competitor') }}">{{ __('Competitor') }}</option>
                                     <option value="{{ __('Other') }}">{{ __('Other') }}</option>
                                 </select>
                             </label>

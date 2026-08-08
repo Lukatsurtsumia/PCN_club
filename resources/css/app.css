@@ -5,6 +5,11 @@
 /* Hide Alpine elements (mobile menu, cookie banner) until Alpine initialises */
 [x-cloak] { display: none !important; }
 
+/* Prevent decorative overhangs (badges, glows) from creating a horizontal
+   scroll on mobile. No section needs to scroll sideways. */
+html, body { overflow-x: hidden; }
+body { max-width: 100%; }
+
 /* Nav links: animated underline that grows on hover */
 .nav-underline { position: relative; }
 .nav-underline::after {

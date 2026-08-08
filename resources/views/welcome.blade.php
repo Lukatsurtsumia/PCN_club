@@ -192,7 +192,7 @@
         </section>
 
         {{-- ============================= ABOUT ============================= --}}
-        <section id="about" class="scroll-mt-24 bg-white py-24 sm:py-32">
+        <section id="about" class="scroll-mt-24 overflow-hidden bg-white py-24 sm:py-32">
             <div class="mx-auto grid max-w-7xl grid-cols-1 items-center gap-16 px-6 lg:grid-cols-2 lg:px-10">
                 <div data-reveal="left" class="relative">
                     <div class="relative aspect-[4/5] w-full max-w-md overflow-hidden rounded-3xl bg-gradient-to-br from-navy-800 to-navy-950 shadow-2xl">

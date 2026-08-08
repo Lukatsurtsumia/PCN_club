@@ -355,7 +355,7 @@
                     <div data-reveal="left" class="relative z-10 col-span-2 flex flex-col justify-center gap-8 bg-navy-900 p-10 lg:p-12">
                         <div>
                             <h3 class="font-display text-2xl tracking-wide text-white">PUGILIST CLUB NIÇOIS</h3>
-                            <p class="mt-2 text-sm text-white/50">Quartier Libération &middot; Nice, France</p>
+                            <p class="mt-2 text-sm text-white/50">Quartier St Roch &middot; Nice, France</p>
                         </div>
 
                         @foreach ([

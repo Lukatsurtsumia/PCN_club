@@ -186,6 +186,48 @@ function renderBlade(bladeContent, locale = 'fr', basePath = '.', cssFileName = 
   // 1. Replace <x-logo />
   html = html.replace(/<x-logo\s*\/?>/g, getLogoHtml(basePath));
 
+  // 1b. Replace <x-discipline-card>
+  const cardRegex = /<x-discipline-card\s+img="([^"]+)"\s+:title="__\('([^']+)'\)">([\s\S]*?)<\/x-discipline-card>/g;
+  html = html.replace(cardRegex, (match, img, rawTitle, slotContent) => {
+    let desc = slotContent.trim();
+    const descMatch = desc.match(/^\{\{\s*__\((["'])([\s\S]*?)\1\)\s*\}\}$/);
+    if (descMatch) {
+      const rawDesc = descMatch[2];
+      desc = locale === 'fr' ? (dictFR[rawDesc] || rawDesc) : rawDesc;
+    }
+    const title = locale === 'fr' ? (dictFR[rawTitle] || rawTitle) : rawTitle;
+    const upperTitle = title.toUpperCase();
+    const clickToDiscover = locale === 'fr' ? (dictFR['Click to discover'] || 'Cliquez pour découvrir') : 'Click to discover';
+    const clickToFlipBack = locale === 'fr' ? (dictFR['Click to flip back'] || 'Cliquez pour revenir') : 'Click to flip back';
+
+    return `<div x-data="{ f: false }" @click="f = !f" @keydown.enter="f = !f" @keydown.space.prevent="f = !f"
+     :class="f && 'is-flipped'" role="button" tabindex="0"
+     class="flip-card h-[28rem] cursor-pointer rounded-3xl focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 focus-visible:ring-offset-2 focus-visible:ring-offset-navy-950">
+    <div class="flip-card-inner">
+        <div class="flip-face overflow-hidden rounded-3xl shadow-xl ring-1 ring-white/10">
+            <img src="${basePath}/images/${img}.jpg" alt="${title}" loading="lazy" class="absolute inset-0 h-full w-full object-cover" />
+            <div class="absolute inset-0 bg-gradient-to-t from-navy-950 via-navy-950/45 to-navy-950/5"></div>
+            <div class="absolute inset-0 flex flex-col justify-end p-7">
+                <h3 class="font-display text-3xl tracking-wide text-white sm:text-4xl">${upperTitle}</h3>
+                <span class="mt-3 inline-flex items-center gap-2 text-sm font-bold text-blue-300">
+                    ${clickToDiscover}
+                    <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none"><path d="M4 12a8 8 0 108-8" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/><path d="M12 4l-3 3m3-3l3 3" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </span>
+            </div>
+        </div>
+        <div class="flip-face flip-face-back flex flex-col overflow-hidden rounded-3xl bg-navy-900 p-7 shadow-xl ring-1 ring-white/10 sm:p-8">
+            <h3 class="font-display text-2xl tracking-wide text-white">${title}</h3>
+            <span class="mt-3 h-[3px] w-11 rounded-full bg-blue-500"></span>
+            <p class="mt-4 flex-1 overflow-y-auto pr-1 text-sm leading-relaxed text-white/70">${desc}</p>
+            <span class="mt-4 inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wide text-blue-400">
+                <svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none"><path d="M9 14l-4-4 4-4m-4 4h11a4 4 0 010 8h-1" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                ${clickToFlipBack}
+            </span>
+        </div>
+    </div>
+</div>`;
+  });
+
   // 2. Replace @vite directive
   html = html.replace(
     /@vite\(\['resources\/css\/app\.css',\s*'resources\/js\/app\.js'\]\)/g,

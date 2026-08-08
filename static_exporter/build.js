@@ -49,7 +49,7 @@ const dictFR = {
   "PCN Boxing Club was founded on one idea: real technique, honest coaching, and a community that has your back between rounds. Whether you're stepping into a gym for the first time or chasing a title, our coaches meet you where you are and push you past it.": "Fondé en 1969, le Pugilist Club Niçois repose sur une vraie culture de la boxe anglaise, un suivi personnalisé et une ambiance solidaire.",
   'Certified professional coaches': 'Entraîneurs diplômés d\'État',
   'Beginner to competitive levels': 'Du débutant à la compétition',
-  'Fully equipped modern ring': 'Ring homologué & équipement complet',
+  'Fully equipped modern ring': 'Ring olympique & équipement complet',
   'Structured fight-team pathway': 'Filière compétition structurée',
   'Years': 'Ans d\'expérience',
   'Members Trained': 'Membres formés',

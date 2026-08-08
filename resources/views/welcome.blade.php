@@ -155,7 +155,7 @@
                         <ul class="mt-6 grid grid-cols-1 gap-2.5 sm:grid-cols-2 text-base text-white/80">
                             <li class="flex items-center gap-2 font-medium"><span class="text-blue-400 font-bold">✓</span> {{ __('Historic club founded in 1969') }}</li>
                             <li class="flex items-center gap-2 font-medium"><span class="text-blue-400 font-bold">✓</span> {{ __('Affiliated with the French Boxing Federation') }}</li>
-                            <li class="flex items-center gap-2 font-medium"><span class="text-blue-400 font-bold">✓</span> {{ __('Kids classes from age 6') }}</li>
+                            <li class="flex items-center gap-2 font-medium"><span class="text-blue-400 font-bold">✓</span> {{ __('Kids classes from age 7') }}</li>
                             <li class="flex items-center gap-2 font-medium"><span class="text-blue-400 font-bold">✓</span> {{ __('Recreational boxing') }}</li>
                             <li class="flex items-center gap-2 font-medium"><span class="text-blue-400 font-bold">✓</span> {{ __('Competitive boxing') }}</li>
                             <li class="flex items-center gap-2 font-medium"><span class="text-blue-400 font-bold">✓</span> {{ __('Physical conditioning') }}</li>

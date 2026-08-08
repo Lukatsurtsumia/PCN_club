@@ -116,7 +116,7 @@
             {{-- ===== full-bleed hero background video (replaces the 3D fighter) ===== --}}
             <video autoplay muted loop playsinline preload="auto"
                    class="pointer-events-none absolute inset-0 z-[2] h-full w-full object-cover">
-                <source src="/videos/hero.mp4" type="video/mp4">
+                <source src="/videos/video-promo.mp4" type="video/mp4">
             </video>
             {{-- readability overlays so the headline stays crisp over the video --}}
             <div class="pointer-events-none absolute inset-0 z-[5] bg-gradient-to-r from-navy-950/90 via-navy-950/55 to-navy-950/25"></div>
@@ -275,7 +275,7 @@
                     <div x-data="{ f: false }" @click="f = !f" @keydown.enter="f = !f" @keydown.space.prevent="f = !f" :class="f && 'is-flipped'" role="button" tabindex="0" class="flip-card h-[32rem] lg:h-[28rem] cursor-pointer rounded-3xl focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 focus-visible:ring-offset-2 focus-visible:ring-offset-navy-950">
                         <div class="flip-card-inner">
                             <div class="flip-face overflow-hidden rounded-3xl shadow-xl ring-1 ring-white/10">
-                                <img src="/images/prog-fitness.jpg" alt="{{ __('Recreational Boxing') }}" loading="lazy" class="absolute inset-0 h-full w-full object-cover" />
+                                <img src="/images/gallery-6.jpg" alt="{{ __('Recreational Boxing') }}" loading="lazy" class="absolute inset-0 h-full w-full object-cover" />
                                 <div class="absolute inset-0 bg-gradient-to-t from-navy-950 via-navy-950/45 to-navy-950/5"></div>
                                 <div class="absolute inset-0 flex flex-col justify-end p-7">
                                     <h3 class="font-display text-3xl uppercase tracking-wide text-white sm:text-4xl">{{ __('Recreational Boxing') }}</h3>
@@ -315,7 +315,7 @@
                     <div x-data="{ f: false }" @click="f = !f" @keydown.enter="f = !f" @keydown.space.prevent="f = !f" :class="f && 'is-flipped'" role="button" tabindex="0" class="flip-card h-[32rem] lg:h-[28rem] cursor-pointer rounded-3xl focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 focus-visible:ring-offset-2 focus-visible:ring-offset-navy-950">
                         <div class="flip-card-inner">
                             <div class="flip-face overflow-hidden rounded-3xl shadow-xl ring-1 ring-white/10">
-                                <img src="/images/prog-youth.jpg" alt="{{ __('Educational Boxing') }}" loading="lazy" class="absolute inset-0 h-full w-full object-cover" />
+                                <img src="/images/educative.jpeg" alt="{{ __('Educational Boxing') }}" loading="lazy" class="absolute inset-0 h-full w-full object-cover" />
                                 <div class="absolute inset-0 bg-gradient-to-t from-navy-950 via-navy-950/45 to-navy-950/5"></div>
                                 <div class="absolute inset-0 flex flex-col justify-end p-7">
                                     <h3 class="font-display text-3xl uppercase tracking-wide text-white sm:text-4xl">{{ __('Educational Boxing') }}</h3>
@@ -335,7 +335,7 @@
                     <div x-data="{ f: false }" @click="f = !f" @keydown.enter="f = !f" @keydown.space.prevent="f = !f" :class="f && 'is-flipped'" role="button" tabindex="0" class="flip-card h-[32rem] lg:h-[28rem] cursor-pointer rounded-3xl focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 focus-visible:ring-offset-2 focus-visible:ring-offset-navy-950">
                         <div class="flip-card-inner">
                             <div class="flip-face overflow-hidden rounded-3xl shadow-xl ring-1 ring-white/10">
-                                <img src="/images/prog-team.jpg" alt="{{ __('Competitors') }}" loading="lazy" class="absolute inset-0 h-full w-full object-cover" />
+                                <img src="/images/gallery-2.jpg" alt="{{ __('Competitors') }}" loading="lazy" class="absolute inset-0 h-full w-full object-cover" />
                                 <div class="absolute inset-0 bg-gradient-to-t from-navy-950 via-navy-950/45 to-navy-950/5"></div>
                                 <div class="absolute inset-0 flex flex-col justify-end p-7">
                                     <h3 class="font-display text-3xl uppercase tracking-wide text-white sm:text-4xl">{{ __('Competitors') }}</h3>

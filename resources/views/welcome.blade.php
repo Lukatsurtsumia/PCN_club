@@ -271,7 +271,7 @@
                 </div>
 
                 <div class="mt-16 grid grid-cols-1 gap-8 md:grid-cols-2">
-                    <x-discipline-card img="prog-fitness" :title="__('Recreational Boxing')">{{ __("Recreational boxing is open to anyone who wants to practice boxing without the obligation to compete. Sessions combine technique, cardio, physical conditioning, coordination, and partner work. Sparring may also be offered when appropriate for the skill level and desired by the participant. It's a complete activity to get active, progress, improve your fitness, and promote well-being in a friendly and respectful atmosphere.") }}</x-discipline-card>
+                    <x-discipline-card img="gallery-6" :title="__('Recreational Boxing')">{{ __("Recreational boxing is open to anyone who wants to practice boxing without the obligation to compete. Sessions combine technique, cardio, physical conditioning, coordination, and partner work. Sparring may also be offered when appropriate for the skill level and desired by the participant. It's a complete activity to get active, progress, improve your fitness, and promote well-being in a friendly and respectful atmosphere.") }}</x-discipline-card>
 
                     <x-discipline-card img="lady-boxing" :title="__('Lady Boxing')">{{ __("Lady Boxing is a form of boxing specifically designed for women of all skill levels. Sessions combine technique, cardio, strength training, physical conditioning, and partner work to help women release energy, improve their fitness, and build confidence. Sparring may also be offered when appropriate for the participant's level and desired by them, always within a structured, safe, and supportive environment.") }}</x-discipline-card>
 

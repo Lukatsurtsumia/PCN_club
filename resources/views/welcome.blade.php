@@ -271,7 +271,6 @@
                 </div>
 
                 <div class="mt-16 grid grid-cols-1 gap-8 md:grid-cols-2">
-                <div class="mt-16 grid grid-cols-1 gap-8 md:grid-cols-2">
                     {{-- RECREATIONAL BOXING --}}
                     <div x-data="{ f: false }" @click="f = !f" @keydown.enter="f = !f" @keydown.space.prevent="f = !f" :class="f && 'is-flipped'" role="button" tabindex="0" class="flip-card h-[32rem] lg:h-[28rem] cursor-pointer rounded-3xl focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 focus-visible:ring-offset-2 focus-visible:ring-offset-navy-950">
                         <div class="flip-card-inner">

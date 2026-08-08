@@ -247,15 +247,11 @@
                     <div class="mt-12 grid max-w-md grid-cols-2 gap-6 border-t border-navy-100 pt-8">
                         @foreach ([
                             ['target' => 55, 'suffix' => '+', 'label' => 'Years'],
-                            ['value' => 'Thousands', 'label' => 'Members Trained'],
+                            ['target' => 3000, 'suffix' => '+', 'label' => 'Members Trained'],
                         ] as $i => $stat)
                             <div data-reveal="scale" data-reveal-delay="{{ $i + 1 }}">
                                 <div class="font-display text-3xl text-navy-950 sm:text-4xl">
-                                    @if (isset($stat['target']))
-                                        <span data-counter="{{ $stat['target'] }}" data-counter-suffix="{{ $stat['suffix'] }}">0{{ $stat['suffix'] }}</span>
-                                    @else
-                                        {{ __($stat['value']) }}
-                                    @endif
+                                    <span data-counter="{{ $stat['target'] }}" data-counter-suffix="{{ $stat['suffix'] }}">0{{ $stat['suffix'] }}</span>
                                 </div>
                                 <div class="mt-1 text-xs font-semibold uppercase tracking-wide text-navy-500">{{ __($stat['label']) }}</div>
                             </div>

@@ -237,6 +237,7 @@ function renderBlade(bladeContent, locale = 'fr', basePath = '.', cssFileName = 
   // Replace root asset paths with relative basePath
   html = html.replace(/data-model="\/models\/hero-boxer\.fbx"/g, `data-model="${basePath}/models/hero-boxer.fbx"`);
   html = html.replace(/src="\/images\//g, `src="${basePath}/images/`);
+  html = html.replace(/src="\/videos\//g, `src="${basePath}/videos/`);
   html = html.replace(/href="\/favicon\.ico"/g, `href="${basePath}/favicon.ico"`);
 
   // 3. Replace locale function

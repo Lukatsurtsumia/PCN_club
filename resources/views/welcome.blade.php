@@ -116,7 +116,7 @@
             {{-- ===== full-bleed hero background video (replaces the 3D fighter) ===== --}}
             <video autoplay muted loop playsinline preload="auto"
                    class="pointer-events-none absolute inset-0 z-[2] h-full w-full object-cover">
-                <source src="/videos/hero.mp4" type="video/mp4">
+                <source src="/videos/video-promo.mp4" type="video/mp4">
             </video>
             {{-- readability overlays so the headline stays crisp over the video --}}
             <div class="pointer-events-none absolute inset-0 z-[5] bg-gradient-to-r from-navy-950/90 via-navy-950/55 to-navy-950/25"></div>

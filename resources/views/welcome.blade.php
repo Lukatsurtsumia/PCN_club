@@ -212,7 +212,7 @@
                             <svg class="h-6 w-6 fill-current" viewBox="0 0 24 24"><path d="M12 2l2.9 6.3 6.8.7-5.1 4.6 1.4 6.7L12 17.8 6 20.9l1.4-6.7-5.1-4.6 6.8-.7z"/></svg>
                         </span>
                         <span class="leading-none">
-                            <span class="block text-[10px] font-bold uppercase tracking-[0.3em] text-navy-500">Depuis</span>
+                            <span class="block text-[10px] font-bold uppercase tracking-[0.3em] text-slate-500">Depuis</span>
                             <span class="mt-1.5 block font-display text-3xl tracking-wide text-blue-600">1969</span>
                         </span>
                     </div>
@@ -244,7 +244,7 @@
                         @endforeach
                     </ul>
 
-                    <div class="mt-12 grid max-w-md grid-cols-2 gap-6 border-t border-navy-100 pt-8">
+                    <div class="mt-12 grid max-w-md grid-cols-2 gap-6 border-t border-slate-200 pt-8">
                         @foreach ([
                             ['target' => 55, 'suffix' => '+', 'label' => 'Years'],
                             ['target' => 3000, 'suffix' => '+', 'label' => 'Members Trained'],
@@ -253,7 +253,7 @@
                                 <div class="font-display text-3xl text-navy-950 sm:text-4xl">
                                     <span data-counter="{{ $stat['target'] }}" data-counter-suffix="{{ $stat['suffix'] }}">0{{ $stat['suffix'] }}</span>
                                 </div>
-                                <div class="mt-1 text-xs font-semibold uppercase tracking-wide text-navy-500">{{ __($stat['label']) }}</div>
+                                <div class="mt-1 text-xs font-semibold uppercase tracking-wide text-slate-500">{{ __($stat['label']) }}</div>
                             </div>
                         @endforeach
                     </div>
@@ -334,14 +334,14 @@
                 <template x-if="$store.consent.accepted()">
                     <div x-data="reviewsWidget()">
                         {{-- loading spinner --}}
-                        <div x-show="state === 'loading'" class="flex flex-col items-center justify-center gap-3 py-16 text-navy-400">
-                            <span class="h-9 w-9 animate-spin rounded-full border-2 border-navy-200 border-t-blue-500"></span>
+                        <div x-show="state === 'loading'" class="flex flex-col items-center justify-center gap-3 py-16 text-slate-400">
+                            <span class="h-9 w-9 animate-spin rounded-full border-2 border-slate-200 border-t-blue-500"></span>
                             <span class="text-sm">{{ __('Loading Google reviews…') }}</span>
                         </div>
                         {{-- live Google reviews (Elfsight) — kept in the DOM so it can populate; hidden only if it stays empty (monthly view cap) --}}
                         <div x-show="state !== 'fallback'" class="elfsight-app-0e0cdec6-2556-432d-a0b1-e2a0934c43a3"></div>
                         {{-- graceful 5-star fallback shown when the reviews widget is capped/unavailable --}}
-                        <div x-show="state === 'fallback'" x-cloak class="mx-auto flex max-w-xl flex-col items-center gap-4 rounded-3xl border border-navy-100 bg-gradient-to-b from-navy-50/70 to-white p-10 text-center shadow-sm sm:p-12">
+                        <div x-show="state === 'fallback'" x-cloak class="mx-auto flex max-w-xl flex-col items-center gap-4 rounded-3xl border border-slate-200 bg-gradient-to-b from-slate-50/70 to-white p-10 text-center shadow-sm sm:p-12">
                             <div class="flex items-center gap-1.5 text-3xl text-amber-400" aria-hidden="true">
                                 <span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span>
                             </div>
@@ -355,9 +355,9 @@
                     </div>
                 </template>
                 <template x-if="! $store.consent.accepted()">
-                    <div class="flex flex-col items-center justify-center gap-4 rounded-3xl border border-navy-200 bg-navy-50/60 p-12 text-center">
+                    <div class="flex flex-col items-center justify-center gap-4 rounded-3xl border border-slate-200 bg-slate-50/60 p-12 text-center">
                         <span class="text-3xl">&#11088;</span>
-                        <p class="max-w-sm text-sm text-navy-500">{{ __('Accept cookies to display our Google reviews.') }}</p>
+                        <p class="max-w-sm text-sm text-slate-500">{{ __('Accept cookies to display our Google reviews.') }}</p>
                         <button @click="$store.consent.set('accepted')" class="rounded-full bg-blue-600 px-5 py-2.5 text-sm font-bold text-white transition hover:bg-blue-500">{{ __('Accept') }}</button>
                     </div>
                 </template>

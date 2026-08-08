@@ -4,6 +4,6 @@
     <img src="/images/pcn-logo.jpg" alt="PCN - Pugilist Club Niçois" class="h-11 w-11 shrink-0 rounded-xl bg-white object-contain p-0.5 shadow-sm sm:h-12 sm:w-12" />
     <span class="leading-none">
         <span class="block font-display text-xl sm:text-2xl tracking-wide text-white">PCN</span>
-        <span class="block text-[9px] sm:text-[10px] font-semibold tracking-[0.2em] text-blue-300 uppercase">PUGILIST CLUB NIÇOIS</span>
+        <span class="block whitespace-nowrap text-[10px] sm:text-[11px] font-semibold tracking-[0.18em] text-blue-300 uppercase">PUGILIST CLUB NIÇOIS</span>
     </span>
 </div>

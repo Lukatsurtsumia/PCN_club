@@ -16,7 +16,7 @@
                 Trouvez votre séance d'entraînement
             </h1>
 
-            <p class="mt-6 text-lg leading-8 text-navy-500">
+            <p class="mt-6 text-lg leading-8 text-slate-600">
                 Entraînez-vous avec des entraîneurs expérimentés dans un environnement
                 professionnel et motivant. Que vous soyez débutant ou sportif confirmé,
                 nous proposons des séances adaptées à tous les niveaux.

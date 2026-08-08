@@ -271,10 +271,19 @@
 
                 <template x-if="active === 2">
                     <div class="animate-hero-in max-w-xl">
-                        <span class="mb-5 inline-block rounded-full border border-blue-400/40 bg-blue-500/10 px-4 py-1.5 text-xs font-bold tracking-[0.3em] text-blue-300 backdrop-blur-sm">{{ __('ONE TEAM. ONE CORNER.') }}</span>
-                        <h1 class="font-display text-5xl leading-[0.95] tracking-wide text-white [text-shadow:0_4px_28px_rgba(0,0,0,0.65)] sm:text-6xl lg:text-7xl">{{ __('JOIN THE') }} <span class="text-blue-500 [text-shadow:0_0_24px_rgba(59,130,246,0.7)]">{{ __('PCN') }}</span> {{ __('FAMILY') }}</h1>
-                        <p class="mt-6 max-w-lg text-lg text-white/70">{{ __('A gym built on respect, sweat, and community. All levels welcome - no experience needed to start.') }}</p>
-                        <div class="mt-9 flex flex-wrap gap-4">
+                        <span class="mb-5 inline-block rounded-full border border-blue-400/40 bg-blue-500/10 px-4 py-1.5 text-xs font-bold tracking-[0.3em] text-blue-300 backdrop-blur-sm">{{ __('WHY PCN') }}</span>
+                        <h1 class="font-display text-4xl leading-[0.95] tracking-wide text-white [text-shadow:0_4px_28px_rgba(0,0,0,0.65)] sm:text-5xl lg:text-6xl">{{ __('WHY CHOOSE') }} <span class="text-blue-500 [text-shadow:0_0_24px_rgba(59,130,246,0.7)]">{{ __('PUGILIST CLUB NIÇOIS?') }}</span></h1>
+                        <ul class="mt-6 grid grid-cols-1 gap-2.5 sm:grid-cols-2 text-base text-white/80">
+                            <li class="flex items-center gap-2 font-medium"><span class="text-blue-400 font-bold">✓</span> {{ __('Historic club founded in 1969') }}</li>
+                            <li class="flex items-center gap-2 font-medium"><span class="text-blue-400 font-bold">✓</span> {{ __('Affiliated with the French Boxing Federation') }}</li>
+                            <li class="flex items-center gap-2 font-medium"><span class="text-blue-400 font-bold">✓</span> {{ __('Kids classes from age 6') }}</li>
+                            <li class="flex items-center gap-2 font-medium"><span class="text-blue-400 font-bold">✓</span> {{ __('Recreational boxing') }}</li>
+                            <li class="flex items-center gap-2 font-medium"><span class="text-blue-400 font-bold">✓</span> {{ __('Competitive boxing') }}</li>
+                            <li class="flex items-center gap-2 font-medium"><span class="text-blue-400 font-bold">✓</span> {{ __('Physical conditioning') }}</li>
+                            <li class="flex items-center gap-2 font-medium"><span class="text-blue-400 font-bold">✓</span> {{ __('Salle Serge Leyrit in Nice') }}</li>
+                            <li class="flex items-center gap-2 font-medium"><span class="text-blue-400 font-bold">✓</span> {{ __('Lady boxing') }}</li>
+                        </ul>
+                        <div class="mt-8 flex flex-wrap gap-4">
                             <a href="#join" class="rounded-full bg-blue-600 px-8 py-3.5 text-sm font-bold tracking-wide text-white shadow-glow transition hover:bg-blue-500 hover:-translate-y-0.5">{{ __('Join The Club') }}</a>
                             <a href="#location" class="rounded-full border border-white/30 px-8 py-3.5 text-sm font-bold tracking-wide text-white transition hover:border-white hover:bg-white/10">{{ __('Find The Gym') }}</a>
                         </div>

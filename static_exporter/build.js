@@ -368,17 +368,20 @@ function renderBlade(bladeContent, locale = 'fr', basePath = '.', cssFileName = 
   });
 
   // Loop for stats
-  const statsLoopRegex = /@foreach\s*\(\[\s*\['target'\s*=>\s*50[\s\S]*?\]\s*as\s*\$i\s*=>\s*\$stat\)([\s\S]*?)@endforeach/;
+  const statsLoopRegex = /@foreach\s*\(\[\s*\['target'\s*=>\s*55[\s\S]*?\]\s*as\s*\$i\s*=>\s*\$stat\)([\s\S]*?)@endforeach/;
   html = html.replace(statsLoopRegex, (match, body) => {
     const stats = [
-      { target: 50, suffix: '+', label: 'Years' },
-      { target: 1500, suffix: '+', label: 'Members Trained' },
-      { target: 15, suffix: '+', label: 'Classes / Month' },
+      { target: 55, suffix: '+', label: 'Years' },
+      { value: 'Thousands', label: 'Members Trained' },
     ];
     return stats.map((stat, i) => {
       let node = body.replace(/\{\{\s*\$i\s*\+\s*1\s*\}\}/g, i + 1);
-      node = node.replace(/\{\{\s*\$stat\['target'\]\s*\}\}/g, stat.target);
-      node = node.replace(/\{\{\s*\$stat\['suffix'\]\s*\}\}/g, stat.suffix);
+      if (stat.target !== undefined) {
+        node = node.replace(/@if\s*\(\s*isset\(\$stat\['target'\]\)\s*\)[\s\S]*?@else[\s\S]*?@endif/, `<span data-counter="${stat.target}" data-counter-suffix="${stat.suffix}">0${stat.suffix}</span>`);
+      } else {
+        const valStr = locale === 'fr' ? (dictFR[stat.value] || stat.value) : stat.value;
+        node = node.replace(/@if\s*\(\s*isset\(\$stat\['target'\]\)\s*\)[\s\S]*?@else[\s\S]*?@endif/, valStr);
+      }
       node = node.replace(/\{\{\s*__\(\$stat\['label'\]\)\s*\}\}/g, locale === 'fr' ? (dictFR[stat.label] || stat.label) : stat.label);
       return node;
     }).join('');

@@ -244,15 +244,18 @@
                         @endforeach
                     </ul>
 
-                    <div class="mt-12 grid max-w-lg grid-cols-3 gap-6 border-t border-navy-100 pt-8">
+                    <div class="mt-12 grid max-w-md grid-cols-2 gap-6 border-t border-navy-100 pt-8">
                         @foreach ([
-                            ['target' => 50, 'suffix' => '+', 'label' => 'Years'],
-                            ['target' => 1500, 'suffix' => '+', 'label' => 'Members Trained'],
-                            ['target' => 15, 'suffix' => '+', 'label' => 'Classes / Month'],
+                            ['target' => 55, 'suffix' => '+', 'label' => 'Years'],
+                            ['value' => 'Thousands', 'label' => 'Members Trained'],
                         ] as $i => $stat)
                             <div data-reveal="scale" data-reveal-delay="{{ $i + 1 }}">
                                 <div class="font-display text-3xl text-navy-950 sm:text-4xl">
-                                    <span data-counter="{{ $stat['target'] }}" data-counter-suffix="{{ $stat['suffix'] }}">0{{ $stat['suffix'] }}</span>
+                                    @if (isset($stat['target']))
+                                        <span data-counter="{{ $stat['target'] }}" data-counter-suffix="{{ $stat['suffix'] }}">0{{ $stat['suffix'] }}</span>
+                                    @else
+                                        {{ __($stat['value']) }}
+                                    @endif
                                 </div>
                                 <div class="mt-1 text-xs font-semibold uppercase tracking-wide text-navy-500">{{ __($stat['label']) }}</div>
                             </div>

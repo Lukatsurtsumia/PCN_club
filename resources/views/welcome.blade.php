@@ -17,15 +17,6 @@
         <link rel="dns-prefetch" href="https://static.elfsight.com">
         <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 
-        {{-- three.js for the 3D boxer (must come before any module script) --}}
-        <script type="importmap">
-        {
-          "imports": {
-            "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
-            "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
-          }
-        }
-        </script>
 
         @vite(['resources/css/app.css', 'resources/js/app.js'])
 
@@ -124,124 +115,27 @@
                 <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_theme(colors.navy.700),_theme(colors.navy.950)_65%)]"></div>
             </div>
 
-            {{-- ===== 3D animated boxer (persistent across all hero slides) ===== --}}
-            {{-- spotlight glow behind the fighter --}}
+            {{-- ===== Hero Video (replaces 3D animated boxer) ===== --}}
+            {{-- spotlight glow behind the video --}}
             <div class="pointer-events-none absolute -bottom-10 right-0 z-0 h-[85%] w-[75%] max-w-[760px] bg-[radial-gradient(ellipse_at_bottom_right,_rgba(37,99,235,0.38),_transparent_62%)]"></div>
-            {{-- 3D animated boxer --}}
-            <div data-boxer-3d data-model="/models/hero-boxer.fbx" data-recolor="1" class="pointer-events-none absolute bottom-0 right-0 z-[1] h-[62%] w-full opacity-90 sm:h-[85%] sm:w-[75%] sm:opacity-100 md:h-full md:w-[62%] md:max-w-[760px] lg:right-[3%]"></div>
-            {{-- readability scrim so the headline stays crisp over the fighter --}}
+            {{-- Hero video container --}}
+            <div class="pointer-events-none absolute bottom-0 right-0 z-[1] flex h-[62%] w-full items-center justify-center p-4 sm:h-[85%] sm:w-[75%] sm:p-6 md:h-full md:w-[62%] md:max-w-[760px] lg:right-[3%]">
+                <div class="relative h-full w-full overflow-hidden rounded-3xl border border-white/15 bg-navy-900/60 shadow-2xl backdrop-blur-sm">
+                    <video
+                        autoplay
+                        muted
+                        loop
+                        playsinline
+                        class="h-full w-full object-cover object-center"
+                    >
+                        <source src="/videos/hero-video-1.mp4" type="video/mp4">
+                    </video>
+                </div>
+            </div>
+            {{-- readability scrim so the headline stays crisp over the video --}}
             <div class="pointer-events-none absolute inset-0 z-[5] bg-gradient-to-r from-navy-950 via-navy-950/70 to-transparent sm:from-navy-950/95 sm:via-navy-950/35"></div>
-            {{-- bottom fade to ground him --}}
+            {{-- bottom fade to ground it --}}
             <div class="pointer-events-none absolute inset-x-0 bottom-0 z-[5] h-40 bg-gradient-to-t from-navy-950 via-navy-950/60 to-transparent"></div>
-            {{-- ===== shared 3D boxer loader: powers the hero + all program cards, lazy per viewport ===== --}}
-            <script type="module">
-                import * as THREE from 'three';
-                import { FBXLoader } from 'three/addons/loaders/FBXLoader.js';
-
-                function initBoxer(mount) {
-                    let started = false, visible = true, mixer, renderer, scene, camera, boxCenter, boxSize;
-                    const clock = new THREE.Clock();
-
-                    function build() {
-                        if (started) return; started = true;
-                        const w = Math.max(mount.clientWidth, 1), h = Math.max(mount.clientHeight, 1);
-                        scene = new THREE.Scene();
-                        camera = new THREE.PerspectiveCamera(40, w / h, 1, 6000);
-                        renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-                        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.75));
-                        renderer.setSize(w, h);
-                        renderer.outputColorSpace = THREE.SRGBColorSpace;
-                        mount.appendChild(renderer.domElement);
-
-                        scene.add(new THREE.HemisphereLight(0xffffff, 0x22314a, 2.0));
-                        const key = new THREE.DirectionalLight(0xffffff, 2.4); key.position.set(120, 240, 180); scene.add(key);
-                        const rim = new THREE.DirectionalLight(0x6aa8ff, 1.4); rim.position.set(-160, 120, -140); scene.add(rim);
-
-                        // (re)frame the whole figure for the container's current size - called on load and on any resize
-                        function frame() {
-                            if (!boxSize || !renderer) return;
-                            const cw = Math.max(mount.clientWidth, 1), ch = Math.max(mount.clientHeight, 1);
-                            const aspect = cw / ch;
-                            const vfov = camera.fov * Math.PI / 180;
-                            const distH = (boxSize.y / 2) / Math.tan(vfov / 2);
-                            const distW = (boxSize.x / 2) / (Math.tan(vfov / 2) * aspect);
-                            const dist = Math.max(distH, distW) * 1.35;
-                            const ty = boxCenter.y + boxSize.y * 0.08; // aim slightly high: head clears nav, feet stay in frame
-                            camera.aspect = aspect;
-                            camera.near = dist / 100;
-                            camera.far = dist * 100;
-                            camera.updateProjectionMatrix();
-                            camera.position.set(boxCenter.x, ty, boxCenter.z + dist);
-                            camera.lookAt(boxCenter.x, ty, boxCenter.z);
-                            renderer.setSize(cw, ch);
-                        }
-                        new ResizeObserver(frame).observe(mount);
-
-                        new FBXLoader().load(mount.dataset.model, (obj) => {
-                            if (mount.dataset.recolor) {
-                                obj.traverse((o) => {
-                                    if (o.isMesh && o.material) {
-                                        const mats = Array.isArray(o.material) ? o.material : [o.material];
-                                        mats.forEach((mt) => {
-                                            if (mt.color) mt.color.set(0xa9c8ff);
-                                            if ('emissive' in mt) mt.emissive.set(0x22367a);
-                                            if ('shininess' in mt) mt.shininess = 30;
-                                            mt.needsUpdate = true;
-                                        });
-                                    }
-                                });
-                            }
-                            scene.add(obj);
-                            const bindBox = new THREE.Box3().setFromObject(obj);
-                            const bindC = bindBox.getCenter(new THREE.Vector3());
-                            const bindS = bindBox.getSize(new THREE.Vector3());
-
-                            if (obj.animations.length) {
-                                // some Mixamo exports include an empty "Take 001" clip first,
-                                // so pick the clip with the most tracks (the real animation)
-                                const clip = obj.animations.reduce((a, b) => (b.tracks.length > a.tracks.length ? b : a));
-                                mixer = new THREE.AnimationMixer(obj);
-                                mixer.clipAction(clip).play();
-                                // the animated pose can sit higher/taller than the bind box (skinning isn't
-                                // reflected in it), so measure the true vertical extent from the skeleton
-                                let minY = Infinity, maxY = -Infinity; const p = new THREE.Vector3();
-                                for (let i = 0; i <= 5; i++) {
-                                    mixer.setTime(clip.duration * i / 5); obj.updateMatrixWorld(true);
-                                    obj.traverse((n) => { if (n.isBone) { n.getWorldPosition(p); if (p.y < minY) minY = p.y; if (p.y > maxY) maxY = p.y; } });
-                                }
-                                mixer.setTime(0);
-                                const ext = maxY - minY;
-                                const top = maxY + ext * 0.12, bottom = minY - ext * 0.05; // pad for skull above head-bone and boot below ankle
-                                boxCenter = new THREE.Vector3(bindC.x, (top + bottom) / 2, bindC.z);
-                                boxSize = new THREE.Vector3(bindS.x, top - bottom, bindS.z);
-                            } else {
-                                boxCenter = bindC; boxSize = bindS;
-                            }
-                            frame();
-                        });
-
-                        window.addEventListener('orientationchange', () => setTimeout(frame, 300));
-
-                        (function tick() {
-                            requestAnimationFrame(tick);
-                            if (!visible || !renderer) return;
-                            if (mixer) mixer.update(clock.getDelta());
-                            renderer.render(scene, camera);
-                        })();
-                    }
-
-                    // IntersectionObserver is a perf optimization (pause offscreen). Not all
-                    // environments fire it, so we also build on a short fallback timer.
-                    try {
-                        new IntersectionObserver((entries) => {
-                            entries.forEach((e) => { visible = e.isIntersecting; if (visible) build(); });
-                        }, { rootMargin: '250px' }).observe(mount);
-                    } catch (e) { /* no IO support */ }
-                    setTimeout(build, 300);
-                }
-
-                document.querySelectorAll('[data-boxer-3d]').forEach(initBoxer);
-            </script>
 
             {{-- content --}}
             <div class="relative z-10 mx-auto flex h-full max-w-7xl items-center px-6 lg:px-10">

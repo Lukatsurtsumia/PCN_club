@@ -405,9 +405,10 @@
 
                     <div class="mt-8 space-y-4">
                         @foreach ([
-                            ['name' => 'Boxing · Adults', 'desc' => 'All levels · technique &amp; sparring', 'price' => '250'],
-                            ['name' => 'Youth School (8-16)', 'desc' => 'Dedicated junior coaching', 'price' => '200'],
-                            ['name' => 'Fit Boxing', 'desc' => 'Cardio · conditioning · pads', 'price' => '220'],
+                            ['name' => 'Educational Boxing', 'desc' => 'Born 2014-2019 · FFBOX license included', 'price' => '200'],
+                            ['name' => 'Cadets / Juniors', 'desc' => 'Born 2009-2012 · FFBOX license included', 'price' => '220'],
+                            ['name' => 'Seniors', 'desc' => 'Born 2008 or earlier · leisure, free bag, Lady Boxing', 'price' => '290'],
+                            ['name' => 'Competition Squad', 'desc' => 'By technical-team selection · FFBOX license included', 'price' => '200'],
                         ] as $course)
                             <div class="flex items-center justify-between gap-4 rounded-2xl border border-white/10 bg-white/[0.04] p-5 transition hover:border-blue-400/40 hover:bg-white/[0.06]">
                                 <div>
@@ -465,9 +466,10 @@
                                 <select x-model="form.course"
                                         class="w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-900 transition focus:border-blue-500 focus:bg-white focus:outline-none focus:ring-2 focus:ring-blue-500/20">
                                     <option value="">{{ __('Choose') }}…</option>
-                                    <option value="{{ __('Boxing · Adults') }}">{{ __('Boxing · Adults') }}</option>
-                                    <option value="{{ __('Youth School (8-16)') }}">{{ __('Youth School (8-16)') }}</option>
-                                    <option value="{{ __('Fit Boxing') }}">{{ __('Fit Boxing') }}</option>
+                                    <option value="{{ __('Educational Boxing') }}">{{ __('Educational Boxing') }}</option>
+                                    <option value="{{ __('Cadets / Juniors') }}">{{ __('Cadets / Juniors') }}</option>
+                                    <option value="{{ __('Seniors') }}">{{ __('Seniors') }}</option>
+                                    <option value="{{ __('Competition Squad') }}">{{ __('Competition Squad') }}</option>
                                     <option value="{{ __('Other') }}">{{ __('Other') }}</option>
                                 </select>
                             </label>

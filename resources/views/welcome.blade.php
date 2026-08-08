@@ -277,7 +277,7 @@
 
                     <x-discipline-card img="prog-youth" :title="__('Educational Boxing')">{{ __("Aimed at children and young people, educational boxing allows them to discover English boxing while developing coordination, motor skills, self-control, and respect for others. The training includes partner exercises and educational sparring adapted to age and skill level, with controlled touches, without the emphasis on power or causing pain. Each session takes place in a safe, respectful, and educational environment, where the goal is to learn to box while controlling one's movements and emotions.") }}</x-discipline-card>
 
-                    <x-discipline-card img="prog-team" :title="__('Competitors')">{{ __("The competitive section is for boxers who want to fully commit to competition. Training is demanding and combines technical and tactical work, physical preparation, conditioning, and mental development. Boxers participate in national competitions and receive support tailored to their level, goals, and progress. This type of training requires commitment, consistency, discipline, and a drive to push oneself to the limit.") }}</x-discipline-card>
+                    <x-discipline-card img="gallery-2" :title="__('Competitors')">{{ __("The competitive section is for boxers who want to fully commit to competition. Training is demanding and combines technical and tactical work, physical preparation, conditioning, and mental development. Boxers participate in national competitions and receive support tailored to their level, goals, and progress. This type of training requires commitment, consistency, discipline, and a drive to push oneself to the limit.") }}</x-discipline-card>
                 </div>
             </div>
         </section>

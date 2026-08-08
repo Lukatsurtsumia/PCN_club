@@ -11,21 +11,10 @@
 
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        {{-- start the CDN connections early: 3D library + reviews widget --}}
-        <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+        {{-- start the CDN connection early: reviews widget --}}
         <link rel="dns-prefetch" href="https://elfsightcdn.com">
         <link rel="dns-prefetch" href="https://static.elfsight.com">
         <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-
-        {{-- three.js for the 3D boxer (must come before any module script) --}}
-        <script type="importmap">
-        {
-          "imports": {
-            "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
-            "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
-          }
-        }
-        </script>
 
         @vite(['resources/css/app.css', 'resources/js/app.js'])
 
@@ -124,124 +113,14 @@
                 <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_theme(colors.navy.700),_theme(colors.navy.950)_65%)]"></div>
             </div>
 
-            {{-- ===== 3D animated boxer (persistent across all hero slides) ===== --}}
-            {{-- spotlight glow behind the fighter --}}
-            <div class="pointer-events-none absolute -bottom-10 right-0 z-0 h-[85%] w-[75%] max-w-[760px] bg-[radial-gradient(ellipse_at_bottom_right,_rgba(37,99,235,0.38),_transparent_62%)]"></div>
-            {{-- 3D animated boxer --}}
-            <div data-boxer-3d data-model="/models/hero-boxer.fbx" data-recolor="1" class="pointer-events-none absolute bottom-0 right-0 z-[1] h-[62%] w-full opacity-90 sm:h-[85%] sm:w-[75%] sm:opacity-100 md:h-full md:w-[62%] md:max-w-[760px] lg:right-[3%]"></div>
-            {{-- readability scrim so the headline stays crisp over the fighter --}}
-            <div class="pointer-events-none absolute inset-0 z-[5] bg-gradient-to-r from-navy-950 via-navy-950/70 to-transparent sm:from-navy-950/95 sm:via-navy-950/35"></div>
-            {{-- bottom fade to ground him --}}
+            {{-- ===== full-bleed hero background video (replaces the 3D fighter) ===== --}}
+            <video autoplay muted loop playsinline preload="auto"
+                   class="pointer-events-none absolute inset-0 z-[2] h-full w-full object-cover">
+                <source src="/videos/hero.mp4" type="video/mp4">
+            </video>
+            {{-- readability overlays so the headline stays crisp over the video --}}
+            <div class="pointer-events-none absolute inset-0 z-[5] bg-gradient-to-r from-navy-950/90 via-navy-950/55 to-navy-950/25"></div>
             <div class="pointer-events-none absolute inset-x-0 bottom-0 z-[5] h-40 bg-gradient-to-t from-navy-950 via-navy-950/60 to-transparent"></div>
-            {{-- ===== shared 3D boxer loader: powers the hero + all program cards, lazy per viewport ===== --}}
-            <script type="module">
-                import * as THREE from 'three';
-                import { FBXLoader } from 'three/addons/loaders/FBXLoader.js';
-
-                function initBoxer(mount) {
-                    let started = false, visible = true, mixer, renderer, scene, camera, boxCenter, boxSize;
-                    const clock = new THREE.Clock();
-
-                    function build() {
-                        if (started) return; started = true;
-                        const w = Math.max(mount.clientWidth, 1), h = Math.max(mount.clientHeight, 1);
-                        scene = new THREE.Scene();
-                        camera = new THREE.PerspectiveCamera(40, w / h, 1, 6000);
-                        renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-                        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.75));
-                        renderer.setSize(w, h);
-                        renderer.outputColorSpace = THREE.SRGBColorSpace;
-                        mount.appendChild(renderer.domElement);
-
-                        scene.add(new THREE.HemisphereLight(0xffffff, 0x22314a, 2.0));
-                        const key = new THREE.DirectionalLight(0xffffff, 2.4); key.position.set(120, 240, 180); scene.add(key);
-                        const rim = new THREE.DirectionalLight(0x6aa8ff, 1.4); rim.position.set(-160, 120, -140); scene.add(rim);
-
-                        // (re)frame the whole figure for the container's current size - called on load and on any resize
-                        function frame() {
-                            if (!boxSize || !renderer) return;
-                            const cw = Math.max(mount.clientWidth, 1), ch = Math.max(mount.clientHeight, 1);
-                            const aspect = cw / ch;
-                            const vfov = camera.fov * Math.PI / 180;
-                            const distH = (boxSize.y / 2) / Math.tan(vfov / 2);
-                            const distW = (boxSize.x / 2) / (Math.tan(vfov / 2) * aspect);
-                            const dist = Math.max(distH, distW) * 1.35;
-                            const ty = boxCenter.y + boxSize.y * 0.08; // aim slightly high: head clears nav, feet stay in frame
-                            camera.aspect = aspect;
-                            camera.near = dist / 100;
-                            camera.far = dist * 100;
-                            camera.updateProjectionMatrix();
-                            camera.position.set(boxCenter.x, ty, boxCenter.z + dist);
-                            camera.lookAt(boxCenter.x, ty, boxCenter.z);
-                            renderer.setSize(cw, ch);
-                        }
-                        new ResizeObserver(frame).observe(mount);
-
-                        new FBXLoader().load(mount.dataset.model, (obj) => {
-                            if (mount.dataset.recolor) {
-                                obj.traverse((o) => {
-                                    if (o.isMesh && o.material) {
-                                        const mats = Array.isArray(o.material) ? o.material : [o.material];
-                                        mats.forEach((mt) => {
-                                            if (mt.color) mt.color.set(0xa9c8ff);
-                                            if ('emissive' in mt) mt.emissive.set(0x22367a);
-                                            if ('shininess' in mt) mt.shininess = 30;
-                                            mt.needsUpdate = true;
-                                        });
-                                    }
-                                });
-                            }
-                            scene.add(obj);
-                            const bindBox = new THREE.Box3().setFromObject(obj);
-                            const bindC = bindBox.getCenter(new THREE.Vector3());
-                            const bindS = bindBox.getSize(new THREE.Vector3());
-
-                            if (obj.animations.length) {
-                                // some Mixamo exports include an empty "Take 001" clip first,
-                                // so pick the clip with the most tracks (the real animation)
-                                const clip = obj.animations.reduce((a, b) => (b.tracks.length > a.tracks.length ? b : a));
-                                mixer = new THREE.AnimationMixer(obj);
-                                mixer.clipAction(clip).play();
-                                // the animated pose can sit higher/taller than the bind box (skinning isn't
-                                // reflected in it), so measure the true vertical extent from the skeleton
-                                let minY = Infinity, maxY = -Infinity; const p = new THREE.Vector3();
-                                for (let i = 0; i <= 5; i++) {
-                                    mixer.setTime(clip.duration * i / 5); obj.updateMatrixWorld(true);
-                                    obj.traverse((n) => { if (n.isBone) { n.getWorldPosition(p); if (p.y < minY) minY = p.y; if (p.y > maxY) maxY = p.y; } });
-                                }
-                                mixer.setTime(0);
-                                const ext = maxY - minY;
-                                const top = maxY + ext * 0.12, bottom = minY - ext * 0.05; // pad for skull above head-bone and boot below ankle
-                                boxCenter = new THREE.Vector3(bindC.x, (top + bottom) / 2, bindC.z);
-                                boxSize = new THREE.Vector3(bindS.x, top - bottom, bindS.z);
-                            } else {
-                                boxCenter = bindC; boxSize = bindS;
-                            }
-                            frame();
-                        });
-
-                        window.addEventListener('orientationchange', () => setTimeout(frame, 300));
-
-                        (function tick() {
-                            requestAnimationFrame(tick);
-                            if (!visible || !renderer) return;
-                            if (mixer) mixer.update(clock.getDelta());
-                            renderer.render(scene, camera);
-                        })();
-                    }
-
-                    // IntersectionObserver is a perf optimization (pause offscreen). Not all
-                    // environments fire it, so we also build on a short fallback timer.
-                    try {
-                        new IntersectionObserver((entries) => {
-                            entries.forEach((e) => { visible = e.isIntersecting; if (visible) build(); });
-                        }, { rootMargin: '250px' }).observe(mount);
-                    } catch (e) { /* no IO support */ }
-                    setTimeout(build, 300);
-                }
-
-                document.querySelectorAll('[data-boxer-3d]').forEach(initBoxer);
-            </script>
 
             {{-- content --}}
             <div class="relative z-10 mx-auto flex h-full max-w-7xl items-center px-6 lg:px-10">
@@ -433,12 +312,26 @@
             {{-- Live Google reviews via Elfsight - loads only after cookie consent --}}
             <div data-reveal="up" data-reveal-delay="2" x-data class="mx-auto mt-12 max-w-7xl px-6 lg:px-10">
                 <template x-if="$store.consent.accepted()">
-                    <div x-data="{ loading: true }" x-init="$store.consent.loadThirdParty(); setTimeout(() => loading = false, 6000)">
-                        <div x-show="loading" class="flex flex-col items-center justify-center gap-3 py-16 text-navy-400">
+                    <div x-data="reviewsWidget()">
+                        {{-- loading spinner --}}
+                        <div x-show="state === 'loading'" class="flex flex-col items-center justify-center gap-3 py-16 text-navy-400">
                             <span class="h-9 w-9 animate-spin rounded-full border-2 border-navy-200 border-t-blue-500"></span>
                             <span class="text-sm">{{ __('Loading Google reviews…') }}</span>
                         </div>
-                        <div class="elfsight-app-0e0cdec6-2556-432d-a0b1-e2a0934c43a3"></div>
+                        {{-- live Google reviews (Elfsight) — kept in the DOM so it can populate; hidden only if it stays empty (monthly view cap) --}}
+                        <div x-show="state !== 'fallback'" class="elfsight-app-0e0cdec6-2556-432d-a0b1-e2a0934c43a3"></div>
+                        {{-- graceful 5-star fallback shown when the reviews widget is capped/unavailable --}}
+                        <div x-show="state === 'fallback'" x-cloak class="mx-auto flex max-w-xl flex-col items-center gap-4 rounded-3xl border border-navy-100 bg-gradient-to-b from-navy-50/70 to-white p-10 text-center shadow-sm sm:p-12">
+                            <div class="flex items-center gap-1.5 text-3xl text-amber-400" aria-hidden="true">
+                                <span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span>
+                            </div>
+                            <div class="font-display text-5xl tracking-wide text-navy-950">{{ __('5.0') }}</div>
+                            <p class="max-w-md text-navy-600">{{ __('Our members rate us 5 stars on Google.') }}</p>
+                            <a href="https://www.google.com/maps/search/?api=1&amp;query=Pugilist+Club+Ni%C3%A7ois+Nice" target="_blank" rel="noopener"
+                               class="inline-flex items-center gap-2 rounded-full bg-blue-600 px-6 py-3 text-sm font-bold text-white transition hover:-translate-y-0.5 hover:bg-blue-500">
+                                {{ __('Read our Google reviews') }}
+                            </a>
+                        </div>
                     </div>
                 </template>
                 <template x-if="! $store.consent.accepted()">
@@ -533,10 +426,14 @@
                 <div data-reveal="left">
                     <span class="text-sm font-bold tracking-[0.3em] text-blue-400">{{ __('COURSES & PRICING') }}</span>
 
-                    <div class="mt-6 space-y-4">
-                        <!-- Educative Boxing -->
-                        <div class="rounded-2xl border border-white/10 bg-white/[0.04] p-5 transition hover:border-blue-400/40 hover:bg-white/[0.06]">
-                            <div class="flex items-start justify-between gap-4">
+                    <div class="mt-8 space-y-4">
+                        @foreach ([
+                            ['name' => 'Educational Boxing', 'desc' => 'Born 2014-2019 · FFBOX license included', 'price' => '200'],
+                            ['name' => 'Cadets / Juniors', 'desc' => 'Born 2009-2012 · FFBOX license included', 'price' => '220'],
+                            ['name' => 'Seniors', 'desc' => 'Born 2008 or earlier · leisure, free bag, Lady Boxing', 'price' => '290'],
+                            ['name' => 'Competition Squad', 'desc' => 'By technical-team selection · FFBOX license included', 'price' => '200'],
+                        ] as $course)
+                            <div class="flex items-center justify-between gap-4 rounded-2xl border border-white/10 bg-white/[0.04] p-5 transition hover:border-blue-400/40 hover:bg-white/[0.06]">
                                 <div>
                                     <span class="inline-block rounded-full bg-blue-500/10 px-3 py-0.5 text-xs font-semibold text-blue-300 border border-blue-400/20 mb-1.5">{{ __('Born 2013 – 2019') }}</span>
                                     <h3 class="font-display text-xl tracking-wide text-white">{{ __('EDUCATIVE BOXING') }}</h3>
@@ -656,10 +553,10 @@
                                 <select x-model="form.course"
                                         class="w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-900 transition focus:border-blue-500 focus:bg-white focus:outline-none focus:ring-2 focus:ring-blue-500/20">
                                     <option value="">{{ __('Choose') }}…</option>
-                                    <option value="{{ __('Educative Boxing (2013-2019)') }}">{{ __('Educative Boxing (2013-2019)') }}</option>
-                                    <option value="{{ __('Cadets / Juniors (2009-2012)') }}">{{ __('Cadets / Juniors (2009-2012)') }}</option>
-                                    <option value="{{ __('Seniors (2008 & before)') }}">{{ __('Seniors (2008 & before)') }}</option>
-                                    <option value="{{ __('Competitor') }}">{{ __('Competitor') }}</option>
+                                    <option value="{{ __('Educational Boxing') }}">{{ __('Educational Boxing') }}</option>
+                                    <option value="{{ __('Cadets / Juniors') }}">{{ __('Cadets / Juniors') }}</option>
+                                    <option value="{{ __('Seniors') }}">{{ __('Seniors') }}</option>
+                                    <option value="{{ __('Competition Squad') }}">{{ __('Competition Squad') }}</option>
                                     <option value="{{ __('Other') }}">{{ __('Other') }}</option>
                                 </select>
                             </label>

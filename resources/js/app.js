@@ -154,6 +154,40 @@ Alpine.data('contactForm', (endpoint, errorText = '', turnstileError = '', turns
 }));
 
 /* ------------------------------------------------------------------ */
+/* Google reviews (Elfsight) with graceful fallback.                   */
+/* The free plan caps monthly views; once hit, the widget renders      */
+/* empty for visitors. We watch the container: if real reviews appear  */
+/* we show them, otherwise we fall back to a static 5-star block.      */
+/* ------------------------------------------------------------------ */
+Alpine.data('reviewsWidget', () => ({
+    state: 'loading', // 'loading' | 'widget' | 'fallback'
+
+    init() {
+        this.$store.consent.loadThirdParty(); // consent already granted at this point
+
+        const selector = '.elfsight-app-0e0cdec6-2556-432d-a0b1-e2a0934c43a3';
+        const started = Date.now();
+        const MAX_WAIT = 12000; // give Elfsight time to load real reviews
+
+        const check = () => {
+            const el = document.querySelector(selector);
+            // Elfsight fills the container with tall content when reviews load;
+            // when the view cap is hit it stays empty (~0 height) for visitors.
+            if (el && el.offsetHeight > 150) {
+                this.state = 'widget';
+                return;
+            }
+            if (Date.now() - started > MAX_WAIT) {
+                if (this.state === 'loading') this.state = 'fallback';
+                return;
+            }
+            setTimeout(check, 600);
+        };
+        setTimeout(check, 800);
+    },
+}));
+
+/* ------------------------------------------------------------------ */
 /* Cookie consent (GDPR): gates Google Maps + Elfsight reviews.         */
 /* Nothing third-party loads until the visitor clicks Accept.           */
 /* ------------------------------------------------------------------ */

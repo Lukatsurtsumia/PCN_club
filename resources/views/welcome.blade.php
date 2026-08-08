@@ -596,7 +596,7 @@
 
                 {{-- Contact form → POSTs JSON { name, email, phone, course, message } to the
                      PCN Cloudflare Worker (config/pcn.php → contact_endpoint) which emails it via Resend --}}
-                <div data-reveal="right" class="rounded-3xl bg-white p-8 shadow-2xl sm:p-10"
+                <div data-reveal="right" class="self-start rounded-3xl bg-white p-8 shadow-2xl sm:p-10"
                      x-data="contactForm(@js(config('pcn.contact_endpoint')), @js(__('Something went wrong. Please try again or email us directly.')), @js(__('Please complete the security check.')), @js((bool) config('pcn.turnstile_site_key')))">
                     <h3 class="font-display text-2xl tracking-wide text-navy-950">{{ __('SEND US A MESSAGE') }}</h3>
                     <p class="mt-2 text-sm text-navy-600">{{ __('A question or want to sign up? Drop us a line.') }}</p>

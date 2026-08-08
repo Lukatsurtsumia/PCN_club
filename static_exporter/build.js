@@ -200,12 +200,14 @@ function renderBlade(bladeContent, locale = 'fr', basePath = '.', cssFileName = 
     const clickToDiscover = locale === 'fr' ? (dictFR['Click to discover'] || 'Cliquez pour découvrir') : 'Click to discover';
     const clickToFlipBack = locale === 'fr' ? (dictFR['Click to flip back'] || 'Cliquez pour revenir') : 'Click to flip back';
 
+    const imgSrc = img.includes('.') ? img : `${img}.jpg`;
+
     return `<div x-data="{ f: false }" @click="f = !f" @keydown.enter="f = !f" @keydown.space.prevent="f = !f"
      :class="f && 'is-flipped'" role="button" tabindex="0"
      class="flip-card h-[28rem] cursor-pointer rounded-3xl focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 focus-visible:ring-offset-2 focus-visible:ring-offset-navy-950">
     <div class="flip-card-inner">
         <div class="flip-face overflow-hidden rounded-3xl shadow-xl ring-1 ring-white/10">
-            <img src="${basePath}/images/${img}.jpg" alt="${title}" loading="lazy" class="absolute inset-0 h-full w-full object-cover" />
+            <img src="${basePath}/images/${imgSrc}" alt="${title}" loading="lazy" class="absolute inset-0 h-full w-full object-cover" />
             <div class="absolute inset-0 bg-gradient-to-t from-navy-950 via-navy-950/45 to-navy-950/5"></div>
             <div class="absolute inset-0 flex flex-col justify-end p-7">
                 <h3 class="font-display text-3xl tracking-wide text-white sm:text-4xl">${upperTitle}</h3>

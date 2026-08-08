@@ -7,7 +7,7 @@
     <div class="flip-card-inner">
         {{-- front: photo + title --}}
         <div class="flip-face overflow-hidden rounded-3xl shadow-xl ring-1 ring-white/10">
-            <img src="/images/{{ $img }}.jpg" alt="{{ $title }}" loading="lazy" class="absolute inset-0 h-full w-full object-cover" />
+            <img src="/images/{{ \Illuminate\Support\Str::contains($img, '.') ? $img : $img . '.jpg' }}" alt="{{ $title }}" loading="lazy" class="absolute inset-0 h-full w-full object-cover" />
             <div class="absolute inset-0 bg-gradient-to-t from-navy-950 via-navy-950/45 to-navy-950/5"></div>
             <div class="absolute inset-0 flex flex-col justify-end p-7">
                 <h3 class="font-display text-3xl tracking-wide text-white sm:text-4xl">{{ mb_strtoupper($title, 'UTF-8') }}</h3>

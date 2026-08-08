@@ -409,7 +409,7 @@ function renderBlade(bladeContent, locale = 'fr', basePath = '.', cssFileName = 
   html = html.replace(locationLoopRegex, (match, body) => {
     const items = [
       { icon: 'pin', label: 'Address', value: '16 rue Fornéro Méneï, 06300 Nice' },
-      { icon: 'phone', label: 'Phone', value: '04 93 89 05 09' },
+      { icon: 'phone', label: 'Phone', value: '06 58 97 80 75' },
       { icon: 'clock', label: 'Hours', value: 'Mon-Fri · 5pm-8pm' },
     ];
     return items.map((item) => {

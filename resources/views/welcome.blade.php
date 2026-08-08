@@ -361,7 +361,7 @@
 
                         @foreach ([
                             ['icon' => 'pin', 'label' => 'Address', 'value' => '16 rue Fornéro Méneï, 06300 Nice'],
-                            ['icon' => 'phone', 'label' => 'Phone', 'value' => '00 00 00 00'],
+                            ['icon' => 'phone', 'label' => 'Phone', 'value' => '06 58 97 80 75'],
                             ['icon' => 'clock', 'label' => 'Hours', 'value' => 'Mon-Fri · 5pm-8pm'],
                         ] as $item)
                             <div class="flex items-start gap-4">

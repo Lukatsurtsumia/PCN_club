@@ -427,13 +427,9 @@
                     <span class="text-sm font-bold tracking-[0.3em] text-blue-400">{{ __('COURSES & PRICING') }}</span>
 
                     <div class="mt-8 space-y-4">
-                        @foreach ([
-                            ['name' => 'Educational Boxing', 'desc' => 'Born 2014-2019 · FFBOX license included', 'price' => '200'],
-                            ['name' => 'Cadets / Juniors', 'desc' => 'Born 2009-2012 · FFBOX license included', 'price' => '220'],
-                            ['name' => 'Seniors', 'desc' => 'Born 2008 or earlier · leisure, free bag, Lady Boxing', 'price' => '290'],
-                            ['name' => 'Competition Squad', 'desc' => 'By technical-team selection · FFBOX license included', 'price' => '200'],
-                        ] as $course)
-                            <div class="flex items-center justify-between gap-4 rounded-2xl border border-white/10 bg-white/[0.04] p-5 transition hover:border-blue-400/40 hover:bg-white/[0.06]">
+                        <!-- Educative Boxing -->
+                        <div class="rounded-2xl border border-white/10 bg-white/[0.04] p-5 transition hover:border-blue-400/40 hover:bg-white/[0.06]">
+                            <div class="flex items-start justify-between gap-4">
                                 <div>
                                     <span class="inline-block rounded-full bg-blue-500/10 px-3 py-0.5 text-xs font-semibold text-blue-300 border border-blue-400/20 mb-1.5">{{ __('Born 2013 – 2019') }}</span>
                                     <h3 class="font-display text-xl tracking-wide text-white">{{ __('EDUCATIVE BOXING') }}</h3>

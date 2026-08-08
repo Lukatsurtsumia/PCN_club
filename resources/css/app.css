@@ -91,6 +91,26 @@
 .animate-ring-pulse { animation: ring-pulse 4s ease-in-out infinite; }
 
 /* ---------------------------------------------------------------- */
+/* Discipline flip cards (click to reveal the description)            */
+/* ---------------------------------------------------------------- */
+.flip-card { perspective: 1600px; }
+.flip-card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.7s cubic-bezier(0.4, 0.2, 0.2, 1);
+    transform-style: preserve-3d;
+}
+.flip-card.is-flipped .flip-card-inner { transform: rotateY(180deg); }
+.flip-face {
+    position: absolute;
+    inset: 0;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+}
+.flip-face-back { transform: rotateY(180deg); }
+
+/* ---------------------------------------------------------------- */
 /* Misc                                                               */
 /* ---------------------------------------------------------------- */
 html {

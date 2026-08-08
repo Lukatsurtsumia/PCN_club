@@ -262,6 +262,27 @@
             </div>
         </section>
 
+        {{-- ============================= DISCIPLINES (click-to-flip cards) ============================= --}}
+        <section id="disciplines" class="scroll-mt-24 bg-navy-950 py-24 sm:py-32">
+            <div class="mx-auto max-w-7xl px-6 lg:px-10">
+                <div class="mx-auto max-w-2xl text-center">
+                    <span data-reveal="up" class="text-sm font-bold tracking-[0.3em] text-blue-400">{{ __('OUR DISCIPLINES') }}</span>
+                    <h2 data-reveal="up" data-reveal-delay="1" class="mt-4 font-display text-4xl tracking-wide text-white sm:text-5xl">{{ __('CHOOSE YOUR PATH') }}</h2>
+                    <p data-reveal="up" data-reveal-delay="2" class="mt-4 text-white/55">{{ __('Tap a card to reveal each discipline.') }}</p>
+                </div>
+
+                <div class="mt-16 grid grid-cols-1 gap-8 md:grid-cols-2">
+                    <x-discipline-card img="prog-fitness" :title="__('Recreational Boxing')">{{ __("Recreational boxing is open to anyone who wants to practice boxing without the obligation to compete. Sessions combine technique, cardio, physical conditioning, coordination, and partner work. Sparring may also be offered when appropriate for the skill level and desired by the participant. It's a complete activity to get active, progress, improve your fitness, and promote well-being in a friendly and respectful atmosphere.") }}</x-discipline-card>
+
+                    <x-discipline-card img="prog-coaching" :title="__('Lady Boxing')">{{ __("Lady Boxing is a form of boxing specifically designed for women of all skill levels. Sessions combine technique, cardio, strength training, physical conditioning, and partner work to help women release energy, improve their fitness, and build confidence. Sparring may also be offered when appropriate for the participant's level and desired by them, always within a structured, safe, and supportive environment.") }}</x-discipline-card>
+
+                    <x-discipline-card img="prog-youth" :title="__('Educational Boxing')">{{ __("Aimed at children and young people, educational boxing allows them to discover English boxing while developing coordination, motor skills, self-control, and respect for others. The training includes partner exercises and educational sparring adapted to age and skill level, with controlled touches, without the emphasis on power or causing pain. Each session takes place in a safe, respectful, and educational environment, where the goal is to learn to box while controlling one's movements and emotions.") }}</x-discipline-card>
+
+                    <x-discipline-card img="prog-team" :title="__('Competitors')">{{ __("The competitive section is for boxers who want to fully commit to competition. Training is demanding and combines technical and tactical work, physical preparation, conditioning, and mental development. Boxers participate in national competitions and receive support tailored to their level, goals, and progress. This type of training requires commitment, consistency, discipline, and a drive to push oneself to the limit.") }}</x-discipline-card>
+                </div>
+            </div>
+        </section>
+
         {{-- ============================= EXPLORE (schedule + gallery cards) ============================= --}}
         <section id="explore" class="scroll-mt-24 bg-navy-950 py-24 sm:py-32">
             <div class="mx-auto max-w-7xl px-6 lg:px-10">

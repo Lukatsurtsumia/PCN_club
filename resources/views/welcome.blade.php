@@ -521,10 +521,8 @@
                 {{-- Courses & pricing --}}
                 <div data-reveal="left">
                     <span class="text-sm font-bold tracking-[0.3em] text-blue-400">{{ __('COURSES & PRICING') }}</span>
-                    <h2 class="mt-4 font-display text-4xl tracking-wide text-white sm:text-5xl">{{ __('JOIN THE CLUB') }}</h2>
-                    <p class="mt-5 max-w-md text-lg text-white/60">{{ __('Pick your discipline. Annual membership, coached by our team - license & insurance included.') }}</p>
 
-                    <div class="mt-8 space-y-4">
+                    <div class="mt-6 space-y-4">
                         @foreach ([
                             [
                                 'name' => 'Educative Boxing',

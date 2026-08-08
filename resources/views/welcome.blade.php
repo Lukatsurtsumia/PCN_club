@@ -119,14 +119,14 @@
             {{-- spotlight glow behind the video --}}
             <div class="pointer-events-none absolute -bottom-10 right-0 z-0 h-[85%] w-[75%] max-w-[760px] bg-[radial-gradient(ellipse_at_bottom_right,_rgba(37,99,235,0.38),_transparent_62%)]"></div>
             {{-- Hero video container --}}
-            <div class="pointer-events-none absolute bottom-0 right-0 z-[1] flex h-[62%] w-full items-center justify-center p-4 sm:h-[85%] sm:w-[75%] sm:p-6 md:h-full md:w-[62%] md:max-w-[760px] lg:right-[3%]">
-                <div class="relative h-full w-full overflow-hidden rounded-3xl border border-white/15 bg-navy-900/60 shadow-2xl backdrop-blur-sm">
+            <div class="pointer-events-none absolute inset-y-0 right-0 z-[1] flex items-center justify-center px-4 pt-28 pb-10 sm:px-6 sm:pt-32 sm:pb-12 md:w-[55%] lg:w-[50%] lg:right-[3%] xl:right-[5%]">
+                <div class="relative aspect-[4/3] w-full max-w-[600px] lg:max-w-[660px] overflow-hidden rounded-3xl border border-white/15 bg-navy-900/80 shadow-2xl backdrop-blur-md">
                     <video
                         autoplay
                         muted
                         loop
                         playsinline
-                        class="h-full w-full object-cover object-center"
+                        class="h-full w-full object-cover object-center aspect-[4/3]"
                     >
                         <source src="/videos/hero-video-1.mp4" type="video/mp4">
                     </video>

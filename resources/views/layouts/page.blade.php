@@ -18,7 +18,7 @@
                     <span class="flex h-10 w-10 items-center justify-center rounded-lg bg-white p-1">
                         <img src="/images/pcn-logo.jpg" alt="PCN" class="h-full w-full object-contain" />
                     </span>
-                    <span class="font-display text-lg tracking-wide text-white">PCN <span class="text-blue-500">BOXING</span></span>
+                    <span class="font-display text-lg tracking-wide text-white">PCN <span class="text-blue-500">PUGILIST CLUB NIÇOIS</span></span>
                 </a>
                 <div class="flex items-center gap-5 text-sm font-semibold">
                     <a href="/" class="text-white/70 transition hover:text-white">&larr; {{ __('Home') }}</a>

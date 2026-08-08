@@ -139,7 +139,7 @@
                 <template x-if="active === 1">
                     <div class="animate-hero-in max-w-xl">
                         <span class="mb-5 inline-block rounded-full border border-blue-400/40 bg-blue-500/10 px-4 py-1.5 text-xs font-bold tracking-[0.3em] text-blue-300 backdrop-blur-sm">{{ __('EVERY ROUND COUNTS') }}</span>
-                        <h1 class="font-display text-5xl leading-[0.95] tracking-wide text-white [text-shadow:0_4px_28px_rgba(0,0,0,0.65)] sm:text-6xl lg:text-7xl">{{ __('DISCIPLINE.') }} <span class="text-blue-500 [text-shadow:0_0_24px_rgba(59,130,246,0.7)]">{{ __('POWER.') }}</span> {{ __('PRECISION.') }}</h1>
+                        <h1 class="font-display text-5xl leading-[0.95] tracking-wide text-white [text-shadow:0_4px_28px_rgba(0,0,0,0.65)] sm:text-6xl lg:text-7xl">{{ __('DISCIPLINE') }} <span class="text-blue-500 [text-shadow:0_0_24px_rgba(59,130,246,0.7)]">{{ __('POWER') }}</span> {{ __('PRECISION') }}</h1>
                         <p class="mt-6 max-w-lg text-lg text-white/70">{{ __('Pugilist Club Niçois is the historic English boxing club in Nice. Our coaches guide beginners, recreational boxers, and competitors in a gym fully dedicated to boxing.') }}</p>
                         <div class="mt-9 flex flex-wrap gap-4">
                             <a href="#join" class="rounded-full bg-blue-600 px-8 py-3.5 text-sm font-bold tracking-wide text-white shadow-glow transition hover:bg-blue-500 hover:-translate-y-0.5">{{ __('Join The Club') }}</a>
@@ -155,7 +155,7 @@
                         <ul class="mt-6 grid grid-cols-1 gap-2.5 sm:grid-cols-2 text-base text-white/80">
                             <li class="flex items-center gap-2 font-medium"><span class="text-blue-400 font-bold">✓</span> {{ __('Historic club founded in 1969') }}</li>
                             <li class="flex items-center gap-2 font-medium"><span class="text-blue-400 font-bold">✓</span> {{ __('Affiliated with the French Boxing Federation') }}</li>
-                            <li class="flex items-center gap-2 font-medium"><span class="text-blue-400 font-bold">✓</span> {{ __('Kids classes from age 6') }}</li>
+                            <li class="flex items-center gap-2 font-medium"><span class="text-blue-400 font-bold">✓</span> {{ __('Kids classes from age 7') }}</li>
                             <li class="flex items-center gap-2 font-medium"><span class="text-blue-400 font-bold">✓</span> {{ __('Recreational boxing') }}</li>
                             <li class="flex items-center gap-2 font-medium"><span class="text-blue-400 font-bold">✓</span> {{ __('Competitive boxing') }}</li>
                             <li class="flex items-center gap-2 font-medium"><span class="text-blue-400 font-bold">✓</span> {{ __('Physical conditioning') }}</li>
@@ -244,11 +244,10 @@
                         @endforeach
                     </ul>
 
-                    <div class="mt-12 grid max-w-lg grid-cols-3 gap-6 border-t border-navy-100 pt-8">
+                    <div class="mt-12 grid max-w-md grid-cols-2 gap-6 border-t border-navy-100 pt-8">
                         @foreach ([
-                            ['target' => 50, 'suffix' => '+', 'label' => 'Years'],
-                            ['target' => 1500, 'suffix' => '+', 'label' => 'Members Trained'],
-                            ['target' => 15, 'suffix' => '+', 'label' => 'Classes / Month'],
+                            ['target' => 55, 'suffix' => '+', 'label' => 'Years'],
+                            ['target' => 3000, 'suffix' => '+', 'label' => 'Members Trained'],
                         ] as $i => $stat)
                             <div data-reveal="scale" data-reveal-delay="{{ $i + 1 }}">
                                 <div class="font-display text-3xl text-navy-950 sm:text-4xl">
@@ -377,13 +376,13 @@
                     <div data-reveal="left" class="relative z-10 col-span-2 flex flex-col justify-center gap-8 bg-navy-900 p-10 lg:p-12">
                         <div>
                             <h3 class="font-display text-2xl tracking-wide text-white">PUGILIST CLUB NIÇOIS</h3>
-                            <p class="mt-2 text-sm text-white/50">Quartier Libération &middot; Nice, France</p>
+                            <p class="mt-2 text-sm text-white/50">Quartier St Roch &middot; Nice, France</p>
                         </div>
 
                         @foreach ([
                             ['icon' => 'pin', 'label' => 'Address', 'value' => '16 rue Fornéro Méneï, 06300 Nice'],
-                            ['icon' => 'phone', 'label' => 'Phone', 'value' => '00 00 00 00'],
-                            ['icon' => 'clock', 'label' => 'Hours', 'value' => 'Mon-Fri · 5pm-8pm'],
+                            ['icon' => 'phone', 'label' => 'Phone', 'value' => '06 58 97 80 75'],
+                            ['icon' => 'clock', 'label' => 'Hours', 'value' => 'Coming soon (26/27)'],
                         ] as $item)
                             <div class="flex items-start gap-4">
                                 <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-blue-600/15 text-blue-400">
@@ -609,7 +608,7 @@
                 <span class="h-[3px] w-full max-w-7xl rounded-full bg-gradient-to-r from-transparent via-blue-500 to-transparent"></span>
             </div>
 
-            <div class="mx-auto grid max-w-7xl grid-cols-1 gap-12 px-6 lg:grid-cols-4 lg:px-10">
+            <div class="mx-auto grid max-w-7xl grid-cols-1 gap-12 px-6 lg:grid-cols-3 lg:px-10">
                 <div>
                     <x-logo />
                     <p class="mt-5 max-w-xs text-sm text-white/50">{{ __('A boxing club built on discipline, respect and real coaching - from your first jab to your first fight.') }}</p>
@@ -647,15 +646,6 @@
                         <li>{{ __('Competitive Team') }}</li>
                         <li>{{ __('1-on-1 Coaching') }}</li>
                     </ul>
-                </div>
-
-                <div>
-                    <h4 class="text-sm font-bold uppercase tracking-wide text-white">{{ __('Stay Sharp') }}</h4>
-                    <p class="mt-5 text-sm text-white/50">{{ __('Get schedule updates and fight-night announcements.') }}</p>
-                    <form class="mt-4 flex gap-2" onsubmit="return false">
-                        <input type="email" placeholder="{{ __('Your email') }}" class="w-full min-w-0 rounded-full border border-white/15 bg-white/5 px-4 py-2.5 text-sm text-white placeholder-white/30 focus:border-blue-400 focus:outline-none" />
-                        <button class="shrink-0 rounded-full bg-blue-600 px-4 py-2.5 text-sm font-bold text-white transition hover:bg-blue-500">OK</button>
-                    </form>
                 </div>
             </div>
 

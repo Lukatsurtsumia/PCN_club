@@ -32,9 +32,9 @@ const dictFR = {
   'Join The Club': 'S\'inscrire au club',
   'View Programs': 'Voir les programmes',
   'EVERY ROUND COUNTS': 'CHAQUE ROUND COMPTE',
-  'DISCIPLINE.': 'DISCIPLINE.',
-  'POWER.': 'PUISSANCE.',
-  'PRECISION.': 'PRÉCISION.',
+  'DISCIPLINE': 'DISCIPLINE',
+  'POWER': 'PUISSANCE',
+  'PRECISION': 'PRÉCISION',
   'From your first jab to your first fight night, our coaches build technique that lasts - not just a good workout.': 'Du tout premier jab jusqu\'aux soirées de gala, nos entraîneurs transmettent une technique durable.',
   'Our Story': 'Notre Histoire',
   'ONE TEAM. ONE CORNER.': 'UNE ÉQUIPE. UN COIN.',
@@ -49,7 +49,7 @@ const dictFR = {
   "PCN Boxing Club was founded on one idea: real technique, honest coaching, and a community that has your back between rounds. Whether you're stepping into a gym for the first time or chasing a title, our coaches meet you where you are and push you past it.": "Fondé en 1969, le Pugilist Club Niçois repose sur une vraie culture de la boxe anglaise, un suivi personnalisé et une ambiance solidaire.",
   'Certified professional coaches': 'Entraîneurs diplômés d\'État',
   'Beginner to competitive levels': 'Du débutant à la compétition',
-  'Fully equipped modern ring': 'Ring homologué & équipement complet',
+  'Fully equipped modern ring': 'Ring olympique & équipement complet',
   'Structured fight-team pathway': 'Filière compétition structurée',
   'Years': 'Ans d\'expérience',
   'Members Trained': 'Membres formés',
@@ -368,12 +368,11 @@ function renderBlade(bladeContent, locale = 'fr', basePath = '.', cssFileName = 
   });
 
   // Loop for stats
-  const statsLoopRegex = /@foreach\s*\(\[\s*\['target'\s*=>\s*50[\s\S]*?\]\s*as\s*\$i\s*=>\s*\$stat\)([\s\S]*?)@endforeach/;
+  const statsLoopRegex = /@foreach\s*\(\[\s*\['target'\s*=>\s*55[\s\S]*?\]\s*as\s*\$i\s*=>\s*\$stat\)([\s\S]*?)@endforeach/;
   html = html.replace(statsLoopRegex, (match, body) => {
     const stats = [
-      { target: 50, suffix: '+', label: 'Years' },
-      { target: 1500, suffix: '+', label: 'Members Trained' },
-      { target: 15, suffix: '+', label: 'Classes / Month' },
+      { target: 55, suffix: '+', label: 'Years' },
+      { target: 3000, suffix: '+', label: 'Members Trained' },
     ];
     return stats.map((stat, i) => {
       let node = body.replace(/\{\{\s*\$i\s*\+\s*1\s*\}\}/g, i + 1);
@@ -409,8 +408,8 @@ function renderBlade(bladeContent, locale = 'fr', basePath = '.', cssFileName = 
   html = html.replace(locationLoopRegex, (match, body) => {
     const items = [
       { icon: 'pin', label: 'Address', value: '16 rue Fornéro Méneï, 06300 Nice' },
-      { icon: 'phone', label: 'Phone', value: '04 93 89 05 09' },
-      { icon: 'clock', label: 'Hours', value: 'Mon-Fri · 5pm-8pm' },
+      { icon: 'phone', label: 'Phone', value: '06 58 97 80 75' },
+      { icon: 'clock', label: 'Hours', value: 'Coming soon (26/27)' },
     ];
     return items.map((item) => {
       let node = body;

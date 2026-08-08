@@ -534,71 +534,83 @@
                     <span class="text-sm font-bold tracking-[0.3em] text-blue-400">{{ __('COURSES & PRICING') }}</span>
 
                     <div class="mt-6 space-y-4">
-                        @foreach ([
-                            [
-                                'name' => 'Educative Boxing',
-                                'subtitle' => 'Born 2013 – 2019',
-                                'price' => '200',
-                                'features' => [
-                                    '2 training sessions / week',
-                                    'FFB license & federal insurance included',
-                                ],
-                            ],
-                            [
-                                'name' => 'Cadets / Juniors',
-                                'subtitle' => 'Born 2009 – 2012',
-                                'price' => '220',
-                                'features' => [
-                                    '2 training sessions / week',
-                                    'FFB license & federal insurance included',
-                                ],
-                            ],
-                            [
-                                'name' => 'Seniors',
-                                'subtitle' => 'Born 2008 & before',
-                                'price' => '290',
-                                'features' => [
-                                    '2 Recreational slots / week',
-                                    'Heavy bags & strength training 2x / week',
-                                    'Access to Lady Boxing slot',
-                                    'Optional sparring sessions',
-                                    'FFB license & federal insurance included',
-                                ],
-                            ],
-                            [
-                                'name' => 'Competitor',
-                                'subtitle' => 'By selection of PCN President',
-                                'price' => '200',
-                                'features' => [
-                                    'Access to all training sessions',
-                                    'Physical & technical competition prep',
-                                    'Dedicated coaching & follow-up',
-                                    'Contact us for an interview',
-                                    'FFB license & federal insurance included',
-                                ],
-                            ],
-                        ] as $course)
-                            <div class="rounded-2xl border border-white/10 bg-white/[0.04] p-5 transition hover:border-blue-400/40 hover:bg-white/[0.06]">
-                                <div class="flex items-start justify-between gap-4">
-                                    <div>
-                                        <span class="inline-block rounded-full bg-blue-500/10 px-3 py-0.5 text-xs font-semibold text-blue-300 border border-blue-400/20 mb-1.5">{{ __($course['subtitle']) }}</span>
-                                        <h3 class="font-display text-xl tracking-wide text-white">{{ mb_strtoupper(__($course['name']), 'UTF-8') }}</h3>
-                                    </div>
-                                    <div class="shrink-0 text-right">
-                                        <span class="font-display text-3xl text-blue-400">{{ $course['price'] }}€</span>
-                                        <span class="block text-[11px] font-semibold uppercase tracking-wide text-white/40">/ {{ __('year') }}</span>
-                                    </div>
+                        <!-- Educative Boxing -->
+                        <div class="rounded-2xl border border-white/10 bg-white/[0.04] p-5 transition hover:border-blue-400/40 hover:bg-white/[0.06]">
+                            <div class="flex items-start justify-between gap-4">
+                                <div>
+                                    <span class="inline-block rounded-full bg-blue-500/10 px-3 py-0.5 text-xs font-semibold text-blue-300 border border-blue-400/20 mb-1.5">{{ __('Born 2013 – 2019') }}</span>
+                                    <h3 class="font-display text-xl tracking-wide text-white">{{ __('EDUCATIVE BOXING') }}</h3>
                                 </div>
-                                <ul class="mt-3.5 space-y-1.5 border-t border-white/10 pt-3 text-xs text-white/70">
-                                    @foreach ($course['features'] as $feat)
-                                        <li class="flex items-center gap-2">
-                                            <span class="text-blue-400 font-bold text-sm">✓</span>
-                                            <span>{{ __($feat) }}</span>
-                                        </li>
-                                    @endforeach
-                                </ul>
+                                <div class="shrink-0 text-right">
+                                    <span class="font-display text-3xl text-blue-400">200€</span>
+                                    <span class="block text-[11px] font-semibold uppercase tracking-wide text-white/40">/ {{ __('year') }}</span>
+                                </div>
                             </div>
-                        @endforeach
+                            <ul class="mt-3.5 space-y-1.5 border-t border-white/10 pt-3 text-xs text-white/70">
+                                <li class="flex items-center gap-2"><span class="text-blue-400 font-bold text-sm">✓</span> <span>{{ __('2 training sessions / week') }}</span></li>
+                                <li class="flex items-center gap-2"><span class="text-blue-400 font-bold text-sm">✓</span> <span>{{ __('FFB license & federal insurance included') }}</span></li>
+                            </ul>
+                        </div>
+
+                        <!-- Cadets / Juniors -->
+                        <div class="rounded-2xl border border-white/10 bg-white/[0.04] p-5 transition hover:border-blue-400/40 hover:bg-white/[0.06]">
+                            <div class="flex items-start justify-between gap-4">
+                                <div>
+                                    <span class="inline-block rounded-full bg-blue-500/10 px-3 py-0.5 text-xs font-semibold text-blue-300 border border-blue-400/20 mb-1.5">{{ __('Born 2009 – 2012') }}</span>
+                                    <h3 class="font-display text-xl tracking-wide text-white">{{ __('CADETS / JUNIORS') }}</h3>
+                                </div>
+                                <div class="shrink-0 text-right">
+                                    <span class="font-display text-3xl text-blue-400">220€</span>
+                                    <span class="block text-[11px] font-semibold uppercase tracking-wide text-white/40">/ {{ __('year') }}</span>
+                                </div>
+                            </div>
+                            <ul class="mt-3.5 space-y-1.5 border-t border-white/10 pt-3 text-xs text-white/70">
+                                <li class="flex items-center gap-2"><span class="text-blue-400 font-bold text-sm">✓</span> <span>{{ __('2 training sessions / week') }}</span></li>
+                                <li class="flex items-center gap-2"><span class="text-blue-400 font-bold text-sm">✓</span> <span>{{ __('FFB license & federal insurance included') }}</span></li>
+                            </ul>
+                        </div>
+
+                        <!-- Seniors -->
+                        <div class="rounded-2xl border border-white/10 bg-white/[0.04] p-5 transition hover:border-blue-400/40 hover:bg-white/[0.06]">
+                            <div class="flex items-start justify-between gap-4">
+                                <div>
+                                    <span class="inline-block rounded-full bg-blue-500/10 px-3 py-0.5 text-xs font-semibold text-blue-300 border border-blue-400/20 mb-1.5">{{ __('Born 2008 & before') }}</span>
+                                    <h3 class="font-display text-xl tracking-wide text-white">{{ __('SENIORS') }}</h3>
+                                </div>
+                                <div class="shrink-0 text-right">
+                                    <span class="font-display text-3xl text-blue-400">290€</span>
+                                    <span class="block text-[11px] font-semibold uppercase tracking-wide text-white/40">/ {{ __('year') }}</span>
+                                </div>
+                            </div>
+                            <ul class="mt-3.5 space-y-1.5 border-t border-white/10 pt-3 text-xs text-white/70">
+                                <li class="flex items-center gap-2"><span class="text-blue-400 font-bold text-sm">✓</span> <span>{{ __('2 Recreational slots / week') }}</span></li>
+                                <li class="flex items-center gap-2"><span class="text-blue-400 font-bold text-sm">✓</span> <span>{{ __('Heavy bags & strength training 2x / week') }}</span></li>
+                                <li class="flex items-center gap-2"><span class="text-blue-400 font-bold text-sm">✓</span> <span>{{ __('Access to Lady Boxing slot') }}</span></li>
+                                <li class="flex items-center gap-2"><span class="text-blue-400 font-bold text-sm">✓</span> <span>{{ __('Optional sparring sessions') }}</span></li>
+                                <li class="flex items-center gap-2"><span class="text-blue-400 font-bold text-sm">✓</span> <span>{{ __('FFB license & federal insurance included') }}</span></li>
+                            </ul>
+                        </div>
+
+                        <!-- Competitor -->
+                        <div class="rounded-2xl border border-white/10 bg-white/[0.04] p-5 transition hover:border-blue-400/40 hover:bg-white/[0.06]">
+                            <div class="flex items-start justify-between gap-4">
+                                <div>
+                                    <span class="inline-block rounded-full bg-blue-500/10 px-3 py-0.5 text-xs font-semibold text-blue-300 border border-blue-400/20 mb-1.5">{{ __('By selection of PCN President') }}</span>
+                                    <h3 class="font-display text-xl tracking-wide text-white">{{ __('COMPETITOR') }}</h3>
+                                </div>
+                                <div class="shrink-0 text-right">
+                                    <span class="font-display text-3xl text-blue-400">200€</span>
+                                    <span class="block text-[11px] font-semibold uppercase tracking-wide text-white/40">/ {{ __('year') }}</span>
+                                </div>
+                            </div>
+                            <ul class="mt-3.5 space-y-1.5 border-t border-white/10 pt-3 text-xs text-white/70">
+                                <li class="flex items-center gap-2"><span class="text-blue-400 font-bold text-sm">✓</span> <span>{{ __('Access to all training sessions') }}</span></li>
+                                <li class="flex items-center gap-2"><span class="text-blue-400 font-bold text-sm">✓</span> <span>{{ __('Physical & technical competition prep') }}</span></li>
+                                <li class="flex items-center gap-2"><span class="text-blue-400 font-bold text-sm">✓</span> <span>{{ __('Dedicated coaching & follow-up') }}</span></li>
+                                <li class="flex items-center gap-2"><span class="text-blue-400 font-bold text-sm">✓</span> <span>{{ __('Contact us for an interview') }}</span></li>
+                                <li class="flex items-center gap-2"><span class="text-blue-400 font-bold text-sm">✓</span> <span>{{ __('FFB license & federal insurance included') }}</span></li>
+                            </ul>
+                        </div>
                     </div>
                     <p class="mt-5 text-xs text-white/40">* {{ __('Indicative pricing - contact us for full details and required certificates.') }}</p>
                 </div>

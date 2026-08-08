@@ -587,7 +587,7 @@
                 <span class="h-[3px] w-full max-w-7xl rounded-full bg-gradient-to-r from-transparent via-blue-500 to-transparent"></span>
             </div>
 
-            <div class="mx-auto grid max-w-7xl grid-cols-1 gap-12 px-6 lg:grid-cols-4 lg:px-10">
+            <div class="mx-auto grid max-w-7xl grid-cols-1 gap-12 px-6 lg:grid-cols-3 lg:px-10">
                 <div>
                     <x-logo />
                     <p class="mt-5 max-w-xs text-sm text-white/50">{{ __('A boxing club built on discipline, respect and real coaching - from your first jab to your first fight.') }}</p>
@@ -625,15 +625,6 @@
                         <li>{{ __('Competitive Team') }}</li>
                         <li>{{ __('1-on-1 Coaching') }}</li>
                     </ul>
-                </div>
-
-                <div>
-                    <h4 class="text-sm font-bold uppercase tracking-wide text-white">{{ __('Stay Sharp') }}</h4>
-                    <p class="mt-5 text-sm text-white/50">{{ __('Get schedule updates and fight-night announcements.') }}</p>
-                    <form class="mt-4 flex gap-2" onsubmit="return false">
-                        <input type="email" placeholder="{{ __('Your email') }}" class="w-full min-w-0 rounded-full border border-white/15 bg-white/5 px-4 py-2.5 text-sm text-white placeholder-white/30 focus:border-blue-400 focus:outline-none" />
-                        <button class="shrink-0 rounded-full bg-blue-600 px-4 py-2.5 text-sm font-bold text-white transition hover:bg-blue-500">OK</button>
-                    </form>
                 </div>
             </div>
 

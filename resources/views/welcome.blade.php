@@ -139,7 +139,7 @@
                 <template x-if="active === 1">
                     <div class="animate-hero-in max-w-xl">
                         <span class="mb-5 inline-block rounded-full border border-blue-400/40 bg-blue-500/10 px-4 py-1.5 text-xs font-bold tracking-[0.3em] text-blue-300 backdrop-blur-sm">{{ __('EVERY ROUND COUNTS') }}</span>
-                        <h1 class="font-display text-5xl leading-[0.95] tracking-wide text-white [text-shadow:0_4px_28px_rgba(0,0,0,0.65)] sm:text-6xl lg:text-7xl">{{ __('DISCIPLINE.') }} <span class="text-blue-500 [text-shadow:0_0_24px_rgba(59,130,246,0.7)]">{{ __('POWER.') }}</span> {{ __('PRECISION.') }}</h1>
+                        <h1 class="font-display text-5xl leading-[0.95] tracking-wide text-white [text-shadow:0_4px_28px_rgba(0,0,0,0.65)] sm:text-6xl lg:text-7xl">{{ __('DISCIPLINE') }} <span class="text-blue-500 [text-shadow:0_0_24px_rgba(59,130,246,0.7)]">{{ __('POWER') }}</span> {{ __('PRECISION') }}</h1>
                         <p class="mt-6 max-w-lg text-lg text-white/70">{{ __('Pugilist Club Niçois is the historic English boxing club in Nice. Our coaches guide beginners, recreational boxers, and competitors in a gym fully dedicated to boxing.') }}</p>
                         <div class="mt-9 flex flex-wrap gap-4">
                             <a href="#join" class="rounded-full bg-blue-600 px-8 py-3.5 text-sm font-bold tracking-wide text-white shadow-glow transition hover:bg-blue-500 hover:-translate-y-0.5">{{ __('Join The Club') }}</a>

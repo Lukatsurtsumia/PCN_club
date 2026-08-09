@@ -672,6 +672,33 @@
                     </form>
                 </div>
             </div>
+
+            {{-- Sponsors / Partenaires --}}
+            <div class="relative mx-auto max-w-7xl px-6 lg:px-10 mt-16 sm:mt-20 pt-16 border-t border-white/10" data-reveal="bottom">
+                <div class="text-center mb-10">
+                    <span class="text-xs font-bold tracking-[0.3em] text-blue-400 uppercase">{{ __('OUR PARTNERS') }}</span>
+                    <h3 class="mt-2 font-display text-2xl tracking-wide text-white sm:text-3xl">{{ __('THEY SUPPORT THE CLUB') }}</h3>
+                </div>
+                <div class="grid grid-cols-2 gap-4 sm:grid-cols-4 lg:gap-6">
+                    <!-- FFB -->
+                    <a href="https://ffboxe.com/" target="_blank" rel="noopener noreferrer" title="Fédération Française de Boxe" class="group flex h-28 items-center justify-center rounded-2xl border border-white/10 bg-white p-5 transition duration-300 hover:border-blue-400 hover:shadow-lg hover:shadow-blue-500/10">
+                        <img src="/images/French_Boxing_Federation_logo.svg.webp" alt="Fédération Française de Boxe" class="max-h-16 w-auto max-w-full object-contain transition duration-300 group-hover:scale-105" />
+                    </a>
+                    <!-- Ville de Nice -->
+                    <a href="https://www.nice.fr/" target="_blank" rel="noopener noreferrer" title="Ville de Nice" class="group flex h-28 items-center justify-center rounded-2xl border border-white/10 bg-white p-5 transition duration-300 hover:border-blue-400 hover:shadow-lg hover:shadow-blue-500/10">
+                        <img src="/images/Ville_Nice_Logo.svg" alt="Ville de Nice" class="max-h-16 w-auto max-w-full object-contain transition duration-300 group-hover:scale-105" />
+                    </a>
+                    <!-- Conseil Départemental 06 -->
+                    <a href="https://www.departement06.fr/" target="_blank" rel="noopener noreferrer" title="Conseil Départemental des Alpes-Maritimes" class="group flex h-28 items-center justify-center rounded-2xl border border-white/10 bg-white p-5 transition duration-300 hover:border-blue-400 hover:shadow-lg hover:shadow-blue-500/10">
+                        <img src="/images/conseil-dep-06.png" alt="Conseil Départemental des Alpes-Maritimes" class="max-h-16 w-auto max-w-full object-contain transition duration-300 group-hover:scale-105" />
+                    </a>
+                    <!-- Future 4th Sponsor -->
+                    <div class="flex h-28 flex-col items-center justify-center rounded-2xl border-2 border-dashed border-white/20 bg-white/[0.02] p-4 text-center transition duration-300 hover:border-blue-400/50 hover:bg-white/[0.04]">
+                        <span class="text-xs font-semibold uppercase tracking-wider text-white/50">{{ __('Sponsor Space') }}</span>
+                        <span class="mt-1 text-[11px] text-white/30">{{ __('Available') }}</span>
+                    </div>
+                </div>
+            </div>
         </section>
 
         {{-- ============================= FOOTER ============================= --}}

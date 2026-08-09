@@ -679,7 +679,7 @@
                     <span class="text-xs font-bold tracking-[0.3em] text-blue-400 uppercase">{{ __('OUR PARTNERS') }}</span>
                     <h3 class="mt-2 font-display text-2xl tracking-wide text-white sm:text-3xl">{{ __('THEY SUPPORT THE CLUB') }}</h3>
                 </div>
-                <div class="grid grid-cols-2 gap-4 sm:grid-cols-4 lg:gap-6">
+                <div class="mx-auto grid max-w-3xl grid-cols-3 gap-4 lg:gap-6">
                     <!-- FFB -->
                     <a href="https://ffboxe.com/" target="_blank" rel="noopener noreferrer" title="Fédération Française de Boxe" class="group flex h-28 items-center justify-center rounded-2xl border border-white/10 bg-white p-5 transition duration-300 hover:border-blue-400 hover:shadow-lg hover:shadow-blue-500/10">
                         <img src="/images/French_Boxing_Federation_logo.svg.webp" alt="Fédération Française de Boxe" class="max-h-16 w-auto max-w-full object-contain transition duration-300 group-hover:scale-105" />
@@ -691,54 +691,6 @@
                     <!-- Conseil Départemental 06 -->
                     <a href="https://www.departement06.fr/" target="_blank" rel="noopener noreferrer" title="Conseil Départemental des Alpes-Maritimes" class="group flex h-28 items-center justify-center rounded-2xl border border-white/10 bg-white p-5 transition duration-300 hover:border-blue-400 hover:shadow-lg hover:shadow-blue-500/10">
                         <img src="/images/conseil-dep-06.png" alt="Conseil Départemental des Alpes-Maritimes" class="max-h-16 w-auto max-w-full object-contain transition duration-300 group-hover:scale-105" />
-                    </a>
-                    <!-- Future 4th Sponsor -->
-                    <div class="flex h-28 flex-col items-center justify-center rounded-2xl border-2 border-dashed border-white/20 bg-white/[0.02] p-4 text-center transition duration-300 hover:border-blue-400/50 hover:bg-white/[0.04]">
-                        <span class="text-xs font-semibold uppercase tracking-wider text-white/50">{{ __('Sponsor Space') }}</span>
-                        <span class="mt-1 text-[11px] text-white/30">{{ __('Available') }}</span>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        {{-- ============================= PARTNERS / SPONSORS ============================= --}}
-        <section id="partners" class="scroll-mt-24 overflow-hidden border-t border-white/5 bg-navy-950 py-20 sm:py-24">
-            <div class="mx-auto max-w-7xl px-6 text-center lg:px-10">
-                <span data-reveal="up" class="text-sm font-bold tracking-[0.3em] text-blue-400">{{ __('THEY SUPPORT US') }}</span>
-                <h2 data-reveal="up" data-reveal-delay="1" class="mt-4 font-display text-4xl tracking-wide text-white sm:text-5xl">{{ __('OUR PARTNERS') }}</h2>
-                <p data-reveal="up" data-reveal-delay="2" class="mx-auto mt-4 max-w-md text-white/55">{{ __('The clubs and businesses that support the Pugilist Club Niçois.') }}</p>
-
-                <div class="mx-auto mt-14 grid max-w-3xl grid-cols-2 gap-x-6 gap-y-10 sm:grid-cols-4 sm:gap-8">
-                    {{-- Partner 1 --}}
-                    <a href="#" target="_blank" rel="noopener" aria-label="{{ __('Partner 1') }}" class="group flex flex-col items-center gap-4">
-                        <span class="flex h-24 w-24 items-center justify-center overflow-hidden rounded-full bg-white shadow-lg ring-1 ring-white/15 transition duration-300 group-hover:-translate-y-1.5 group-hover:ring-2 group-hover:ring-blue-400 sm:h-28 sm:w-28">
-                            <svg class="h-9 w-9 text-navy-800" viewBox="0 0 24 24" fill="none"><rect x="3" y="5" width="18" height="14" rx="2" stroke="currentColor" stroke-width="1.6"/><circle cx="8.5" cy="10" r="1.5" fill="currentColor"/><path d="M5 17l4-4 3 3 3-3 4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                        </span>
-                        <span class="text-sm font-semibold text-white/80 transition group-hover:text-blue-300">{{ __('Partner 1') }}</span>
-                    </a>
-
-                    {{-- Partner 2 --}}
-                    <a href="#" target="_blank" rel="noopener" aria-label="{{ __('Partner 2') }}" class="group flex flex-col items-center gap-4">
-                        <span class="flex h-24 w-24 items-center justify-center overflow-hidden rounded-full bg-white shadow-lg ring-1 ring-white/15 transition duration-300 group-hover:-translate-y-1.5 group-hover:ring-2 group-hover:ring-blue-400 sm:h-28 sm:w-28">
-                            <svg class="h-9 w-9 text-navy-800" viewBox="0 0 24 24" fill="none"><rect x="3" y="5" width="18" height="14" rx="2" stroke="currentColor" stroke-width="1.6"/><circle cx="8.5" cy="10" r="1.5" fill="currentColor"/><path d="M5 17l4-4 3 3 3-3 4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                        </span>
-                        <span class="text-sm font-semibold text-white/80 transition group-hover:text-blue-300">{{ __('Partner 2') }}</span>
-                    </a>
-
-                    {{-- Partner 3 --}}
-                    <a href="#" target="_blank" rel="noopener" aria-label="{{ __('Partner 3') }}" class="group flex flex-col items-center gap-4">
-                        <span class="flex h-24 w-24 items-center justify-center overflow-hidden rounded-full bg-white shadow-lg ring-1 ring-white/15 transition duration-300 group-hover:-translate-y-1.5 group-hover:ring-2 group-hover:ring-blue-400 sm:h-28 sm:w-28">
-                            <svg class="h-9 w-9 text-navy-800" viewBox="0 0 24 24" fill="none"><rect x="3" y="5" width="18" height="14" rx="2" stroke="currentColor" stroke-width="1.6"/><circle cx="8.5" cy="10" r="1.5" fill="currentColor"/><path d="M5 17l4-4 3 3 3-3 4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                        </span>
-                        <span class="text-sm font-semibold text-white/80 transition group-hover:text-blue-300">{{ __('Partner 3') }}</span>
-                    </a>
-
-                    {{-- Partner 4 --}}
-                    <a href="#" target="_blank" rel="noopener" aria-label="{{ __('Partner 4') }}" class="group flex flex-col items-center gap-4">
-                        <span class="flex h-24 w-24 items-center justify-center overflow-hidden rounded-full bg-white shadow-lg ring-1 ring-white/15 transition duration-300 group-hover:-translate-y-1.5 group-hover:ring-2 group-hover:ring-blue-400 sm:h-28 sm:w-28">
-                            <svg class="h-9 w-9 text-navy-800" viewBox="0 0 24 24" fill="none"><rect x="3" y="5" width="18" height="14" rx="2" stroke="currentColor" stroke-width="1.6"/><circle cx="8.5" cy="10" r="1.5" fill="currentColor"/><path d="M5 17l4-4 3 3 3-3 4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                        </span>
-                        <span class="text-sm font-semibold text-white/80 transition group-hover:text-blue-300">{{ __('Partner 4') }}</span>
                     </a>
                 </div>
             </div>

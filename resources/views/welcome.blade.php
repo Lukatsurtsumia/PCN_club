@@ -7,7 +7,7 @@
         <meta name="google" content="notranslate">
         <meta name="description" content="Pugilist Club Niçois - club de boxe anglaise à Nice depuis 1969. Boxe jeunesse, fitness, compétition et coaching privé.">
 
-        <title>Pugilist Club Niçois | Boxe Anglaise à Nice</title>
+        <title>Pugilist Club Niçois | Club de boxe anglaise à Nice</title>
 
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -305,7 +305,7 @@
                             <div class="flip-face flip-face-back flex flex-col overflow-hidden rounded-3xl bg-navy-900 p-7 shadow-xl ring-1 ring-white/10 sm:p-8">
                                 <h3 class="font-display text-2xl tracking-wide text-white">{{ __('Lady Boxing') }}</h3>
                                 <span class="mt-3 h-[3px] w-11 rounded-full bg-blue-500"></span>
-                                <p class="mt-4 flex-1 overflow-y-auto pr-1 text-sm leading-relaxed text-white/70">{{ __("Lady Boxing is a form of boxing specifically designed for women of all skill levels. Sessions combine technique, cardio, strength training, physical conditioning, and partner work to help women release energy, improve their fitness, and build confidence. Sparring may also be offered when appropriate for the participant's level and desired by them, always within a structured, safe, and supportive environment.") }}</p>
+                                <p class="mt-4 flex-1 overflow-y-auto pr-1 text-sm leading-relaxed text-white/70">{{ __("Lady Boxing is a form of boxing specifically designed for women of all skill levels. Sessions combine technique, cardio, strength training, physical conditioning, and partner work to improve fitness and build confidence. Sparring may also be offered when appropriate for the participant's level and desired by them, always within a structured, safe, and supportive environment.") }}</p>
                                 <span class="mt-4 inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wide text-blue-400">{{ __('Click to flip back') }}</span>
                             </div>
                         </div>
@@ -325,7 +325,7 @@
                             <div class="flip-face flip-face-back flex flex-col overflow-hidden rounded-3xl bg-navy-900 p-7 shadow-xl ring-1 ring-white/10 sm:p-8">
                                 <h3 class="font-display text-2xl tracking-wide text-white">{{ __('Educational Boxing') }}</h3>
                                 <span class="mt-3 h-[3px] w-11 rounded-full bg-blue-500"></span>
-                                <p class="mt-4 flex-1 overflow-y-auto pr-1 text-sm leading-relaxed text-white/70">{{ __("Aimed at children and young people, educational boxing allows them to discover English boxing while developing coordination, motor skills, self-control, and respect for others. The training includes partner exercises and educational sparring adapted to age and skill level, with controlled touches, without the emphasis on power or causing pain. Each session takes place in a safe, respectful, and educational environment, where the goal is to learn to box while controlling one's movements and emotions.") }}</p>
+                                <p class="mt-4 flex-1 overflow-y-auto pr-1 text-sm leading-relaxed text-white/70">{{ __("Aimed at children and young people, educational boxing allows them to discover English boxing in a fun and progressive way, while developing coordination, motor skills, self-control, and respect for others.") }}</p>
                                 <span class="mt-4 inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wide text-blue-400">{{ __('Click to flip back') }}</span>
                             </div>
                         </div>
@@ -519,6 +519,22 @@
                     <span class="text-sm font-bold tracking-[0.3em] text-blue-400">{{ __('COURSES & PRICING') }}</span>
 
                     <div class="mt-8 space-y-4">
+                        <!-- HelloAsso 3x Payment Facility -->
+                        <div class="rounded-2xl border border-emerald-500/30 bg-gradient-to-r from-emerald-950/40 via-white/[0.03] to-white/[0.04] p-4.5 shadow-lg ring-1 ring-emerald-500/20 transition hover:border-emerald-400/50">
+                            <div class="flex items-center gap-4">
+                                <div class="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-white p-2 shadow-sm">
+                                    <img src="/images/helloasso-icon.svg" alt="HelloAsso" class="h-full w-full object-contain" />
+                                </div>
+                                <div class="flex-1 min-w-0">
+                                    <div class="flex flex-wrap items-center gap-2">
+                                        <h4 class="font-display text-base tracking-wide text-white sm:text-lg">{{ __('3x Payment Free of Charge') }}</h4>
+                                        <span class="inline-flex items-center rounded-full bg-emerald-500/15 px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wider text-emerald-300 border border-emerald-500/30">{{ __('Payment Facility') }}</span>
+                                    </div>
+                                    <p class="mt-0.5 text-xs text-white/70">{{ __('Pay in 3 installments at no extra cost via') }} <span class="font-semibold text-white">HelloAsso</span>.</p>
+                                </div>
+                            </div>
+                        </div>
+
                         <!-- Educative Boxing -->
                         <div class="rounded-2xl border border-white/10 bg-white/[0.04] p-5 transition hover:border-blue-400/40 hover:bg-white/[0.06]">
                             <div class="flex items-start justify-between gap-4">
@@ -706,12 +722,12 @@
                 <div>
                     <x-logo />
                     <p class="mt-5 max-w-xs text-sm text-white/50">{{ __('A boxing club built on discipline, respect and real coaching - from your first jab to your first fight.') }}</p>
-                    <div class="mt-6 flex gap-3">
-                        <a href="https://www.instagram.com/pugilistclubnicois" target="_blank" rel="noopener" aria-label="Instagram" class="flex h-9 w-9 items-center justify-center rounded-full border border-white/15 text-white/60 transition hover:border-blue-400 hover:text-blue-400">
-                            <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.8"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg>
+                    <div class="mt-6 flex items-center gap-3.5">
+                        <a href="https://www.instagram.com/pugilistclubnicois" target="_blank" rel="noopener noreferrer" aria-label="Instagram" class="flex h-11 w-11 items-center justify-center rounded-xl bg-gradient-to-tr from-[#f09433] via-[#dc2743] to-[#bc1888] text-white shadow-md shadow-pink-900/30 transition duration-300 hover:scale-110 hover:shadow-lg hover:shadow-pink-500/30">
+                            <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="2"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg>
                         </a>
-                        <a href="https://www.facebook.com/share/1JF1MpaWag/" target="_blank" rel="noopener" aria-label="Facebook" class="flex h-9 w-9 items-center justify-center rounded-full border border-white/15 text-white/60 transition hover:border-blue-400 hover:text-blue-400">
-                            <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none"><path d="M14 9h3V6h-3c-2 0-3.5 1.5-3.5 3.5V12H8v3h2.5v6h3v-6H16l.5-3h-3v-1.5c0-.6.4-1.5 1.5-1.5z" fill="currentColor"/></svg>
+                        <a href="https://www.facebook.com/share/1JF1MpaWag/" target="_blank" rel="noopener noreferrer" aria-label="Facebook" class="flex h-11 w-11 items-center justify-center rounded-xl bg-[#1877F2] text-white shadow-md shadow-blue-900/30 transition duration-300 hover:scale-110 hover:bg-[#166fe5] hover:shadow-lg hover:shadow-blue-500/30">
+                            <svg class="h-6 w-6" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
                         </a>
                     </div>
                 </div>
@@ -730,10 +746,10 @@
                 <div>
                     <h4 class="text-sm font-bold uppercase tracking-wide text-white">{{ __('Programs') }}</h4>
                     <ul class="mt-5 space-y-3 text-sm text-white/50">
-                        <li>{{ __('Youth Boxing') }}</li>
-                        <li>{{ __('Fitness Boxing') }}</li>
-                        <li>{{ __('Competitive Team') }}</li>
-                        <li>{{ __('1-on-1 Coaching') }}</li>
+                        <li><a href="#join" class="transition hover:text-blue-400">{{ __('Educative Boxing') }}</a></li>
+                        <li><a href="#join" class="transition hover:text-blue-400">{{ __('Cadets / Juniors') }}</a></li>
+                        <li><a href="#join" class="transition hover:text-blue-400">{{ __('Seniors') }}</a></li>
+                        <li><a href="#join" class="transition hover:text-blue-400">{{ __('Competitor') }}</a></li>
                     </ul>
                 </div>
             </div>

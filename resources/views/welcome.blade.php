@@ -365,7 +365,7 @@
                 <div class="mt-16 grid grid-cols-1 gap-8 md:grid-cols-2">
                     {{-- Schedule card --}}
                     <a href="/horaires" data-reveal="left" class="group relative flex h-80 items-end overflow-hidden rounded-3xl shadow-xl ring-1 ring-white/10 transition duration-500 hover:-translate-y-2 hover:shadow-glow">
-                        <img src="/images/gallery-3.jpg" alt="{{ __('Schedule') }}" loading="lazy" class="absolute inset-0 h-full w-full object-cover transition duration-700 group-hover:scale-110" />
+                        <img src="/documents/pcn-horaires-sept-2026.jpeg" alt="{{ __('Schedule') }}" loading="lazy" class="absolute inset-0 h-full w-full object-cover transition duration-700 group-hover:scale-110" />
                         <div class="absolute inset-0 bg-gradient-to-t from-navy-950 via-navy-950/55 to-navy-950/10"></div>
                         <div class="relative z-10 p-8">
                             <span class="text-xs font-bold tracking-[0.3em] text-blue-400">{{ __('WEEKLY SCHEDULE') }}</span>

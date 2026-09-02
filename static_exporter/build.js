@@ -153,6 +153,10 @@ const dictFR = {
   'Registration Memo': 'Mémo Inscription',
   'Registration Guide': "Guide d'inscription",
   'How to finalize your registration: steps, documents & license.': 'Comment finaliser votre inscription : étapes, documents & licence.',
+  'Open full size': 'Afficher en grand format',
+  'Download': 'Télécharger',
+  'Click to enlarge': 'Cliquer pour agrandir',
+  'Season 2026 / 2027': 'Saison 2026 / 2027',
 };
 
 const contactEndpoint = process.env.PCN_CONTACT_ENDPOINT || 'https://pcnboxe-contact-worker.pcnboxe06.workers.dev';
@@ -264,6 +268,7 @@ function renderBlade(bladeContent, locale = 'fr', basePath = '.', cssFileName = 
   html = html.replace(/data-model="\/models\/hero-boxer\.fbx"/g, `data-model="${basePath}/models/hero-boxer.fbx"`);
   html = html.replace(/src="\/images\//g, `src="${basePath}/images/`);
   html = html.replace(/src="\/videos\//g, `src="${basePath}/videos/`);
+  html = html.replace(/src="\/documents\//g, `src="${basePath}/documents/`);
   html = html.replace(/href="\/documents\//g, `href="${basePath}/documents/`);
   html = html.replace(/href="\/favicon\.ico"/g, `href="${basePath}/favicon.ico"`);
 

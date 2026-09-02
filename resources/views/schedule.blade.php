@@ -1,68 +1,66 @@
 @extends('layouts.page')
 
-@section('title', 'Programme')
+@section('title', __('Schedule'))
 
 @section('content')
-<section class="bg-white py-20 sm:py-28">
-    <div class="mx-auto max-w-7xl px-6 lg:px-10">
+<section class="relative overflow-hidden bg-navy-950 py-20 sm:py-28">
+    {{-- Ambient light effect --}}
+    <div class="pointer-events-none absolute -top-40 left-1/2 -translate-x-1/2 h-[32rem] w-[50rem] rounded-full bg-blue-600/15 blur-3xl"></div>
+
+    <div class="relative mx-auto max-w-7xl px-6 lg:px-10">
 
         <!-- Header -->
-        <div class="mx-auto max-w-2xl text-center">
-            <span class="text-sm font-bold tracking-[0.3em] uppercase text-blue-600">
-                Programme Hebdomadaire
+        <div class="mx-auto max-w-3xl text-center">
+            <span class="text-sm font-bold tracking-[0.3em] uppercase text-blue-400">
+                {{ __('WEEKLY SCHEDULE') }}
             </span>
 
-            <h1 class="mt-4 font-display text-4xl tracking-wide text-navy-950 sm:text-5xl">
-                Trouvez votre séance d'entraînement
+            <h1 class="mt-4 font-display text-4xl tracking-wide text-white sm:text-5xl">
+                {{ __('FIND YOUR SLOT') }}
             </h1>
 
-            <p class="mt-6 text-lg leading-8 text-slate-600">
-                Entraînez-vous avec des entraîneurs expérimentés dans un environnement
-                professionnel et motivant. Que vous soyez débutant ou sportif confirmé,
-                nous proposons des séances adaptées à tous les niveaux.
+            <p class="mt-5 text-lg leading-8 text-white/60">
+                {{ __('All sessions are coached. Times may vary during holidays - contact us to confirm.') }}
             </p>
         </div>
 
-        <!-- Coming Soon Card -->
-        <div class="mt-10 flex justify-center">
-            <div class="w-full max-w-3xl rounded-3xl border border-blue-100 bg-gradient-to-br from-blue-50 via-white to-blue-100 px-8 py-12 text-center shadow-xl">
+        <!-- Schedule Image Card -->
+        <div class="mt-12 flex justify-center">
+            <div class="group relative w-full max-w-5xl overflow-hidden rounded-3xl border border-white/10 bg-navy-900/80 p-2 shadow-2xl backdrop-blur ring-1 ring-white/10 sm:p-4 transition duration-300 hover:border-blue-500/30">
+                <a href="/documents/pcn-horaires-sept-2026.jpeg" target="_blank" rel="noopener noreferrer" class="block overflow-hidden rounded-2xl cursor-zoom-in" title="{{ __('Click to enlarge') }}">
+                    <img
+                        src="/documents/pcn-horaires-sept-2026.jpeg"
+                        alt="Planning Hebdomadaire - Pugilist Club Niçois"
+                        class="w-full h-auto rounded-2xl object-contain transition duration-500 group-hover:scale-[1.01]"
+                        loading="eager"
+                    />
+                </a>
 
-                <div class="mx-auto flex h-20 w-20 items-center justify-center rounded-full bg-blue-600 text-white shadow-lg">
-                    <svg xmlns="http://www.w3.org/2000/svg"
-                         class="h-10 w-10"
-                         fill="none"
-                         viewBox="0 0 24 24"
-                         stroke="currentColor"
-                         stroke-width="2">
-                        <path stroke-linecap="round"
-                              stroke-linejoin="round"
-                              d="M8 7V3m8 4V3m-9 8h10m-13 9h16a2 2 0 002-2V7a2 2 0 00-2-2H4a2 2 0 00-2 2v11a2 2 0 002 2z"/>
-                    </svg>
+                {{-- Action Bar under image --}}
+                <div class="mt-4 flex flex-wrap items-center justify-between gap-3 px-3 py-2 text-xs font-semibold text-white/60">
+                    <span class="inline-flex items-center gap-2">
+                        <span class="inline-block h-2 w-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                        {{ __('Season 2026 / 2027') }}
+                    </span>
+                    <div class="flex items-center gap-3">
+                        <a href="/documents/pcn-horaires-sept-2026.jpeg" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 rounded-lg bg-white/10 px-3 py-1.5 text-white transition hover:bg-white/20">
+                            <svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6" />
+                                <polyline points="15 3 21 3 21 9" />
+                                <line x1="10" y1="14" x2="21" y2="3" />
+                            </svg>
+                            {{ __('Open full size') }}
+                        </a>
+                        <a href="/documents/pcn-horaires-sept-2026.jpeg" download="pcn-horaires-2026-2027.jpeg" class="inline-flex items-center gap-1.5 rounded-lg bg-blue-600/80 px-3 py-1.5 text-white transition hover:bg-blue-600">
+                            <svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4" />
+                                <polyline points="7 10 12 15 17 10" />
+                                <line x1="12" y1="15" x2="12" y2="3" />
+                            </svg>
+                            {{ __('Download') }}
+                        </a>
+                    </div>
                 </div>
-
-                <span class="mt-8 inline-flex rounded-full bg-blue-600/10 px-4 py-1 text-sm font-semibold uppercase tracking-widest text-blue-700">
-                    Bientôt disponible
-                </span>
-
-                <h2 class="mt-6 font-display text-4xl font-bold text-navy-950">
-                    Programme de la saison 2026 / 2027
-                </h2>
-
-                <p class="mx-auto mt-6 max-w-2xl text-lg leading-8 text-gray-600">
-                    Notre équipe d'entraîneurs finalise actuellement le programme officiel
-                    des entraînements pour la saison 2026/2027.
-                </p>
-
-                <p class="mx-auto mt-4 max-w-2xl text-gray-500">
-                    Le calendrier complet comprendra les jours d'entraînement,
-                    les horaires des cours, les groupes d'âge ainsi que les entraîneurs
-                    responsables de chaque séance. Nous souhaitons offrir la meilleure
-                    expérience possible à chaque athlète avant la publication du programme définitif.
-                </p>
-
-                <p class="mt-8 text-base font-medium text-blue-700">
-                    Restez connectés — le programme complet sera annoncé très prochainement !
-                </p>
             </div>
         </div>
 
@@ -70,7 +68,7 @@
         <div class="mt-16 text-center">
             <a href="/#join"
                class="inline-flex items-center gap-2 rounded-full bg-blue-600 px-8 py-3.5 text-sm font-bold tracking-wide text-white shadow-glow transition duration-300 hover:-translate-y-1 hover:bg-blue-500">
-                Rejoindre le club
+                {{ __('Join The Club') }}
             </a>
         </div>
 

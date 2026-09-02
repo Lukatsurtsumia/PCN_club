@@ -750,6 +750,7 @@
                         <li><a href="#join" class="transition hover:text-blue-400">{{ __('Cadets / Juniors') }}</a></li>
                         <li><a href="#join" class="transition hover:text-blue-400">{{ __('Seniors') }}</a></li>
                         <li><a href="#join" class="transition hover:text-blue-400">{{ __('Competitor') }}</a></li>
+                        <li><a href="/documents/Reglement_interieur.pdf" target="_blank" rel="noopener noreferrer" class="transition hover:text-blue-400">{{ __('Internal Regulations') }}</a></li>
                     </ul>
                 </div>
             </div>

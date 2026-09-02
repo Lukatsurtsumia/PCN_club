@@ -144,6 +144,7 @@ const dictFR = {
   'Real training, real fighters, real community.': 'Un vrai entraînement, de vrais combattants, une vraie communauté.',
   'Home': 'Accueil',
   'Please complete the security check.': 'Veuillez valider le test de sécurité.',
+  'Internal Regulations': 'Règlement Intérieur',
 };
 
 const contactEndpoint = process.env.PCN_CONTACT_ENDPOINT || 'https://pcnboxe-contact-worker.pcnboxe06.workers.dev';
@@ -255,6 +256,7 @@ function renderBlade(bladeContent, locale = 'fr', basePath = '.', cssFileName = 
   html = html.replace(/data-model="\/models\/hero-boxer\.fbx"/g, `data-model="${basePath}/models/hero-boxer.fbx"`);
   html = html.replace(/src="\/images\//g, `src="${basePath}/images/`);
   html = html.replace(/src="\/videos\//g, `src="${basePath}/videos/`);
+  html = html.replace(/href="\/documents\//g, `href="${basePath}/documents/`);
   html = html.replace(/href="\/favicon\.ico"/g, `href="${basePath}/favicon.ico"`);
 
   // 3. Replace locale function

@@ -592,6 +592,25 @@
                             </ul>
                         </div>
 
+                        <!-- Lady Boxing -->
+                        <div class="rounded-2xl border border-white/10 bg-white/[0.04] p-5 transition hover:border-blue-400/40 hover:bg-white/[0.06]">
+                            <div class="flex items-start justify-between gap-4">
+                                <div>
+                                    <span class="inline-block rounded-full bg-blue-500/10 px-3 py-0.5 text-xs font-semibold text-blue-300 border border-blue-400/20 mb-1.5">{{ __('All levels') }}</span>
+                                    <h3 class="font-display text-xl tracking-wide text-white">{{ __('LADY BOXING') }}</h3>
+                                </div>
+                                <div class="shrink-0 text-right">
+                                    <span class="font-display text-3xl text-blue-400">180€</span>
+                                    <span class="block text-[11px] font-semibold uppercase tracking-wide text-white/40">/ {{ __('year') }}</span>
+                                </div>
+                            </div>
+                            <ul class="mt-3.5 space-y-1.5 border-t border-white/10 pt-3 text-xs text-white/70">
+                                <li class="flex items-center gap-2"><span class="text-blue-400 font-bold text-sm">✓</span> <span>{{ __('1 session / week') }}</span></li>
+                                <li class="flex items-center gap-2"><span class="text-blue-400 font-bold text-sm">✓</span> <span>{{ __('All levels from beginner to advanced') }}</span></li>
+                                <li class="flex items-center gap-2"><span class="text-blue-400 font-bold text-sm">✓</span> <span>{{ __('FFB license & federal insurance included') }}</span></li>
+                            </ul>
+                        </div>
+
                         <!-- Competitor -->
                         <div class="rounded-2xl border border-white/10 bg-white/[0.04] p-5 transition hover:border-blue-400/40 hover:bg-white/[0.06]">
                             <div class="flex items-start justify-between gap-4">
@@ -685,6 +704,7 @@
                                     <option value="{{ __('Educational Boxing') }}">{{ __('Educational Boxing') }}</option>
                                     <option value="{{ __('Cadets / Juniors') }}">{{ __('Cadets / Juniors') }}</option>
                                     <option value="{{ __('Seniors') }}">{{ __('Seniors') }}</option>
+                                    <option value="{{ __('Lady Boxing') }}">{{ __('Lady Boxing') }}</option>
                                     <option value="{{ __('Competition Squad') }}">{{ __('Competition Squad') }}</option>
                                     <option value="{{ __('Other') }}">{{ __('Other') }}</option>
                                 </select>
@@ -776,6 +796,7 @@
                         <li><a href="#join" class="transition hover:text-blue-400">{{ __('Educative Boxing') }}</a></li>
                         <li><a href="#join" class="transition hover:text-blue-400">{{ __('Cadets / Juniors') }}</a></li>
                         <li><a href="#join" class="transition hover:text-blue-400">{{ __('Seniors') }}</a></li>
+                        <li><a href="#join" class="transition hover:text-blue-400">{{ __('Lady Boxing') }}</a></li>
                         <li><a href="#join" class="transition hover:text-blue-400">{{ __('Competitor') }}</a></li>
                         <li><a href="/documents/Reglement_interieur.pdf" target="_blank" rel="noopener noreferrer" class="transition hover:text-blue-400">{{ __('Internal Regulations') }}</a></li>
                         <li><a href="/documents/memo-inscription.jpeg" target="_blank" rel="noopener noreferrer" class="transition hover:text-blue-400">{{ __('Registration Memo') }}</a></li>

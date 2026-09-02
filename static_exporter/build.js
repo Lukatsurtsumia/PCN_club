@@ -145,6 +145,10 @@ const dictFR = {
   'Home': 'Accueil',
   'Please complete the security check.': 'Veuillez valider le test de sécurité.',
   'Internal Regulations': 'Règlement Intérieur',
+  'CONTACT & REGISTRATION': 'CONTACT & INSCRIPTION',
+  'Registration Memo': 'Mémo Inscription',
+  'Registration Guide': "Guide d'inscription",
+  'How to finalize your registration: steps, documents & license.': 'Comment finaliser votre inscription : étapes, documents & licence.',
 };
 
 const contactEndpoint = process.env.PCN_CONTACT_ENDPOINT || 'https://pcnboxe-contact-worker.pcnboxe06.workers.dev';

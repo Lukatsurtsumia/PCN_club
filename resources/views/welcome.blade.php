@@ -618,10 +618,35 @@
 
                 {{-- Contact form → POSTs JSON { name, email, phone, course, message } to the
                      PCN Cloudflare Worker (config/pcn.php → contact_endpoint) which emails it via Resend --}}
-                <div data-reveal="right" class="self-start rounded-3xl bg-white p-8 shadow-2xl sm:p-10"
-                     x-data="contactForm(@js(config('pcn.contact_endpoint')), @js(__('Something went wrong. Please try again or email us directly.')), @js(__('Please complete the security check.')), @js((bool) config('pcn.turnstile_site_key')))">
-                    <h3 class="font-display text-2xl tracking-wide text-navy-950">{{ __('SEND US A MESSAGE') }}</h3>
-                    <p class="mt-2 text-sm text-navy-600">{{ __('A question or want to sign up? Drop us a line.') }}</p>
+                <div data-reveal="right" class="self-start">
+                    <span class="text-sm font-bold tracking-[0.3em] text-blue-400">{{ __('CONTACT & REGISTRATION') }}</span>
+
+                    <div class="mt-8 space-y-4">
+                        <!-- Registration Memo (How to finalize registration) -->
+                        <a href="/documents/memo-inscription.jpeg" target="_blank" rel="noopener noreferrer"
+                           class="group flex items-center justify-between gap-4 rounded-2xl border border-blue-500/30 bg-gradient-to-r from-blue-950/40 via-white/[0.03] to-white/[0.04] p-4.5 shadow-lg ring-1 ring-blue-500/20 transition hover:border-blue-400/50 hover:bg-white/[0.06]">
+                            <div class="flex items-center gap-4">
+                                <div class="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-blue-600/20 border border-blue-500/30 p-2 shadow-sm text-blue-400 group-hover:bg-blue-600 group-hover:text-white transition">
+                                    <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" stroke-linecap="round" stroke-linejoin="round"/><path d="M5 19V5a2 2 0 012-2h7l5 5v11a2 2 0 01-2 2H7a2 2 0 01-2-2z" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                                </div>
+                                <div class="flex-1 min-w-0">
+                                    <div class="flex flex-wrap items-center gap-2">
+                                        <h4 class="font-display text-base tracking-wide text-white sm:text-lg">{{ __('Registration Memo') }}</h4>
+                                        <span class="inline-flex items-center rounded-full bg-blue-500/15 px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wider text-blue-300 border border-blue-500/30">{{ __('Registration Guide') }}</span>
+                                    </div>
+                                    <p class="mt-0.5 text-xs text-white/70">{{ __('How to finalize your registration: steps, documents & license.') }}</p>
+                                </div>
+                            </div>
+                            <div class="shrink-0 text-blue-400 transition group-hover:translate-x-1">
+                                <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                            </div>
+                        </a>
+
+                        {{-- Contact form card --}}
+                        <div class="rounded-3xl bg-white p-8 shadow-2xl sm:p-10"
+                             x-data="contactForm(@js(config('pcn.contact_endpoint')), @js(__('Something went wrong. Please try again or email us directly.')), @js(__('Please complete the security check.')), @js((bool) config('pcn.turnstile_site_key')))">
+                            <h3 class="font-display text-2xl tracking-wide text-navy-950">{{ __('SEND US A MESSAGE') }}</h3>
+                            <p class="mt-2 text-sm text-navy-600">{{ __('A question or want to sign up? Drop us a line.') }}</p>
 
                     {{-- Success state --}}
                     <div x-show="sent" x-cloak class="mt-8 flex flex-col items-center gap-4 rounded-2xl border border-blue-100 bg-blue-50/60 p-8 text-center sm:p-10">
@@ -688,29 +713,31 @@
                     </form>
                 </div>
             </div>
+        </div>
+    </div>
 
-            {{-- Sponsors / Partenaires --}}
-            <div class="relative mx-auto max-w-7xl px-6 lg:px-10 mt-16 sm:mt-20 pt-16 border-t border-white/10" data-reveal="bottom">
-                <div class="text-center mb-10">
-                    <span class="text-xs font-bold tracking-[0.3em] text-blue-400 uppercase">{{ __('OUR PARTNERS') }}</span>
-                    <h3 class="mt-2 font-display text-2xl tracking-wide text-white sm:text-3xl">{{ __('THEY SUPPORT THE CLUB') }}</h3>
-                </div>
-                <div class="mx-auto grid max-w-3xl grid-cols-3 gap-4 lg:gap-6">
-                    <!-- FFB -->
-                    <a href="https://ffboxe.com/" target="_blank" rel="noopener noreferrer" title="Fédération Française de Boxe" class="group flex h-28 items-center justify-center rounded-2xl border border-white/10 bg-white p-5 transition duration-300 hover:border-blue-400 hover:shadow-lg hover:shadow-blue-500/10">
-                        <img src="/images/French_Boxing_Federation_logo.svg.webp" alt="Fédération Française de Boxe" class="max-h-16 w-auto max-w-full object-contain transition duration-300 group-hover:scale-105" />
-                    </a>
-                    <!-- Ville de Nice -->
-                    <a href="https://www.nice.fr/" target="_blank" rel="noopener noreferrer" title="Ville de Nice" class="group flex h-28 items-center justify-center rounded-2xl border border-white/10 bg-white p-5 transition duration-300 hover:border-blue-400 hover:shadow-lg hover:shadow-blue-500/10">
-                        <img src="/images/Ville_Nice_Logo.svg" alt="Ville de Nice" class="max-h-16 w-auto max-w-full object-contain transition duration-300 group-hover:scale-105" />
-                    </a>
-                    <!-- Conseil Départemental 06 -->
-                    <a href="https://www.departement06.fr/" target="_blank" rel="noopener noreferrer" title="Conseil Départemental des Alpes-Maritimes" class="group flex h-28 items-center justify-center rounded-2xl border border-white/10 bg-white p-5 transition duration-300 hover:border-blue-400 hover:shadow-lg hover:shadow-blue-500/10">
-                        <img src="/images/conseil-dep-06.png" alt="Conseil Départemental des Alpes-Maritimes" class="max-h-16 w-auto max-w-full object-contain transition duration-300 group-hover:scale-105" />
-                    </a>
-                </div>
-            </div>
-        </section>
+    {{-- Sponsors / Partenaires --}}
+    <div class="relative mx-auto max-w-7xl px-6 lg:px-10 mt-16 sm:mt-20 pt-16 border-t border-white/10" data-reveal="bottom">
+        <div class="text-center mb-10">
+            <span class="text-xs font-bold tracking-[0.3em] text-blue-400 uppercase">{{ __('OUR PARTNERS') }}</span>
+            <h3 class="mt-2 font-display text-2xl tracking-wide text-white sm:text-3xl">{{ __('THEY SUPPORT THE CLUB') }}</h3>
+        </div>
+        <div class="mx-auto grid max-w-3xl grid-cols-3 gap-4 lg:gap-6">
+            <!-- FFB -->
+            <a href="https://ffboxe.com/" target="_blank" rel="noopener noreferrer" title="Fédération Française de Boxe" class="group flex h-28 items-center justify-center rounded-2xl border border-white/10 bg-white p-5 transition duration-300 hover:border-blue-400 hover:shadow-lg hover:shadow-blue-500/10">
+                <img src="/images/French_Boxing_Federation_logo.svg.webp" alt="Fédération Française de Boxe" class="max-h-16 w-auto max-w-full object-contain transition duration-300 group-hover:scale-105" />
+            </a>
+            <!-- Ville de Nice -->
+            <a href="https://www.nice.fr/" target="_blank" rel="noopener noreferrer" title="Ville de Nice" class="group flex h-28 items-center justify-center rounded-2xl border border-white/10 bg-white p-5 transition duration-300 hover:border-blue-400 hover:shadow-lg hover:shadow-blue-500/10">
+                <img src="/images/Ville_Nice_Logo.svg" alt="Ville de Nice" class="max-h-16 w-auto max-w-full object-contain transition duration-300 group-hover:scale-105" />
+            </a>
+            <!-- Conseil Départemental 06 -->
+            <a href="https://www.departement06.fr/" target="_blank" rel="noopener noreferrer" title="Conseil Départemental des Alpes-Maritimes" class="group flex h-28 items-center justify-center rounded-2xl border border-white/10 bg-white p-5 transition duration-300 hover:border-blue-400 hover:shadow-lg hover:shadow-blue-500/10">
+                <img src="/images/conseil-dep-06.png" alt="Conseil Départemental des Alpes-Maritimes" class="max-h-16 w-auto max-w-full object-contain transition duration-300 group-hover:scale-105" />
+            </a>
+        </div>
+    </div>
+</section>
 
         {{-- ============================= FOOTER ============================= --}}
         <footer class="relative bg-navy-950 pt-20 pb-8">
@@ -751,6 +778,7 @@
                         <li><a href="#join" class="transition hover:text-blue-400">{{ __('Seniors') }}</a></li>
                         <li><a href="#join" class="transition hover:text-blue-400">{{ __('Competitor') }}</a></li>
                         <li><a href="/documents/Reglement_interieur.pdf" target="_blank" rel="noopener noreferrer" class="transition hover:text-blue-400">{{ __('Internal Regulations') }}</a></li>
+                        <li><a href="/documents/memo-inscription.jpeg" target="_blank" rel="noopener noreferrer" class="transition hover:text-blue-400">{{ __('Registration Memo') }}</a></li>
                     </ul>
                 </div>
             </div>

@@ -16,6 +16,10 @@ return Application::configure(basePath: dirname(__DIR__))
         // request came in over https and generates https:// asset/URL links
         // (otherwise the browser blocks the http:// CSS/JS as mixed content).
         $middleware->trustProxies(at: '*');
+
+        // Browser hardening headers (HSTS, nosniff, anti-clickjacking) on
+        // every response, including /up.
+        $middleware->append(\App\Http\Middleware\SecurityHeaders::class);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         $exceptions->shouldRenderJsonWhen(

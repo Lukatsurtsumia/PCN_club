@@ -109,9 +109,24 @@ const dictFR = {
   'Your email': 'Votre email',
   'All rights reserved.': 'Tous droits réservés.',
   'Youth Boxing': 'Boxe Éducative',
+  'Educative Boxing': 'Boxe Éducative',
+  'EDUCATIVE BOXING': 'Boxe Éducative',
+  'Cadets / Juniors': 'Cadets / Juniors',
+  'CADETS / JUNIORS': 'Cadets / Juniors',
+  'Seniors': 'Séniors',
+  'SENIORS': 'Séniors',
+  'Competitor': 'Compétiteur',
+  'COMPETITOR': 'Compétiteur',
+  'LADY BOXING': 'Lady Boxing',
+  '1 session / week': '1 séance / semaine',
+  'All levels from beginner to advanced': 'Tous niveaux du débutant au confirmé',
+  'All levels': 'Tous niveaux',
   'Fitness Boxing': 'Fit Boxing',
   'Competitive Team': 'Section Compétition',
   '1-on-1 Coaching': 'Coaching Privé',
+  '3x Payment Free of Charge': 'Paiement en 3 fois sans frais',
+  'Pay in 3 installments at no extra cost via': 'Paiement en 3 fois possible sans frais via',
+  'Payment Facility': 'Facilité de paiement',
   "Thanks! Your message has been sent - we'll get back to you soon.": "Merci ! Votre message a été envoyé - nous vous répondrons rapidement.",
   'Something went wrong. Please try again or email us directly.': 'Une erreur est survenue. Veuillez réessayer ou nous contacter directement.',
   'Sending…': 'Envoi…',
@@ -133,6 +148,15 @@ const dictFR = {
   'Real training, real fighters, real community.': 'Un vrai entraînement, de vrais combattants, une vraie communauté.',
   'Home': 'Accueil',
   'Please complete the security check.': 'Veuillez valider le test de sécurité.',
+  'Internal Regulations': 'Règlement Intérieur',
+  'CONTACT & REGISTRATION': 'CONTACT & INSCRIPTION',
+  'Registration Memo': 'Mémo Inscription',
+  'Registration Guide': "Guide d'inscription",
+  'How to finalize your registration: steps, documents & license.': 'Comment finaliser votre inscription : étapes, documents & licence.',
+  'Open full size': 'Afficher en grand format',
+  'Download': 'Télécharger',
+  'Click to enlarge': 'Cliquer pour agrandir',
+  'Season 2026 / 2027': 'Saison 2026 / 2027',
 };
 
 const contactEndpoint = process.env.PCN_CONTACT_ENDPOINT || 'https://pcnboxe-contact-worker.pcnboxe06.workers.dev';
@@ -244,6 +268,8 @@ function renderBlade(bladeContent, locale = 'fr', basePath = '.', cssFileName = 
   html = html.replace(/data-model="\/models\/hero-boxer\.fbx"/g, `data-model="${basePath}/models/hero-boxer.fbx"`);
   html = html.replace(/src="\/images\//g, `src="${basePath}/images/`);
   html = html.replace(/src="\/videos\//g, `src="${basePath}/videos/`);
+  html = html.replace(/src="\/documents\//g, `src="${basePath}/documents/`);
+  html = html.replace(/href="\/documents\//g, `href="${basePath}/documents/`);
   html = html.replace(/href="\/favicon\.ico"/g, `href="${basePath}/favicon.ico"`);
 
   // 3. Replace locale function

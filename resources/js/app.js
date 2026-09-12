@@ -222,14 +222,23 @@ Alpine.store('consent', (() => {
 
         reopen() { this.value = null; }, // "Cookie settings" — show the banner again
 
-        // load the Elfsight reviews script only once the visitor has accepted
+        // load third-party scripts (Elfsight reviews, Microsoft Clarity) only once the visitor has accepted
         loadThirdParty() {
             if (this._loaded) return;
             this._loaded = true;
+
+            // Elfsight reviews
             const s = document.createElement('script');
             s.src = 'https://elfsightcdn.com/platform.js';
             s.async = true;
             document.body.appendChild(s);
+
+            // Microsoft Clarity
+            (function(c,l,a,r,i,t,y){
+                c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+                t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+                y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+            })(window, document, "clarity", "script", "y2ub1ct000");
         },
     };
 })());
